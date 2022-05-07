@@ -1,0 +1,28 @@
+<Assets>
+
+  <!--Texture ID's and File names will go in the "Textures" xml node below-->
+  <Textures>
+
+    <Texture
+      ID="txt_Chopper"
+      File="ChopperSpritesheet.png"
+      />
+
+  </Textures>
+
+  <!--Fonts ID's and File names will go in the "Fonts" xml node below-->
+  <Fonts>
+
+    <Font
+      ID="fnt_Arial"
+      File="arial.ttf"
+      />
+
+    <Font
+      ID="fnt_Charriot"
+      File="charriot.ttf"
+      />
+
+  </Fonts>
+
+</Assets>
