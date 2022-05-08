@@ -199,18 +199,9 @@ void Box::RefreshUI()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Box::SetWidth(int width)
+void Box::SetSize(int width, int height)
 {
     m_BaseRectangle.w = width;
-
-    RefreshUI();
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void Box::SetHeight(int height)
-{
     m_BaseRectangle.h = height;
 
     RefreshUI();

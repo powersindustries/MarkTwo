@@ -34,8 +34,7 @@ public:
 
 public:
 
-    void SetWidth(int width);
-    void SetHeight(int height);
+    void SetSize(int width, int height);
     void SetColor(SDL_Color color) { m_Color = color; }
 
 

@@ -222,6 +222,17 @@ void TextBlock::SetText(std::string text)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
+void TextBlock::SetSize(int width, int height)
+{
+    m_BaseRectangle.w = width;
+    m_BaseRectangle.h = height;
+
+    RefreshUI();
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
 void TextBlock::SetFont(std::string fontID)
 {
     m_Font = MarkTwo::g_LoadManager.m_FontAssets[fontID].m_Font;
@@ -240,26 +251,6 @@ void TextBlock::SetColor(SDL_Color color)
     m_MessageTexture = SDL_CreateTextureFromSurface(MarkTwo::Game::m_Renderer, surface);
 
     SDL_FreeSurface(surface);
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void TextBlock::SetWidth(int width)
-{
-    m_BaseRectangle.w = width;
-
-    RefreshUI();
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void TextBlock::SetHeight(int height)
-{
-    m_BaseRectangle.h = height;
-
-    RefreshUI();
 }
 
 }

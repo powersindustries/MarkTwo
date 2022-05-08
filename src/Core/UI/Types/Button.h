@@ -43,8 +43,7 @@ public:
     int GetPositionX() { return m_BaseRectangle.x; }
     int GetPositionY() { return m_BaseRectangle.y; }
 
-    void SetWidth(int width);
-    void SetHeight(int height);
+    void SetSize(int width, int height);
     void SetText(std::string text);
     void SetTextAlignment(HorizontalAlignment alignment);
 

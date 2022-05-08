@@ -60,8 +60,7 @@ void PauseScreen::Initialize()
 {
     m_BackgroundBox.SetAnchor(HorizontalAlignment::eCenter, VerticalAlignment::eCenter);
     m_BackgroundBox.SetElementAlignment(HorizontalAlignment::eCenter, VerticalAlignment::eCenter);
-    m_BackgroundBox.SetWidth(500);
-    m_BackgroundBox.SetHeight(g_GameGlobals.WINDOW_HEIGHT - 50);
+    m_BackgroundBox.SetSize(500, g_GameGlobals.WINDOW_HEIGHT - 50);
     m_BackgroundBox.SetColor(g_GameGlobals.COLOR_SILVER);
 
     m_Title.SetAnchor(HorizontalAlignment::eCenter, VerticalAlignment::eTop);
@@ -80,13 +79,11 @@ void PauseScreen::Initialize()
 
     m_ReturnToGameButton.SetFont("fnt_Arial");
     m_ReturnToGameButton.SetText("RETURN TO GAME");
-    m_ReturnToGameButton.SetWidth(300);
-    m_ReturnToGameButton.SetHeight(50);
+    m_ReturnToGameButton.SetSize(300,50);
 
     m_QuitGameButton.SetFont("fnt_Arial");
     m_QuitGameButton.SetText("QUIT GAME");
-    m_QuitGameButton.SetWidth(300);
-    m_QuitGameButton.SetHeight(50);
+    m_QuitGameButton.SetSize(300,50);
 
     m_StackPanel.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eBottom);
     m_StackPanel.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);

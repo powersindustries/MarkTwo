@@ -142,25 +142,14 @@ void Button::SetFont(std::string fontID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Button::SetWidth(int width)
+void Button::SetSize(int width, int height)
 {
     m_BaseRectangle.w = width;
-
-    RefreshUI();
-    RefreshInternalUI();
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void Button::SetHeight(int height)
-{
     m_BaseRectangle.h = height;
 
     RefreshUI();
     RefreshInternalUI();
 }
-
 
 // -------------------------------------------------------
 // -------------------------------------------------------

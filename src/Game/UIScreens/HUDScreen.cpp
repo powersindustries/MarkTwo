@@ -50,8 +50,7 @@ void HUDScreen::Initialize()
     m_TitleBox.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
     m_TitleBox.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);
     m_TitleBox.SetOffset(0,50);
-    m_TitleBox.SetWidth(300);
-    m_TitleBox.SetHeight(50);
+    m_TitleBox.SetSize(300,50);
     m_TitleBox.SetColor(g_GameGlobals.COLOR_WHITE);
 
     m_Title.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
@@ -65,8 +64,7 @@ void HUDScreen::Initialize()
     m_PlayerBox.SetAnchor(HorizontalAlignment::eLeft,VerticalAlignment::eTop);
     m_PlayerBox.SetElementAlignment(HorizontalAlignment::eLeft,VerticalAlignment::eCenter);
     m_PlayerBox.SetOffset(50,50);
-    m_PlayerBox.SetWidth(250);
-    m_PlayerBox.SetHeight(50);
+    m_PlayerBox.SetSize(250,50);
     m_PlayerBox.SetColor(g_GameGlobals.COLOR_WHITE);
 
     m_PlayerText.SetAnchor(HorizontalAlignment::eLeft,VerticalAlignment::eTop);
@@ -80,8 +78,7 @@ void HUDScreen::Initialize()
     m_DirectionsBox.SetAnchor(HorizontalAlignment::eRight,VerticalAlignment::eTop);
     m_DirectionsBox.SetElementAlignment(HorizontalAlignment::eRight,VerticalAlignment::eTop);
     m_DirectionsBox.SetOffset(50,25);
-    m_DirectionsBox.SetWidth(300);
-    m_DirectionsBox.SetHeight(250);
+    m_DirectionsBox.SetSize(300,250);
     m_DirectionsBox.SetColor(g_GameGlobals.COLOR_WHITE);
 
     m_DirectionTitle.SetFont("fnt_Charriot");
