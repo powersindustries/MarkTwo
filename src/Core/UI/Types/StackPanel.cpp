@@ -9,21 +9,6 @@ namespace CoreUI
 // -------------------------------------------------------
 StackPanel::StackPanel()
 {
-    m_Anchor.m_Horizontal = HorizontalAlignment::eLeft;
-    m_Anchor.m_Vertical = VerticalAlignment::eTop;
-
-    m_ElementAlignment.m_Horizontal = HorizontalAlignment::eLeft;
-    m_ElementAlignment.m_Vertical = VerticalAlignment::eTop;
-
-    m_Offset.m_iX = 0;
-    m_Offset.m_iY = 0;
-
-    m_BaseRectangle.x = 0;
-    m_BaseRectangle.y = 0;
-
-    m_BaseRectangle.w = 10;
-    m_BaseRectangle.h = 10;
-
     m_iPadding = 0;
 
     m_Alignment = StackpanelAlignment::eVertical;
@@ -46,13 +31,6 @@ void StackPanel::Update()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void StackPanel::Update(bool leftClicked, bool rightClicked)
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void StackPanel::Draw(SDL_Renderer* renderer)
 {
     int childCount = (int)m_Children.size();
@@ -60,17 +38,6 @@ void StackPanel::Draw(SDL_Renderer* renderer)
     {
         m_Children[x]->Draw(renderer);
     }
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void StackPanel::SetAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical)
-{
-    m_Anchor.m_Horizontal = horizontal;
-    m_Anchor.m_Vertical = vertical;
-
-    RefreshUI();
 }
 
 
@@ -94,17 +61,17 @@ void StackPanel::RefreshUI()
     {
     case HorizontalAlignment::eLeft:
     {
-        m_BaseRectangle.x = m_Offset.m_iX;
+        m_BaseRectangle.x = m_vOffset.m_iX;
         break;
     }
     case HorizontalAlignment::eCenter:
     {
-        m_BaseRectangle.x = (MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2) + m_Offset.m_iX;
+        m_BaseRectangle.x = (MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2) + m_vOffset.m_iX;
         break;
     }
     case HorizontalAlignment::eRight:
     {
-        m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_Offset.m_iX;
+        m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX;
         break;
     }
     default:
@@ -116,17 +83,17 @@ void StackPanel::RefreshUI()
     {
     case VerticalAlignment::eTop:
     {
-        m_BaseRectangle.y = m_Offset.m_iY;
+        m_BaseRectangle.y = m_vOffset.m_iY;
         break;
     }
     case VerticalAlignment::eCenter:
     {
-        m_BaseRectangle.y = (MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2) + m_Offset.m_iY;
+        m_BaseRectangle.y = (MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2) + m_vOffset.m_iY;
         break;
     }
     case VerticalAlignment::eBottom:
     {
-        m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_Offset.m_iY;
+        m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY;
         break;
     }
     default:
@@ -196,28 +163,6 @@ void StackPanel::SetChildAlignment(StackpanelAlignment alignment)
     m_Alignment = alignment;
 
     ResizeSpacing();
-    RefreshUI();
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void StackPanel::SetElementAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
-{
-    m_ElementAlignment.m_Horizontal = horizontal;
-    m_ElementAlignment.m_Vertical = vertical;
-
-    RefreshUI();
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void StackPanel::SetOffset(int xOffset, int yOffset)
-{
-    m_Offset.m_iX = xOffset;
-    m_Offset.m_iY = yOffset;
-
     RefreshUI();
 }
 

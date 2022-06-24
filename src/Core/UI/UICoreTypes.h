@@ -47,38 +47,49 @@ public:
 };
 
 
-class UIBase
-{
-public:
-    virtual void Update() = 0;
-    virtual void Update(bool leftClicked, bool rightClicked) = 0;
-    virtual void Draw(SDL_Renderer* renderer) = 0;
-
-    virtual void SetAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical) = 0;
-    virtual void SetElementAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical) = 0;
-    virtual void SetOffset(int xOffset, int yOffset) = 0;
-    virtual void SetPosition(int x, int y) = 0;
-
-    virtual int GetWidth() = 0;
-    virtual int GetHeight() = 0;
-
-    virtual void RefreshUI() = 0;
-
-    // Anchor point (x,y) relative to entire screen.
-    AlignmentData m_Anchor;
-    // How the UI elements are aligned around it's position.
-    AlignmentData m_ElementAlignment;
-    // Offset position based on the anchor point.
-    CoreMath::Vector2i m_Offset;
-
-};
-
-
 class UIScreenBase
 {
     virtual void Update() = 0;
     virtual void Draw(SDL_Renderer* renderer) = 0;
     virtual void Initialize() = 0;
+};
+
+
+class UIBase
+{
+public:
+    UIBase();
+    ~UIBase();
+
+    virtual void Update() = 0;
+    virtual void Draw(SDL_Renderer* renderer) = 0;
+    virtual void SetPosition(int x, int y) = 0;
+    virtual void RefreshUI() = 0;
+
+
+    void SetAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical);
+    void SetElementAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical);
+    void SetOffset(int xOffset, int yOffset);
+
+    inline int GetWidth()  { return m_BaseRectangle.w; }
+    inline int GetHeight() { return m_BaseRectangle.h; }
+
+    inline int GetPositionX() { return m_BaseRectangle.x; }
+    inline int GetPositionY() { return m_BaseRectangle.y; }
+
+
+    // Anchor point (x,y) relative to entire screen.
+    AlignmentData m_Anchor;
+
+    // How the UI elements are aligned around it's position.
+    AlignmentData m_ElementAlignment;
+
+    // Offset position based on the anchor point.
+    CoreMath::Vector2i m_vOffset;
+
+    // Rectangle for determining position and size of UI element.
+    SDL_Rect m_BaseRectangle;
+
 };
 
 }

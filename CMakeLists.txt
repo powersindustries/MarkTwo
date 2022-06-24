@@ -59,6 +59,7 @@ src/Core/Math/Vector.h
 src/Core/Math/Vector.cpp
 
 src/Core/UI/UICoreTypes.h
+src/Core/UI/UICoreTypes.cpp
 src/Core/UI/Types/Box.h
 src/Core/UI/Types/Box.cpp
 src/Core/UI/Types/Button.h
@@ -94,65 +95,65 @@ target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} 
 
 # Add SDL2.dll to exe folder
 if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2/lib/x64/SDL2.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 else ()
   add_custom_command(TARGET MarkTwo POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2/lib/x86/SDL2.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif ()
 
 # Add SDL2.dll to exe folder
 if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_image/lib/x64/SDL2_image.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 else ()
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_image/lib/x86/SDL2_image.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif ()
 
 # Add SDL2.dll to exe folder
 if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_ttf/lib/x64/SDL2_ttf.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 else ()
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_ttf/lib/x86/SDL2_ttf.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif ()
 
 # Add libfreetype-6.dll to exe folder
 if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_ttf/lib/x64/libfreetype-6.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 else ()
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_ttf/lib/x86/libfreetype-6.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif ()
 
 # Add zlib1.dll to exe folder
 if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_ttf/lib/x64/zlib1.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 else ()
-  add_custom_command(TARGET MarkTwo POST_BUILD
+  add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
      COMMAND ${CMAKE_COMMAND} -E copy_if_different
          "${CMAKE_SOURCE_DIR}/External/SDL2_ttf/lib/x86/zlib1.dll"
-         $<TARGET_FILE_DIR:MarkTwo>)
+         $<TARGET_FILE_DIR:${PROJECT_NAME}>)
 endif ()
