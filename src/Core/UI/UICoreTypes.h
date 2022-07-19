@@ -71,11 +71,11 @@ public:
     void SetElementAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical);
     void SetOffset(int xOffset, int yOffset);
 
-    inline int GetWidth()  { return m_BaseRectangle.w; }
-    inline int GetHeight() { return m_BaseRectangle.h; }
+    inline int GetWidth() const  { return m_BaseRectangle.w; }
+    inline int GetHeight() const { return m_BaseRectangle.h; }
 
-    inline int GetPositionX() { return m_BaseRectangle.x; }
-    inline int GetPositionY() { return m_BaseRectangle.y; }
+    inline int GetPositionX() const { return m_BaseRectangle.x; }
+    inline int GetPositionY() const { return m_BaseRectangle.y; }
 
 
     // Anchor point (x,y) relative to entire screen.

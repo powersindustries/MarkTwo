@@ -24,7 +24,7 @@ public:
     void SetColor(SDL_Color color);
     void SetText(std::string text);
 
-    inline std::string GetText() { return m_Text; };
+    inline std::string GetText() const { return m_Text; };
 
 
 private:

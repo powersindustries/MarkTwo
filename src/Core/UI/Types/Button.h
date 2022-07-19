@@ -25,8 +25,8 @@ public:
     void SetText(std::string text);
     void SetTextAlignment(HorizontalAlignment alignment);
 
-    inline bool LeftClickPressed() { return m_LeftClickPressed; }
-    inline bool RightClickPressed() { return m_RightClickPressed; }
+    inline bool LeftClickPressed() const { return m_LeftClickPressed; }
+    inline bool RightClickPressed() const { return m_RightClickPressed; }
 
 
 
