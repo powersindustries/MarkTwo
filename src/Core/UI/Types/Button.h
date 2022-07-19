@@ -2,8 +2,16 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
-#include "../UICoreTypes.h"
 #include <string>
+#include "../UICoreTypes.h"
+#include "Core/Managers/InputManager.h"
+
+enum ButtonStates
+{
+    eHover  = 1 << 0, // Mouse Hover
+    eLMouse = 1 << 1, // Left Mouse
+    eRMouse = 1 << 2  // Right Mouse
+};
 
 namespace CoreUI
 {
@@ -14,7 +22,7 @@ public:
     ~Button();
 
     void Update();
-    void Update(bool leftClicked, bool rightClicked);
+    void Update(MarkTwo::InputManager& inputManager);
     void Draw(SDL_Renderer* renderer);
     void SetPosition(int x, int y);
     void RefreshUI();
@@ -25,9 +33,12 @@ public:
     void SetText(std::string text);
     void SetTextAlignment(HorizontalAlignment alignment);
 
-    inline bool LeftClickPressed() const { return m_LeftClickPressed; }
-    inline bool RightClickPressed() const { return m_RightClickPressed; }
+    inline void SetBaseColor(SDL_Color color) { m_BaseColor = color; };
+    inline void SetHoverColor(SDL_Color color) { m_HoverColor = color; };
 
+    inline bool MouseHovered() const { return m_uiButtonStateFlags & ButtonStates::eHover; };
+    inline bool LeftClickPressed() const { return m_uiButtonStateFlags & ButtonStates::eLMouse; };
+    inline bool RightClickPressed() const { return m_uiButtonStateFlags & ButtonStates::eRMouse; };
 
 
 private:
@@ -44,12 +55,14 @@ private:
     SDL_Rect m_FontRectangle;
 
     // Button States
-    bool m_LeftClickPressed;
-    bool m_RightClickPressed;
+    uint8_t m_uiButtonStateFlags;
 
-    // Button Text
+    // Button Properties
     std::string m_Text;
-    HorizontalAlignment m_TextAlignment = HorizontalAlignment::eCenter;
+    HorizontalAlignment m_TextAlignment;
+
+    SDL_Color m_BaseColor;
+    SDL_Color m_HoverColor;
 
 };
 }

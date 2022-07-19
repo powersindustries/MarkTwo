@@ -17,8 +17,11 @@ Button::Button()
     m_FontRectangle.w = 80;
     m_FontRectangle.h = 15;
 
-    m_LeftClickPressed = false;
-    m_RightClickPressed = false;
+    m_uiButtonStateFlags = 0;
+    
+    m_TextAlignment = HorizontalAlignment::eCenter;
+    m_BaseColor = MarkTwo::g_GameGlobals.COLOR_BLACK;
+    m_HoverColor = MarkTwo::g_GameGlobals.COLOR_GRAY;
 }
 
 
@@ -38,22 +41,44 @@ void Button::Update()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Button::Update(bool leftClicked, bool rightClicked)
+void Button::Update(MarkTwo::InputManager& inputManager)
 {
-    int mouseX;
-    int mouseY;
+    int mouseX = 0;
+    int mouseY = 0;
 
     SDL_GetMouseState(&mouseX, &mouseY);
 
+    // Update button state.
     if (MouseCollisionDetected(mouseX, mouseY))
     {
-        m_LeftClickPressed = leftClicked;
-        m_RightClickPressed = rightClicked;
+        // Hover
+        m_uiButtonStateFlags |= ButtonStates::eHover;
+
+        // LMouse
+        if (inputManager.m_MouseButtonData.m_LeftClicked)
+        {
+            m_uiButtonStateFlags |= ButtonStates::eLMouse;
+        }
+        else
+        {
+            m_uiButtonStateFlags &= ~ButtonStates::eLMouse;
+        }
+
+        // RMouse
+        if (inputManager.m_MouseButtonData.m_RightClicked)
+        {
+            m_uiButtonStateFlags |= ButtonStates::eRMouse;
+        }
+        else
+        {
+            m_uiButtonStateFlags &= ~ButtonStates::eRMouse;
+        }
     }
     else
     {
-        m_LeftClickPressed = false;
-        m_RightClickPressed = false;
+        m_uiButtonStateFlags &= ~ButtonStates::eHover;
+        m_uiButtonStateFlags &= ~ButtonStates::eLMouse;
+        m_uiButtonStateFlags &= ~ButtonStates::eLMouse;
     }
 }
 
@@ -62,11 +87,23 @@ void Button::Update(bool leftClicked, bool rightClicked)
 // -------------------------------------------------------
 void Button::Draw(SDL_Renderer* renderer)
 {
-    SDL_SetRenderDrawColor(renderer, 
-    MarkTwo::g_GameGlobals.COLOR_BLACK.r, 
-    MarkTwo::g_GameGlobals.COLOR_BLACK.g, 
-    MarkTwo::g_GameGlobals.COLOR_BLACK.b, 
-    MarkTwo::g_GameGlobals.COLOR_BLACK.a);
+    if (MouseHovered())
+    {
+        SDL_SetRenderDrawColor(renderer,
+            m_HoverColor.r,
+            m_HoverColor.g,
+            m_HoverColor.b,
+            m_HoverColor.a);
+    }
+    else
+    {
+        SDL_SetRenderDrawColor(renderer,
+            m_BaseColor.r,
+            m_BaseColor.g,
+            m_BaseColor.b,
+            m_BaseColor.a);
+    }
+
     SDL_RenderFillRect(renderer, &m_BaseRectangle);
 
     SDL_RenderCopy(renderer, m_MessageTexture, NULL, &m_FontRectangle);
