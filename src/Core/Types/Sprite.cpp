@@ -1,7 +1,7 @@
 #include "Sprite.h"
 #include "../Managers/LoadManager.h"
 
-namespace MarkTwo
+namespace CoreTypes
 {
 
 
@@ -195,7 +195,8 @@ void Sprite::Play(std::string animationName)
 // -------------------------------------------------------
 void Sprite::SetTexture(std::string textureID)
 {
-    m_Texture = g_LoadManager.m_TextureAssets[textureID].m_Texture;
+    m_Texture = MarkTwo::g_LoadManager.m_TextureAssets[textureID].m_Texture;
 }
+
 
 }

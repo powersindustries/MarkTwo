@@ -6,6 +6,8 @@
 #include "PlayerMovement.h"
 #include "Core/Types/Sprite.h"
 
+using namespace CoreTypes;
+
 namespace MarkTwo
 {
 class Player

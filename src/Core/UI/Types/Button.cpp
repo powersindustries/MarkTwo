@@ -18,7 +18,7 @@ Button::Button()
     m_FontRectangle.h = 15;
 
     m_uiButtonStateFlags = 0;
-    
+
     m_TextAlignment = HorizontalAlignment::eCenter;
     m_BaseColor = MarkTwo::g_GameGlobals.COLOR_BLACK;
     m_HoverColor = MarkTwo::g_GameGlobals.COLOR_GRAY;

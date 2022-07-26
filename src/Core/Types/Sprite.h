@@ -6,7 +6,7 @@
 #include "Transform.h"
 #include <map>
 
-namespace MarkTwo
+namespace CoreTypes
 {
 
 
@@ -45,6 +45,7 @@ public:
     void Update(float deltaTime, SDL_Rect& inRectangle);
     void Update(float deltaTime, Transform& inTransform);
     void Draw(SDL_Renderer* renderer);
+
 
     void Play(std::string animationName);
 

@@ -3,8 +3,9 @@
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
 
-namespace MarkTwo
+namespace CoreTypes
 {
+
 class Transform
 {
 public:
@@ -27,4 +28,5 @@ public:
     int m_iScale;
 
 };
+
 }

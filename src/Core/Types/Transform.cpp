@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include <iostream>
 
-namespace MarkTwo
+namespace CoreTypes
 {
 
 
@@ -64,5 +64,6 @@ void Transform::SetPosition(SDL_Rect& rectangle)
     m_iPositionX = rectangle.x;
     m_iPositionY = rectangle.y;
 }
+
 
 }
