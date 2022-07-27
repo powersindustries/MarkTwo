@@ -5,6 +5,10 @@ project(MarkTwo VERSION 2.0)
 # Set Source directory to be used in game
 add_definitions(-DPROJECT_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
 
+# Remove warnings from C deprication warnings
+if(MSVC)
+    add_definitions(-D_CRT_SECURE_NO_WARNINGS)
+endif()
 
 # Set Library/Package Paths
 set(CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake ${CMAKE_MODULE_PATH})
