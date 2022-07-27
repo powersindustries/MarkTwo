@@ -2,8 +2,9 @@
 #include <iostream>
 #include <rapidxml.hpp>
 #include <rapidxml_utils.hpp>
-#include "GameGlobals.h"
 #include <Windows.h>
+
+#include "GameGlobals.h"
 
 namespace MarkTwo
 {
@@ -52,7 +53,7 @@ void LoadManager::InitialLoad(SDL_Renderer* renderer)
         textureAssetData.m_ID = child->first_attribute("ID")->value();
         textureAssetData.m_File = child->first_attribute("File")->value();
 
-        std::string assetPath = m_sTextureDirectorypath;
+        CoreTypes::String assetPath = m_sTextureDirectorypath;
         assetPath.append(textureAssetData.m_File);
         SDL_Surface* surface = IMG_Load(assetPath.c_str());
         textureAssetData.m_Texture = SDL_CreateTextureFromSurface(renderer, surface);
@@ -71,7 +72,7 @@ void LoadManager::InitialLoad(SDL_Renderer* renderer)
         fontAssetData.m_ID = child->first_attribute("ID")->value();
         fontAssetData.m_File = child->first_attribute("File")->value();
 
-        std::string assetPath = m_sFontsDirectorypath;
+        CoreTypes::String assetPath = m_sFontsDirectorypath;
         assetPath.append(fontAssetData.m_File);
         int fontsize = 24;
         fontAssetData.m_Font = TTF_OpenFont(assetPath.c_str(), fontsize);

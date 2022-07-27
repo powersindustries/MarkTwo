@@ -2,15 +2,20 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
-#include <string>
 #include <map>
+
+#include "../Types/String.h"
 
 namespace MarkTwo
 {
+
+
 struct TextureAssetData
 {
-    std::string m_ID;
-    std::string m_File;
+    TextureAssetData() : m_Fontsize(0), m_Texture(nullptr), m_TextureHeight(0), m_TextureWidth(0) {}
+
+    CoreTypes::String m_ID;
+    CoreTypes::String m_File;
 
     SDL_Texture* m_Texture;
 
@@ -19,10 +24,11 @@ struct TextureAssetData
     int m_TextureHeight;
 };
 
+
 struct FontAssetData
 {
-    std::string m_ID;
-    std::string m_File;
+    CoreTypes::String m_ID;
+    CoreTypes::String m_File;
 
     TTF_Font* m_Font;
 };
@@ -39,15 +45,15 @@ public:
     void Update(float* deltaTime);
     void Draw(SDL_Renderer* renderer);
 
-    std::map<std::string, TextureAssetData> m_TextureAssets;
-    std::map<std::string, FontAssetData> m_FontAssets;
+    std::map<CoreTypes::String, TextureAssetData> m_TextureAssets;
+    std::map<CoreTypes::String, FontAssetData> m_FontAssets;
 
 
 private:
 
-    std::string m_sManifestFilepath;
-    std::string m_sTextureDirectorypath;
-    std::string m_sFontsDirectorypath;
+    CoreTypes::String m_sManifestFilepath;
+    CoreTypes::String m_sTextureDirectorypath;
+    CoreTypes::String m_sFontsDirectorypath;
 
 };
 

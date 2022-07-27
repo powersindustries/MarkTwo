@@ -2,9 +2,10 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
-#include <string>
+
 #include "../UICoreTypes.h"
 #include "Core/Managers/InputManager.h"
+#include "Core/Types/String.h"
 
 enum ButtonStates
 {
@@ -27,10 +28,10 @@ public:
     void SetPosition(int x, int y);
     void RefreshUI();
 
-    void SetFont(std::string fontID);
+    void SetFont(CoreTypes::String fontID);
 
     void SetSize(int width, int height);
-    void SetText(std::string text);
+    void SetText(CoreTypes::String text);
     void SetTextAlignment(HorizontalAlignment alignment);
 
     inline void SetBaseColor(SDL_Color color) { m_BaseColor = color; };
@@ -58,7 +59,7 @@ private:
     uint8_t m_uiButtonStateFlags;
 
     // Button Properties
-    std::string m_Text;
+    CoreTypes::String m_Text;
     HorizontalAlignment m_TextAlignment;
 
     SDL_Color m_BaseColor;

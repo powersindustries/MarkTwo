@@ -2,7 +2,7 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
-#include <string>
+
 #include "PlayerMovement.h"
 #include "Core/Types/Sprite.h"
 
@@ -36,7 +36,7 @@ private:
 
     PlayerMovement m_PlayerMovement;
 
-    std::string m_PlayerDataFilepath;
+    CoreTypes::String m_PlayerDataFilepath;
 
     const float m_fHealthMultiplier = 2.5f;
 

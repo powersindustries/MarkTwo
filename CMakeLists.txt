@@ -47,6 +47,8 @@ src/Core/Types/Sprite.h
 src/Core/Types/Sprite.cpp
 src/Core/Types/Transform.h
 src/Core/Types/Transform.cpp
+src/Core/Types/String.h
+src/Core/Types/String.cpp
 
 src/Core/Managers/InputManager.h
 src/Core/Managers/InputManager.cpp

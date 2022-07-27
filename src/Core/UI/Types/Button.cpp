@@ -131,7 +131,7 @@ void Button::SetPosition(int x, int y)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Button::SetFont(std::string fontID)
+void Button::SetFont(CoreTypes::String fontID)
 {
     m_Font = MarkTwo::g_LoadManager.m_FontAssets[fontID].m_Font;
 }
@@ -150,7 +150,7 @@ void Button::SetSize(int width, int height)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Button::SetText(std::string text)
+void Button::SetText(CoreTypes::String text)
 {
     m_Text = text;
 

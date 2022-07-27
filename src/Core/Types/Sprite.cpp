@@ -35,7 +35,7 @@ Sprite::~Sprite()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Sprite::Sprite(std::string assetID)
+Sprite::Sprite(String assetID)
 {
     m_bIsAnimated = false;
 
@@ -45,7 +45,7 @@ Sprite::Sprite(std::string assetID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Sprite::Sprite(std::string assetID, int numFrames, int animationSpeed, bool hasDirection)
+Sprite::Sprite(String assetID, int numFrames, int animationSpeed, bool hasDirection)
 {
     m_bIsAnimated = true;
     m_iFrameNumber = numFrames;
@@ -58,17 +58,17 @@ Sprite::Sprite(std::string assetID, int numFrames, int animationSpeed, bool hasD
         AnimationData left = AnimationData(2, numFrames, animationSpeed);
         AnimationData right = AnimationData(3, numFrames, animationSpeed);
 
-        m_Animations.emplace("up", up);
-        m_Animations.emplace("down", down);
-        m_Animations.emplace("left", left);
-        m_Animations.emplace("right", right);
+        m_Animations.emplace(std::pair<String, AnimationData>("up", up));
+        m_Animations.emplace(std::pair<String, AnimationData>("down", down));
+        m_Animations.emplace(std::pair<String, AnimationData>("left", left));
+        m_Animations.emplace(std::pair<String, AnimationData>("right", right));
 
         m_uiAnimationIndex = 0;
         m_sCurrentAnimationName = "up";
     }
     else
     {
-        std::string single = "single";
+        String single = "single";
         AnimationData singleAnimation = AnimationData(0, numFrames, animationSpeed);
         m_Animations.emplace(single, singleAnimation);
         m_uiAnimationIndex = 0;
@@ -182,7 +182,7 @@ void Sprite::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::Play(std::string animationName)
+void Sprite::Play(String animationName)
 {
     m_iFrameNumber = m_Animations[animationName].m_uiFrameCount;
     m_uiAnimationIndex = m_Animations[animationName].m_uiIndex;
@@ -193,7 +193,7 @@ void Sprite::Play(std::string animationName)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::SetTexture(std::string textureID)
+void Sprite::SetTexture(String textureID)
 {
     m_Texture = MarkTwo::g_LoadManager.m_TextureAssets[textureID].m_Texture;
 }

@@ -2,8 +2,9 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
+
 #include "../UICoreTypes.h"
-#include <string>
+#include "Core/Types/String.h"
 
 namespace CoreUI
 {
@@ -20,11 +21,11 @@ public:
 
 
     void SetSize(int width, int height);
-    void SetFont(std::string fontID);
+    void SetFont(CoreTypes::String fontID);
     void SetColor(SDL_Color color);
-    void SetText(std::string text);
+    void SetText(CoreTypes::String text);
 
-    inline std::string GetText() const { return m_Text; };
+    inline CoreTypes::String GetText() const { return m_Text; };
 
 
 private:
@@ -33,7 +34,7 @@ private:
 
     SDL_Color m_Color;
 
-    std::string m_Text;
+    CoreTypes::String m_Text;
 
 };
 }

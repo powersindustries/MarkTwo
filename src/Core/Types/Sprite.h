@@ -2,9 +2,10 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
-#include <string>
-#include "Transform.h"
 #include <map>
+
+#include "Transform.h"
+#include "String.h"
 
 namespace CoreTypes
 {
@@ -35,8 +36,8 @@ public:
     Sprite();
     ~Sprite();
 
-    Sprite(std::string assetID);
-    Sprite(std::string assetID, int numFrames, int animationSpeed, bool hasDirection);
+    Sprite(String assetID);
+    Sprite(String assetID, int numFrames, int animationSpeed, bool hasDirection);
 
     void InitializeSprite(SDL_Rect& inRectangle);
     void InitializeSprite(int x, int y, int width, int height);
@@ -47,9 +48,9 @@ public:
     void Draw(SDL_Renderer* renderer);
 
 
-    void Play(std::string animationName);
+    void Play(String animationName);
 
-    void SetTexture(std::string textureID);
+    void SetTexture(String textureID);
 
 
 public:
@@ -62,8 +63,8 @@ private:
     SDL_Rect m_DestinationRectangle;
 
 
-    std::map<std::string, AnimationData> m_Animations;
-    std::string m_sCurrentAnimationName;
+    std::map<String, AnimationData> m_Animations;
+    String m_sCurrentAnimationName;
 
     bool m_bIsAnimated;
 

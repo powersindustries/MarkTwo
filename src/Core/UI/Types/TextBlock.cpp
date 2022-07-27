@@ -146,7 +146,7 @@ void TextBlock::RefreshUI()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetText(std::string text)
+void TextBlock::SetText(CoreTypes::String text)
 {
     m_Text = text;
 
@@ -179,7 +179,7 @@ void TextBlock::SetSize(int width, int height)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetFont(std::string fontID)
+void TextBlock::SetFont(CoreTypes::String fontID)
 {
     m_Font = MarkTwo::g_LoadManager.m_FontAssets[fontID].m_Font;
 }
