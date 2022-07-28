@@ -1,5 +1,4 @@
 #include "HUDScreen.h"
-#include <Windows.h>
 #include "Core/Managers/LoadManager.h"
 #include "GameGlobals.h"
 

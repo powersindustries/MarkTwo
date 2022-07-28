@@ -1,0 +1,22 @@
+#pragma once
+#include <assert.h>
+
+namespace Systems
+{
+
+
+// -------------------------------------------------------
+// Expression should be true. If not, assert will be hit.
+// -------------------------------------------------------
+static void SYSTEMS_ASSERT(bool expression)
+{
+    if (!expression)
+    {
+        SYSTEMS_LOG(LoggingLevel::eError, "False Expression hit. Check logs for details.");
+    }
+
+    assert(expression);
+}
+
+
+}

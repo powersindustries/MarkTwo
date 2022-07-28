@@ -1,10 +1,10 @@
 #include "Game.h"
-#include <windows.h>
 #include "GameGlobals.h"
 #include "Managers/InputManager.h"
 #include "Managers/LoadManager.h"
 #include "Game/Player/Player.h"
 #include "Managers/UIManager.h"
+#include "Systems/Logging.h"
 
 namespace MarkTwo
 {
@@ -23,7 +23,7 @@ Game::Game()
     m_Window = nullptr;
     m_iTicksLastFrame = 0;
 
-    OutputDebugString("MESSAGE: Game was created.");
+    Systems::SYSTEMS_LOG(Systems::LoggingLevel::eInfo, "Game was created.");
 }
 
 
@@ -31,7 +31,7 @@ Game::Game()
 // -------------------------------------------------------
 Game::~Game()
 {
-    OutputDebugString("MESSAGE: Game was destroyed.");
+    Systems::SYSTEMS_LOG(Systems::LoggingLevel::eInfo, "Game was destroyed.");
 }
 
 
@@ -41,13 +41,13 @@ void Game::InitializeSession()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        OutputDebugString("ERROR: Error with SDL_Init.");
+        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Error with SDL_Init.");
         return;
     }
 
     if (TTF_Init() != 0)
     {
-        OutputDebugString("ERROR: Error with TTF_Init.");
+        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Error with TTF_Init.");
         return;
     }
 
@@ -61,7 +61,7 @@ void Game::InitializeSession()
 
     if (!m_Window)
     {
-        OutputDebugString("ERROR: Window did not work.");
+        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Window did not work.");
         return;
     }
 
@@ -70,7 +70,7 @@ void Game::InitializeSession()
 
     if (!m_Renderer)
     {
-        OutputDebugString("ERROR: Renderer did not work.");
+        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Renderer did not work.");
         return;
     }
 

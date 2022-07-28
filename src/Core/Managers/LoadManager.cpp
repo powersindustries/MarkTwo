@@ -2,9 +2,10 @@
 #include <iostream>
 #include <rapidxml.hpp>
 #include <rapidxml_utils.hpp>
-#include <Windows.h>
 
 #include "GameGlobals.h"
+#include "../Systems/Logging.h"
+#include "../Systems/Assert.h"
 
 namespace MarkTwo
 {
@@ -80,7 +81,7 @@ void LoadManager::InitialLoad(SDL_Renderer* renderer)
         m_FontAssets[fontAssetData.m_ID] = fontAssetData;
     }
 
-    OutputDebugString("MESSAGE: Initial LoadManager Load Complete!");
+    Systems::SYSTEMS_LOG(Systems::LoggingLevel::eInfo, "Initial LoadManager Load Complete!");
 }
 
 

@@ -27,6 +27,8 @@ struct TextureAssetData
 
 struct FontAssetData
 {
+    FontAssetData() : m_Font(nullptr) {}
+
     CoreTypes::String m_ID;
     CoreTypes::String m_File;
 

@@ -1,6 +1,7 @@
 #include "UIManager.h"
-#include <Windows.h>
 #include "GameGlobals.h"
+
+#include "../Systems/Logging.h"
 
 namespace MarkTwo
 {
@@ -48,7 +49,7 @@ void UIManager::Update()
         m_PauseScreen.Update();
         break;
     default:
-        OutputDebugString("MESSAGE: UI Update corrupted.");
+        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "UI Update corrupted.");
         break;
     }
 }
@@ -67,7 +68,7 @@ void UIManager::Draw(SDL_Renderer* renderer)
         m_PauseScreen.Draw(renderer);
         break;
     default:
-        OutputDebugString("MESSAGE: UI Draw corrupted.");
+        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "UI Draw corrupted.");
         break;
     }
 }
