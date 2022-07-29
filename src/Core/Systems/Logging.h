@@ -4,7 +4,7 @@
 #include "../Types/String.h"
 
 
-namespace Systems
+namespace CoreSystems
 {
 
 

@@ -1,7 +1,7 @@
 #pragma once
 #include <assert.h>
 
-namespace Systems
+namespace CoreSystems
 {
 
 

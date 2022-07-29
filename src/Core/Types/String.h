@@ -24,11 +24,11 @@ public:
     String& operator=(const String& right);
     String& operator=(const char* right);
 
-    bool operator<(const String& right) const;
-    bool operator<(const char* right) const;
+    bool operator<(const String& rhs) const;
+    bool operator<(const char* rhs) const;
     
-    bool operator>(const String& right) const;
-    bool operator>(const char* right) const;
+    bool operator>(const String& rhs) const;
+    bool operator>(const char* rhs) const;
 
 
 private:

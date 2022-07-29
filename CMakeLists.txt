@@ -65,8 +65,8 @@ src/Core/Managers/LoadManager.cpp
 src/Core/Managers/UIManager.h
 src/Core/Managers/UIManager.cpp
 
-src/Core/Math/Vector.h
-src/Core/Math/Vector.cpp
+src/Core/Math/VectorMethods.h
+src/Core/Math/VectorMethods.cpp
 
 src/Core/UI/UICoreTypes.h
 src/Core/UI/UICoreTypes.cpp

@@ -81,7 +81,7 @@ void LoadManager::InitialLoad(SDL_Renderer* renderer)
         m_FontAssets[fontAssetData.m_ID] = fontAssetData;
     }
 
-    Systems::SYSTEMS_LOG(Systems::LoggingLevel::eInfo, "Initial LoadManager Load Complete!");
+    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Initial LoadManager Load Complete!");
 }
 
 

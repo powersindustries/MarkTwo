@@ -49,7 +49,7 @@ void UIManager::Update()
         m_PauseScreen.Update();
         break;
     default:
-        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "UI Update corrupted.");
+        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "UI Update corrupted.");
         break;
     }
 }
@@ -68,7 +68,7 @@ void UIManager::Draw(SDL_Renderer* renderer)
         m_PauseScreen.Draw(renderer);
         break;
     default:
-        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "UI Draw corrupted.");
+        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "UI Draw corrupted.");
         break;
     }
 }

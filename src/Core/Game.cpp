@@ -23,7 +23,7 @@ Game::Game()
     m_Window = nullptr;
     m_iTicksLastFrame = 0;
 
-    Systems::SYSTEMS_LOG(Systems::LoggingLevel::eInfo, "Game was created.");
+    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Game was created.");
 }
 
 
@@ -31,7 +31,7 @@ Game::Game()
 // -------------------------------------------------------
 Game::~Game()
 {
-    Systems::SYSTEMS_LOG(Systems::LoggingLevel::eInfo, "Game was destroyed.");
+    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Game was destroyed.");
 }
 
 
@@ -41,13 +41,13 @@ void Game::InitializeSession()
 {
     if (SDL_Init(SDL_INIT_EVERYTHING) != 0)
     {
-        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Error with SDL_Init.");
+        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "Error with SDL_Init.");
         return;
     }
 
     if (TTF_Init() != 0)
     {
-        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Error with TTF_Init.");
+        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "Error with TTF_Init.");
         return;
     }
 
@@ -61,7 +61,7 @@ void Game::InitializeSession()
 
     if (!m_Window)
     {
-        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Window did not work.");
+        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "Window did not work.");
         return;
     }
 
@@ -70,7 +70,7 @@ void Game::InitializeSession()
 
     if (!m_Renderer)
     {
-        Systems::SYSTEMS_LOG(Systems::LoggingLevel::eError, "Renderer did not work.");
+        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "Renderer did not work.");
         return;
     }
 

@@ -75,7 +75,6 @@ void String::push_back(char character)
     tempString[m_uiStringLength + 1] = NULL_TERMINATE_CHAR;
 
     delete[] m_String;
-
     m_String = tempString;
     m_uiStringLength++;
 }
@@ -141,18 +140,18 @@ void String::append(const char* string)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-String& String::operator=(const String& right)
+String& String::operator=(const String& rhs)
 {
-    if (this == &right)
+    if (this == &rhs)
     {
         return *this;
     }
 
-    m_uiStringLength = static_cast<uint32_t>(strlen(right.c_str())) ;
+    m_uiStringLength = static_cast<uint32_t>(strlen(rhs.c_str())) ;
 
     delete[] m_String;
     m_String = new char[m_uiStringLength + 1];
-    strcpy(m_String, right.c_str());
+    strcpy(m_String, rhs.c_str());
 
     return *this;
 }
@@ -160,18 +159,18 @@ String& String::operator=(const String& right)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-String& String::operator=(const char* right)
+String& String::operator=(const char* rhs)
 {
-    if (this->m_String == right)
+    if (this->m_String == rhs)
     {
         return *this;
     }
 
-    m_uiStringLength = static_cast<uint32_t>(strlen(right));
+    m_uiStringLength = static_cast<uint32_t>(strlen(rhs));
 
     delete[] m_String;
     m_String = new char[m_uiStringLength + 1];
-    strcpy(m_String, right);
+    strcpy(m_String, rhs);
 
     return *this;
 }
@@ -179,33 +178,33 @@ String& String::operator=(const char* right)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-bool String::operator<(const String& right) const
+bool String::operator<(const String& rhs) const
 {
-    return strcmp(this->m_String, right.c_str()) > 0;
+    return strcmp(this->m_String, rhs.c_str()) > 0;
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-bool String::operator<(const char* right) const
+bool String::operator<(const char* rhs) const
 {
-    return strcmp(this->m_String, right) > 0;
+    return strcmp(this->m_String, rhs) > 0;
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-bool String::operator>(const String& right) const
+bool String::operator>(const String& rhs) const
 {
-    return strcmp(this->m_String, right.c_str()) < 0;
+    return strcmp(this->m_String, rhs.c_str()) < 0;
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-bool String::operator>(const char* right) const
+bool String::operator>(const char* rhs) const
 {
-    return strcmp(this->m_String, right) < 0;
+    return strcmp(this->m_String, rhs) < 0;
 
 }
 
