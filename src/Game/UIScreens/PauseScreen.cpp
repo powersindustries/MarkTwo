@@ -1,8 +1,8 @@
 #include "PauseScreen.h"
-#include "Core/Managers/InputManager.h"
+#include "Game/Managers/InputManager.h"
 #include "GameGlobals.h"
-#include "Core/Managers/UIManager.h"
-#include "Core/Managers/LoadManager.h"
+#include "Game/Managers/UIManager.h"
+#include "Game/Managers/LoadManager.h"
 
 namespace MarkTwo
 {

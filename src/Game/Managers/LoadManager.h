@@ -4,7 +4,8 @@
 #include <SDL_image.h> // SDL Image
 #include <map>
 
-#include "../Types/String.h"
+#include "Core/Types/String.h"
+
 
 namespace MarkTwo
 {

@@ -1,7 +1,7 @@
 #include "Button.h"
 #include "GameGlobals.h"
 #include "Core/Game.h"
-#include "Core/Managers/LoadManager.h"
+#include "Game/Managers/LoadManager.h"
 
 namespace CoreUI
 {

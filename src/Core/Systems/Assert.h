@@ -1,6 +1,8 @@
 #pragma once
 #include <assert.h>
 
+#include "Logging.h"
+
 namespace CoreSystems
 {
 

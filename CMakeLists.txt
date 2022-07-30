@@ -55,15 +55,9 @@ src/Core/Types/Transform.cpp
 src/Core/Types/String.h
 src/Core/Types/String.cpp
 
+src/Core/Systems/Systems.h
 src/Core/Systems/Assert.h
 src/Core/Systems/Logging.h
-
-src/Core/Managers/InputManager.h
-src/Core/Managers/InputManager.cpp
-src/Core/Managers/LoadManager.h
-src/Core/Managers/LoadManager.cpp
-src/Core/Managers/UIManager.h
-src/Core/Managers/UIManager.cpp
 
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp
@@ -88,6 +82,13 @@ src/Game/UIScreens/HUDScreen.h
 src/Game/UIScreens/HUDScreen.cpp
 src/Game/UIScreens/PauseScreen.h
 src/Game/UIScreens/PauseScreen.cpp
+
+src/Game/Managers/InputManager.h
+src/Game/Managers/InputManager.cpp
+src/Game/Managers/LoadManager.h
+src/Game/Managers/LoadManager.cpp
+src/Game/Managers/UIManager.h
+src/Game/Managers/UIManager.cpp
 
 ${RESOURCE_FILES}
 

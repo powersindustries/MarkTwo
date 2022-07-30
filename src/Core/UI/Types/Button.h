@@ -4,7 +4,7 @@
 #include <SDL_image.h> // SDL Image
 
 #include "../UICoreTypes.h"
-#include "Core/Managers/InputManager.h"
+#include "Game/Managers/InputManager.h"
 #include "Core/Types/String.h"
 
 enum ButtonStates

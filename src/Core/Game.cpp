@@ -1,10 +1,10 @@
 #include "Game.h"
 #include "GameGlobals.h"
-#include "Managers/InputManager.h"
-#include "Managers/LoadManager.h"
 #include "Game/Player/Player.h"
-#include "Managers/UIManager.h"
 #include "Systems/Logging.h"
+#include "Game/Managers/LoadManager.h"
+#include "Game/Managers/UIManager.h"
+#include "Game/Managers/InputManager.h"
 
 namespace MarkTwo
 {

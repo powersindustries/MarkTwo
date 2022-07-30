@@ -4,8 +4,7 @@
 #include <rapidxml_utils.hpp>
 
 #include "GameGlobals.h"
-#include "../Systems/Logging.h"
-#include "../Systems/Assert.h"
+#include "Core/Systems/Systems.h"
 
 namespace MarkTwo
 {

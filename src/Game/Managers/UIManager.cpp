@@ -1,7 +1,8 @@
 #include "UIManager.h"
 #include "GameGlobals.h"
 
-#include "../Systems/Logging.h"
+#include "Core/Systems/Systems.h"
+
 
 namespace MarkTwo
 {

@@ -1,5 +1,5 @@
 #include "Sprite.h"
-#include "../Managers/LoadManager.h"
+#include "Game/Managers/LoadManager.h"
 
 namespace CoreTypes
 {
