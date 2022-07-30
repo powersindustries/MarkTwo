@@ -208,5 +208,13 @@ bool String::operator>(const char* rhs) const
 
 }
 
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+char& String::operator[](size_t index)
+{
+    return m_String[index];
+}
+
 }
 

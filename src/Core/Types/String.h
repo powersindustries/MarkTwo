@@ -30,6 +30,7 @@ public:
     bool operator>(const String& rhs) const;
     bool operator>(const char* rhs) const;
 
+    char& operator[](size_t index);
 
 private:
 
