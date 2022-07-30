@@ -48,8 +48,8 @@ public:
     void Update(float* deltaTime);
     void Draw(SDL_Renderer* renderer);
 
-    std::map<CoreTypes::String, TextureAssetData> m_TextureAssets;
-    std::map<CoreTypes::String, FontAssetData> m_FontAssets;
+    std::map<uint32_t, TextureAssetData> m_TextureAssets; // ID as hash, Texture Data
+    std::map<uint32_t, FontAssetData> m_FontAssets; // ID as hash, Texture Data
 
 
 private:

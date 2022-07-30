@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "GameGlobals.h"
+#include "Core/Systems/Systems.h"
 
 namespace MarkTwo
 {
@@ -34,7 +35,9 @@ Player::~Player()
 void Player::InitializePlayer()
 {
     // Initialize Player Sprite
-    m_PlayerSprite = new Sprite("txt_Chopper", 2, 90, true);
+    CoreTypes::String chopperID = "txt_Chopper";
+    uint32_t chopperIDHash = CoreSystems::StringToHash32(chopperID); 
+    m_PlayerSprite = new Sprite(chopperIDHash, 2, 90, true);
     m_PlayerSprite->InitializeSprite(m_PlayerRectangle);
 
     m_PlayerSprite->m_Transform.m_iPositionX = m_PlayerRectangle.x;

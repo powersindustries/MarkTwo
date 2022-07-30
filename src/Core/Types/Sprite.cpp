@@ -1,5 +1,6 @@
 #include "Sprite.h"
 #include "Game/Managers/LoadManager.h"
+#include "../Systems/Systems.h"
 
 namespace CoreTypes
 {
@@ -35,17 +36,7 @@ Sprite::~Sprite()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Sprite::Sprite(String assetID)
-{
-    m_bIsAnimated = false;
-
-    SetTexture(assetID);
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-Sprite::Sprite(String assetID, int numFrames, int animationSpeed, bool hasDirection)
+Sprite::Sprite(uint32_t assetIDHash, int numFrames, int animationSpeed, bool hasDirection)
 {
     m_bIsAnimated = true;
     m_iFrameNumber = numFrames;
@@ -76,7 +67,7 @@ Sprite::Sprite(String assetID, int numFrames, int animationSpeed, bool hasDirect
     }
 
     Play(m_sCurrentAnimationName);
-    SetTexture(assetID);
+    SetTexture(assetIDHash);
 }
 
 
@@ -193,9 +184,9 @@ void Sprite::Play(String animationName)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::SetTexture(String textureID)
+void Sprite::SetTexture(uint32_t textureIDHash)
 {
-    m_Texture = MarkTwo::g_LoadManager.m_TextureAssets[textureID].m_Texture;
+    m_Texture = MarkTwo::g_LoadManager.m_TextureAssets[textureIDHash].m_Texture;
 }
 
 

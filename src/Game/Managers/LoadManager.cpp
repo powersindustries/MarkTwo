@@ -61,7 +61,7 @@ void LoadManager::InitialLoad(SDL_Renderer* renderer)
 
         SDL_QueryTexture(textureAssetData.m_Texture, NULL, NULL, &textureAssetData.m_TextureWidth, &textureAssetData.m_TextureHeight);
 
-        m_TextureAssets[textureAssetData.m_ID] = textureAssetData;
+        m_TextureAssets[CoreSystems::StringToHash32(textureAssetData.m_ID)] = textureAssetData;
     }
 
     // Parse Font Data
@@ -77,7 +77,7 @@ void LoadManager::InitialLoad(SDL_Renderer* renderer)
         int fontsize = 24;
         fontAssetData.m_Font = TTF_OpenFont(assetPath.c_str(), fontsize);
 
-        m_FontAssets[fontAssetData.m_ID] = fontAssetData;
+        m_FontAssets[CoreSystems::StringToHash32(fontAssetData.m_ID)] = fontAssetData;
     }
 
     CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Initial LoadManager Load Complete!");

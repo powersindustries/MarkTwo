@@ -3,6 +3,7 @@
 #include "GameGlobals.h"
 #include "Game/Managers/UIManager.h"
 #include "Game/Managers/LoadManager.h"
+#include "Core/Systems/Systems.h"
 
 namespace MarkTwo
 {
@@ -66,22 +67,22 @@ void PauseScreen::Initialize()
     m_Title.SetAnchor(HorizontalAlignment::eCenter, VerticalAlignment::eTop);
     m_Title.SetElementAlignment(HorizontalAlignment::eCenter, VerticalAlignment::eTop);
     m_Title.SetOffset(0, 75);
-    m_Title.SetFont("fnt_Charriot");
+    m_Title.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_Title.SetText("Pause Menu");
     m_Title.SetColor(g_GameGlobals.COLOR_BLACK);
 
     m_EngineText.SetAnchor(HorizontalAlignment::eCenter, VerticalAlignment::eTop);
     m_EngineText.SetElementAlignment(HorizontalAlignment::eCenter, VerticalAlignment::eCenter);
     m_EngineText.SetOffset(0, 200);
-    m_EngineText.SetFont("fnt_Charriot");
+    m_EngineText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_EngineText.SetText("MarkTwo Engine v2.0");
     m_EngineText.SetColor(g_GameGlobals.COLOR_BLACK);
 
-    m_ReturnToGameButton.SetFont("fnt_Arial");
+    m_ReturnToGameButton.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Arial")));
     m_ReturnToGameButton.SetText("RETURN TO GAME");
     m_ReturnToGameButton.SetSize(300,50);
 
-    m_QuitGameButton.SetFont("fnt_Arial");
+    m_QuitGameButton.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Arial")));
     m_QuitGameButton.SetText("QUIT GAME");
     m_QuitGameButton.SetSize(300,50);
 

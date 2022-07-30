@@ -28,7 +28,7 @@ public:
     void SetPosition(int x, int y);
     void RefreshUI();
 
-    void SetFont(CoreTypes::String fontID);
+    void SetFont(uint32_t fontIDHash);
 
     void SetSize(int width, int height);
     void SetText(CoreTypes::String text);

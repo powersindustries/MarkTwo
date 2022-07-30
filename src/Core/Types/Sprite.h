@@ -36,8 +36,7 @@ public:
     Sprite();
     ~Sprite();
 
-    Sprite(String assetID);
-    Sprite(String assetID, int numFrames, int animationSpeed, bool hasDirection);
+    Sprite(uint32_t assetIDHash, int numFrames, int animationSpeed, bool hasDirection);
 
     void InitializeSprite(SDL_Rect& inRectangle);
     void InitializeSprite(int x, int y, int width, int height);
@@ -50,7 +49,7 @@ public:
 
     void Play(String animationName);
 
-    void SetTexture(String textureID);
+    void SetTexture(uint32_t textureIDHash);
 
 
 public:

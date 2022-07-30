@@ -3,31 +3,43 @@
 
 #include "Core/Types/String.h"
 
+#define PRIME_1 37
+#define PRIME_2 1993
+
 namespace CoreSystems
 {
-
-
 // -------------------------------------------------------
 // DISCLAIMER: These hashing methods are note safe! Do not use the hashing methods in this class for any security uses.
 // These hashes are not safe, but they arent meant to be. Theyre used for fast lookups.
 // -------------------------------------------------------
-class HashMethods
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+static uint32_t StringToHash32(CoreTypes::String& string)
 {
-public:
-    HashMethods();
-    ~HashMethods();
+    uint32_t output = 0;
+    const uint32_t stringSize = string.size();
 
-    uint32_t StringToHash32(CoreTypes::String& string);
-    uint32_t StringToHash32(const char* string, const uint32_t size);
+    for (uint32_t x=0; x<stringSize; ++x) 
+    {
+        output = (output * PRIME_1) + string[x];
+    }
+    return output;
+}
 
 
-private:
+// -------------------------------------------------------
+// -------------------------------------------------------
+static uint32_t StringToHash32(const char* string, const uint32_t size)
+{
+    uint32_t output = 0;
 
-    const uint32_t m_uiPrime1 = 37;
-    const uint32_t m_uiPrime2 = 1993;
-
-};
-
-extern HashMethods g_HashMethods;
+    for (uint32_t x=0; x<size; ++x) 
+    {
+        output = (output * PRIME_1) + string[x];
+    }
+    return output;
+}
 
 }

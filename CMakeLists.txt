@@ -58,6 +58,7 @@ src/Core/Types/String.cpp
 src/Core/Systems/Systems.h
 src/Core/Systems/Assert.h
 src/Core/Systems/Logging.h
+src/Core/Systems/Hash.h
 
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp

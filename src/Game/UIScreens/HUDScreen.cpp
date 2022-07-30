@@ -1,5 +1,6 @@
 #include "HUDScreen.h"
 #include "GameGlobals.h"
+#include "Core/Systems/Systems.h"
 
 namespace MarkTwo
 {
@@ -54,7 +55,7 @@ void HUDScreen::Initialize()
     m_Title.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
     m_Title.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);
     m_Title.SetOffset(0,50);
-    m_Title.SetFont("fnt_Charriot");
+    m_Title.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_Title.SetText("MarkTwo Engine v2.0");
     m_Title.SetColor(g_GameGlobals.COLOR_BLACK);
 
@@ -68,7 +69,7 @@ void HUDScreen::Initialize()
     m_PlayerText.SetAnchor(HorizontalAlignment::eLeft,VerticalAlignment::eTop);
     m_PlayerText.SetElementAlignment(HorizontalAlignment::eLeft,VerticalAlignment::eCenter);
     m_PlayerText.SetOffset(100,50);
-    m_PlayerText.SetFont("fnt_Charriot");
+    m_PlayerText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_PlayerText.SetText("Player Below");
     m_PlayerText.SetColor(g_GameGlobals.COLOR_BLACK);
 
@@ -79,23 +80,23 @@ void HUDScreen::Initialize()
     m_DirectionsBox.SetSize(300,250);
     m_DirectionsBox.SetColor(g_GameGlobals.COLOR_WHITE);
 
-    m_DirectionTitle.SetFont("fnt_Charriot");
+    m_DirectionTitle.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_DirectionTitle.SetText("Directions:");
     m_DirectionTitle.SetColor(g_GameGlobals.COLOR_BLACK);
 
-    m_MovementText.SetFont("fnt_Charriot");
+    m_MovementText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_MovementText.SetText("WASD - Movement");
     m_MovementText.SetColor(g_GameGlobals.COLOR_BLACK);
 
-    m_PauseText.SetFont("fnt_Charriot");
+    m_PauseText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_PauseText.SetText("ESC - Pause Menu");
     m_PauseText.SetColor(g_GameGlobals.COLOR_BLACK);
 
-    m_DebugText.SetFont("fnt_Charriot");
+    m_DebugText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_DebugText.SetText("F1 - Debug Mode");
     m_DebugText.SetColor(g_GameGlobals.COLOR_BLACK);
 
-    m_KillGameText.SetFont("fnt_Charriot");
+    m_KillGameText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_KillGameText.SetText("Backspace - Kill Game");
     m_KillGameText.SetColor(g_GameGlobals.COLOR_BLACK);
 

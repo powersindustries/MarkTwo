@@ -21,7 +21,7 @@ public:
 
 
     void SetSize(int width, int height);
-    void SetFont(CoreTypes::String fontID);
+    void SetFont(uint32_t fontIDHash);
     void SetColor(SDL_Color color);
     void SetText(CoreTypes::String text);
 

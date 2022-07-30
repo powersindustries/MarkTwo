@@ -3,6 +3,8 @@
 #include "Core/Game.h"
 
 #include "Game/Managers/LoadManager.h"
+#include "Core/Systems/Systems.h"
+
 namespace CoreUI
 {
 
@@ -179,9 +181,9 @@ void TextBlock::SetSize(int width, int height)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetFont(CoreTypes::String fontID)
+void TextBlock::SetFont(uint32_t fontIDHash)
 {
-    m_Font = MarkTwo::g_LoadManager.m_FontAssets[fontID].m_Font;
+    m_Font = MarkTwo::g_LoadManager.m_FontAssets[fontIDHash].m_Font;
 }
 
 
