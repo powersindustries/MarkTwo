@@ -11,6 +11,13 @@ namespace CoreTypes
 {
 
 
+enum class SpriteType
+{
+    eAnimanted,
+    eNonAnimated
+};
+
+
 class AnimationData
 {
 public:
@@ -36,41 +43,35 @@ public:
     Sprite();
     ~Sprite();
 
-    Sprite(uint32_t assetIDHash, int numFrames, int animationSpeed, bool hasDirection);
-
-    void InitializeSprite(SDL_Rect& inRectangle);
-    void InitializeSprite(int x, int y, int width, int height);
+    // Non-Animated Texture constructor
+    Sprite(uint32_t assetIDHash, SpriteType spriteType = SpriteType::eNonAnimated);
+    // Animated Texture constructor
+    Sprite(uint32_t assetIDHash, uint8_t numFrames, uint8_t animationSpeed, SpriteType spriteType = SpriteType::eAnimanted);
 
     void Update(float deltaTime);
     void Update(float deltaTime, SDL_Rect& inRectangle);
-    void Update(float deltaTime, Transform& inTransform);
     void Draw(SDL_Renderer* renderer);
 
-
-    void Play(String animationName);
-
+    void InitializeSprite(SDL_Rect& inRectangle);
     void SetTexture(uint32_t textureIDHash);
 
-
-public:
-    Transform m_Transform;
+    void SetRotation(double degrees);
 
 
 private:
     SDL_Texture* m_Texture;
+
     SDL_Rect m_SourceRectangle;
     SDL_Rect m_DestinationRectangle;
 
+    Transform m_Transform;
 
-    std::map<String, AnimationData> m_Animations;
-    String m_sCurrentAnimationName;
+    SpriteType m_SpriteType;
+    uint8_t m_uiFrameNumber;
+    uint8_t m_uiAnimationSpeed;
 
-    bool m_bIsAnimated;
-
-    int m_iFrameNumber;
-    int m_iAnimationSpeed;
-
-    unsigned int m_uiAnimationIndex = 0;
+    // In Degrees, Clockwise
+    double m_dRotation;
 
 };
 

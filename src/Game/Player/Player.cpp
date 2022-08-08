@@ -1,6 +1,7 @@
 #include "Player.h"
 #include "GameGlobals.h"
 #include "Core/Systems/Systems.h"
+#include "../Managers/LoadManager.h"
 
 namespace MarkTwo
 {
@@ -35,16 +36,8 @@ Player::~Player()
 void Player::InitializePlayer()
 {
     // Initialize Player Sprite
-    CoreTypes::String chopperID = "txt_Chopper";
-    uint32_t chopperIDHash = CoreSystems::StringToHash32(chopperID); 
-    m_PlayerSprite = new Sprite(chopperIDHash, 2, 90, true);
+    m_PlayerSprite = new Sprite(CoreSystems::StringToHash32(CoreTypes::String("txt_Chopper")), 2, 90);
     m_PlayerSprite->InitializeSprite(m_PlayerRectangle);
-
-    m_PlayerSprite->m_Transform.m_iPositionX = m_PlayerRectangle.x;
-    m_PlayerSprite->m_Transform.m_iPositionY = m_PlayerRectangle.y;
-    m_PlayerSprite->m_Transform.m_iWidth = m_PlayerRectangle.w;
-    m_PlayerSprite->m_Transform.m_iHeight = m_PlayerRectangle.h;
-
 }
 
 
@@ -54,6 +47,9 @@ void Player::Update(float* deltaTime)
 {
     // Update Player Movement
     m_PlayerMovement.Update(deltaTime);
+
+    // Update Player Rotation
+    SetMouseRotation();
 
     // Update Player Assets
     m_PlayerSprite->Update(*deltaTime, m_PlayerRectangle);
@@ -81,6 +77,25 @@ void Player::SetPlayerPosition(int x, int y)
 {
     m_PlayerRectangle.x = x;
     m_PlayerRectangle.y = y;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void Player::SetMouseRotation()
+{
+    int iMouseX;
+    int iMouseY;
+    SDL_GetMouseState(&iMouseX, &iMouseY);
+
+    double dNumberator = m_PlayerRectangle.x - iMouseX;
+    double dDenominator = m_PlayerRectangle.y - iMouseY;
+    double dRotation = atan2(dNumberator, dDenominator) * 180 / g_GameGlobals.PI;
+
+    // Clockwise correction.
+    dRotation *= -1;
+
+    m_PlayerSprite->SetRotation(dRotation);
 }
 
 }

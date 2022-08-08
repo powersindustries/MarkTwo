@@ -35,6 +35,8 @@ public:
 
     const int FPS = 60;
     const int FRAME_TARGET_TIME = 1000 / FPS;
+    
+    const double PI = 3.14;
 
 
     // SDL Globals

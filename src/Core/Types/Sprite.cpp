@@ -11,6 +11,13 @@ namespace CoreTypes
 Sprite::Sprite()
     : m_Texture(nullptr)
 {
+    m_SpriteType = SpriteType::eNonAnimated;
+
+    m_uiFrameNumber    = 0;
+    m_uiAnimationSpeed = 0;
+
+    m_dRotation = 0.0;
+
     m_SourceRectangle.x = 0;
     m_SourceRectangle.y = 0;
     m_SourceRectangle.w = 0;
@@ -20,10 +27,6 @@ Sprite::Sprite()
     m_DestinationRectangle.y = 0;
     m_DestinationRectangle.w = 0;
     m_DestinationRectangle.h = 0;
-
-    m_bIsAnimated = true;
-    m_iFrameNumber = 0;
-    m_iAnimationSpeed = 0;
 }
 
 
@@ -31,43 +34,47 @@ Sprite::Sprite()
 // -------------------------------------------------------
 Sprite::~Sprite()
 {
+    free(m_Texture);
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Sprite::Sprite(uint32_t assetIDHash, int numFrames, int animationSpeed, bool hasDirection)
+Sprite::Sprite(uint32_t assetIDHash, SpriteType spriteType)
+    : m_Texture(nullptr)
 {
-    m_bIsAnimated = true;
-    m_iFrameNumber = numFrames;
-    m_iAnimationSpeed = animationSpeed;
+    m_SpriteType = spriteType;
 
-    if (hasDirection)
-    {
-        AnimationData up = AnimationData(0, numFrames, animationSpeed);
-        AnimationData down = AnimationData(1, numFrames, animationSpeed);
-        AnimationData left = AnimationData(2, numFrames, animationSpeed);
-        AnimationData right = AnimationData(3, numFrames, animationSpeed);
+    m_uiFrameNumber    = 0;
+    m_uiAnimationSpeed = 0;
 
-        m_Animations.emplace(std::pair<String, AnimationData>("up", up));
-        m_Animations.emplace(std::pair<String, AnimationData>("down", down));
-        m_Animations.emplace(std::pair<String, AnimationData>("left", left));
-        m_Animations.emplace(std::pair<String, AnimationData>("right", right));
+    m_dRotation = 0.0;
 
-        m_uiAnimationIndex = 0;
-        m_sCurrentAnimationName = "up";
-    }
-    else
-    {
-        String single = "single";
-        AnimationData singleAnimation = AnimationData(0, numFrames, animationSpeed);
-        m_Animations.emplace(single, singleAnimation);
-        m_uiAnimationIndex = 0;
-        m_sCurrentAnimationName = single;
-    }
-
-    Play(m_sCurrentAnimationName);
     SetTexture(assetIDHash);
+
+    m_SourceRectangle.x = 0;
+    m_SourceRectangle.y = 0;
+    m_SourceRectangle.w = 0;
+    m_SourceRectangle.h = 0;
+
+    m_DestinationRectangle.x = 0;
+    m_DestinationRectangle.y = 0;
+    m_DestinationRectangle.w = 0;
+    m_DestinationRectangle.h = 0;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+Sprite::Sprite(uint32_t assetIDHash, uint8_t numFrames, uint8_t animationSpeed, SpriteType spriteType)
+{
+    SetTexture(assetIDHash);
+
+    m_SpriteType = spriteType;
+    m_uiFrameNumber = numFrames;
+    m_uiAnimationSpeed = animationSpeed;
+
+    m_dRotation = 0.0;
 }
 
 
@@ -86,28 +93,14 @@ void Sprite::InitializeSprite(SDL_Rect& inRectangle)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::InitializeSprite(int x, int y, int width, int height)
-{
-    m_Transform.SetTransform(x, y, width, height);
-
-    m_SourceRectangle.x = 0;
-    m_SourceRectangle.y = 0;
-    m_SourceRectangle.w = m_Transform.m_iWidth;
-    m_SourceRectangle.h = m_Transform.m_iHeight;
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void Sprite::Update(float deltaTime)
 {
-    // Update Source Rectangle
-    if (m_bIsAnimated)
+    // Update Source Rectangle to next frame in spritesheet.
+    // Spritesheets work horizontally for now. Will eventually be vertical instead.
+    if (m_SpriteType == SpriteType::eAnimanted)
     {
-        m_SourceRectangle.x = m_SourceRectangle.w * static_cast<int>(SDL_GetTicks() / m_iAnimationSpeed % m_iFrameNumber);
+        m_SourceRectangle.x = m_SourceRectangle.w * static_cast<int>(SDL_GetTicks() / m_uiAnimationSpeed % m_uiFrameNumber);
     }
-
-    m_SourceRectangle.y = m_uiAnimationIndex * m_Transform.m_iHeight;
 
     // Update Destination Rectangle
     m_DestinationRectangle.x = m_Transform.m_iPositionX;
@@ -121,41 +114,16 @@ void Sprite::Update(float deltaTime)
 // -------------------------------------------------------
 void Sprite::Update(float deltaTime, SDL_Rect& inRectangle)
 {
-    // Update Transform Data
+    // Update Transform Data.
     m_Transform.SetTransform(inRectangle);
 
-    // Update Source Rectangle
-    if (m_bIsAnimated)
+    // Update Source Rectangle if animated.
+    if (m_SpriteType == SpriteType::eAnimanted)
     {
-        m_SourceRectangle.x = m_SourceRectangle.w * static_cast<int>(SDL_GetTicks() / m_iAnimationSpeed % m_iFrameNumber);
+        m_SourceRectangle.x = m_SourceRectangle.w * static_cast<int>(SDL_GetTicks() / m_uiAnimationSpeed % m_uiFrameNumber);
     }
 
-    m_SourceRectangle.y = m_uiAnimationIndex * m_Transform.m_iHeight;
-
-    // Update Destination Rectangle
-    m_DestinationRectangle.x = m_Transform.m_iPositionX;
-    m_DestinationRectangle.y = m_Transform.m_iPositionY;
-    m_DestinationRectangle.w = m_Transform.m_iWidth * m_Transform.m_iScale;
-    m_DestinationRectangle.h = m_Transform.m_iHeight * m_Transform.m_iScale;
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void Sprite::Update(float deltaTime, Transform& inTransform)
-{
-    // Update Transform Data
-    m_Transform = inTransform;
-
-    // Update Source Rectangle
-    if (m_bIsAnimated)
-    {
-        m_SourceRectangle.x = m_SourceRectangle.w * static_cast<int>(SDL_GetTicks() / m_iAnimationSpeed % m_iFrameNumber);
-    }
-
-    m_SourceRectangle.y = m_uiAnimationIndex * m_Transform.m_iHeight;
-
-    // Update Destination Rectangle
+    // Update Destination Rectangle.
     m_DestinationRectangle.x = m_Transform.m_iPositionX;
     m_DestinationRectangle.y = m_Transform.m_iPositionY;
     m_DestinationRectangle.w = m_Transform.m_iWidth * m_Transform.m_iScale;
@@ -167,18 +135,14 @@ void Sprite::Update(float deltaTime, Transform& inTransform)
 // -------------------------------------------------------
 void Sprite::Draw(SDL_Renderer* renderer)
 {
-    SDL_RenderCopyEx(renderer, m_Texture, &m_SourceRectangle, &m_DestinationRectangle, 0.0, NULL, SDL_FLIP_NONE);
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void Sprite::Play(String animationName)
-{
-    m_iFrameNumber = m_Animations[animationName].m_uiFrameCount;
-    m_uiAnimationIndex = m_Animations[animationName].m_uiIndex;
-    m_iAnimationSpeed = m_Animations[animationName].m_uiAnimationSpeed;
-    m_sCurrentAnimationName = animationName;
+    if (m_SpriteType == SpriteType::eAnimanted)
+    {
+        SDL_RenderCopyEx(renderer, m_Texture, &m_SourceRectangle, &m_DestinationRectangle, m_dRotation, NULL, SDL_FLIP_NONE);
+    }
+    else
+    {
+        SDL_RenderCopyEx(renderer, m_Texture, NULL, &m_DestinationRectangle, m_dRotation, NULL, SDL_FLIP_NONE);
+    }
 }
 
 
@@ -189,5 +153,12 @@ void Sprite::SetTexture(uint32_t textureIDHash)
     m_Texture = MarkTwo::g_LoadManager.m_TextureAssets[textureIDHash].m_Texture;
 }
 
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void Sprite::SetRotation(double degrees)
+{
+    m_dRotation = degrees;
+}
 
 }

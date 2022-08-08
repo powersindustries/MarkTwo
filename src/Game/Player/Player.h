@@ -10,6 +10,8 @@ using namespace CoreTypes;
 
 namespace MarkTwo
 {
+
+
 class Player
 {
 public:
@@ -30,17 +32,21 @@ public:
 
 
 private:
+    void SetMouseRotation();
+
+
+
+private:
     SDL_Rect m_PlayerRectangle;
 
     Sprite* m_PlayerSprite;
 
     PlayerMovement m_PlayerMovement;
 
-    CoreTypes::String m_PlayerDataFilepath;
-
-    const float m_fHealthMultiplier = 2.5f;
 
 };
 
 extern Player g_Player;
+
+
 }
