@@ -36,8 +36,7 @@ Player::~Player()
 void Player::InitializePlayer()
 {
     // Initialize Player Sprite
-    m_PlayerSprite = new Sprite(CoreSystems::StringToHash32(CoreTypes::String("txt_Chopper")), 2, 90);
-    m_PlayerSprite->InitializeSprite(m_PlayerRectangle);
+    m_PlayerSprite = new Sprite(CoreSystems::StringToHash32(CoreTypes::String("txt_Chopper")), 90);
 }
 
 

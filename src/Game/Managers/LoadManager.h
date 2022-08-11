@@ -13,16 +13,17 @@ namespace MarkTwo
 
 struct TextureAssetData
 {
-    TextureAssetData() : m_Fontsize(0), m_Texture(nullptr), m_TextureHeight(0), m_TextureWidth(0) {}
+    TextureAssetData() : m_Texture(nullptr), m_iHeight(0), m_iWidth(0), m_uiFrames(0) {}
 
     CoreTypes::String m_ID;
     CoreTypes::String m_File;
 
     SDL_Texture* m_Texture;
-
-    int m_Fontsize;
-    int m_TextureWidth;
-    int m_TextureHeight;
+    
+    uint8_t m_uiFrames;
+    
+    int m_iWidth;
+    int m_iHeight;
 };
 
 
@@ -50,6 +51,12 @@ public:
 
     std::map<uint32_t, TextureAssetData> m_TextureAssets; // ID as hash, Texture Data
     std::map<uint32_t, FontAssetData> m_FontAssets; // ID as hash, Texture Data
+
+
+private:
+
+    void LoadTextureAssets(SDL_Renderer* renderer);
+    void LoadFontAssets(SDL_Renderer* renderer);
 
 
 private:

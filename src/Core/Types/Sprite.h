@@ -46,13 +46,12 @@ public:
     // Non-Animated Texture constructor
     Sprite(uint32_t assetIDHash, SpriteType spriteType = SpriteType::eNonAnimated);
     // Animated Texture constructor
-    Sprite(uint32_t assetIDHash, uint8_t numFrames, uint8_t animationSpeed, SpriteType spriteType = SpriteType::eAnimanted);
+    Sprite(uint32_t assetIDHash, uint8_t animationSpeed, SpriteType spriteType = SpriteType::eAnimanted);
 
     void Update(float deltaTime);
     void Update(float deltaTime, SDL_Rect& inRectangle);
-    void Draw(SDL_Renderer* renderer);
+    void Draw(SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
-    void InitializeSprite(SDL_Rect& inRectangle);
     void SetTexture(uint32_t textureIDHash);
 
     void SetRotation(double degrees);
