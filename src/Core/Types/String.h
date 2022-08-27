@@ -20,6 +20,9 @@ public:
 
     void append(const String& string);
     void append(const char* string);
+    void append(const uint16_t number);
+
+    void to_string(const uint16_t number);
 
     String& operator=(const String& right);
     String& operator=(const char* right);

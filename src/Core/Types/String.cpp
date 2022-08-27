@@ -1,5 +1,7 @@
 #include "String.h"
 #include <cstring>
+#include <stdio.h>
+#include <corecrt_math.h>
 
 #define NULL_TERMINATE_CHAR '\0'
 
@@ -20,7 +22,7 @@ String::String()
 // -------------------------------------------------------
 String::~String()
 {
-    delete m_String;
+    delete[] m_String;
 }
 
 
@@ -135,6 +137,36 @@ void String::append(const char* string)
     delete[] m_String;
     m_String = tempString;
     m_uiStringLength = finalStringSize;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void String::append(const uint16_t number)
+{
+    String numberAsString;
+    numberAsString.to_string(number);
+
+    append(numberAsString);
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void String::to_string(const uint16_t number)
+{
+    const uint8_t sizeIncrease = 1;
+    const uint16_t numberLength = static_cast<int>(((ceil(log10(number)) + 1) * sizeof(char)));
+    
+    char* tempString = new char[numberLength + sizeIncrease];
+    sprintf(tempString, "%d", number);
+
+    tempString[numberLength] = NULL_TERMINATE_CHAR;
+
+    delete[] m_String;
+    m_String = tempString;
+    m_uiStringLength = numberLength;
+
 }
 
 
