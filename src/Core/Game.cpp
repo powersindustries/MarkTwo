@@ -5,6 +5,7 @@
 #include "Game/Managers/LoadManager.h"
 #include "Game/Managers/UIManager.h"
 #include "Game/Managers/InputManager.h"
+#include "Game/Managers/EventManager.h"
 
 namespace MarkTwo
 {
@@ -75,6 +76,7 @@ void Game::InitializeSession()
     }
 
     // Do initial loading stuff here
+    g_EventManager.InitializeEvents();
     g_LoadManager.InitialLoad(m_Renderer);
     g_Player.InitializePlayer();
     g_UIManager.InitializeUIScreens();

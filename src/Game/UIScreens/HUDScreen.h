@@ -36,5 +36,7 @@ private:
     TextBlock m_DebugText;
     TextBlock m_KillGameText;
 
+    TextBlock m_EventInfoText;
+
 };
 }

@@ -59,6 +59,7 @@ src/Core/Systems/Systems.h
 src/Core/Systems/Assert.h
 src/Core/Systems/Logging.h
 src/Core/Systems/Hash.h
+src/Core/Systems/Event.h
 
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp
@@ -90,6 +91,8 @@ src/Game/Managers/LoadManager.h
 src/Game/Managers/LoadManager.cpp
 src/Game/Managers/UIManager.h
 src/Game/Managers/UIManager.cpp
+src/Game/Managers/EventManager.h
+src/Game/Managers/EventManager.cpp
 
 ${RESOURCE_FILES}
 

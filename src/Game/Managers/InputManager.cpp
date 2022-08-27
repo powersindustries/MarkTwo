@@ -1,4 +1,5 @@
 #include "InputManager.h"
+#include "EventManager.h"
 
 namespace MarkTwo
 {
@@ -202,6 +203,9 @@ void InputManager::ManageKeyState(SDL_KeyboardEvent& keyboardEvent)
         {
             m_KeyboardHeldData.m_F4 = true;
             m_KeyboardPressedData.m_F4 = true;
+
+            // Broadcast TestEvent event.
+            g_EventManager.Broadcast(Events::eTestEvent);
             break;
         }
         case SDLK_UP:

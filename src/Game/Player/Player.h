@@ -30,6 +30,7 @@ public:
     void SetPlayerPositionX(int x) { m_PlayerRectangle.x = x; };
     void SetPlayerPositionY(int y) { m_PlayerRectangle.y = y; };
 
+    void OnTestEvent();
 
 private:
     void SetMouseRotation();

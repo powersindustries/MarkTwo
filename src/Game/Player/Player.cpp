@@ -2,6 +2,7 @@
 #include "GameGlobals.h"
 #include "Core/Systems/Systems.h"
 #include "../Managers/LoadManager.h"
+#include "../Managers/EventManager.h"
 
 namespace MarkTwo
 {
@@ -37,6 +38,10 @@ void Player::InitializePlayer()
 {
     // Initialize Player Sprite
     m_PlayerSprite = new Sprite(CoreSystems::StringToHash32(CoreTypes::String("txt_Chopper")), 90);
+
+    // Subscribe to TestEvent
+    g_EventManager.Subscribe(Events::eTestEvent, [this](){ Player::OnTestEvent(); });
+
 }
 
 
@@ -76,6 +81,14 @@ void Player::SetPlayerPosition(int x, int y)
 {
     m_PlayerRectangle.x = x;
     m_PlayerRectangle.y = y;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void Player::OnTestEvent()
+{
+    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "TestEvent triggered from the Player class after pressing F4 button.");
 }
 
 
