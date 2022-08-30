@@ -22,7 +22,10 @@ String::String()
 // -------------------------------------------------------
 String::~String()
 {
-    delete[] m_String;
+    if (!m_String)
+    {
+        delete[] m_String;
+    }
 }
 
 
@@ -76,7 +79,10 @@ void String::push_back(char character)
     tempString[m_uiStringLength] = character;
     tempString[m_uiStringLength + 1] = NULL_TERMINATE_CHAR;
 
-    delete[] m_String;
+    if (!m_String)
+    {
+        delete[] m_String;
+    }
     m_String = tempString;
     m_uiStringLength++;
 }
@@ -105,7 +111,11 @@ void String::append(const String& string)
 
     tempString[finalStringSize] = NULL_TERMINATE_CHAR;
 
-    delete[] m_String;
+    if (!m_String)
+    {
+        delete[] m_String;
+    }
+    
     m_String = tempString;
     m_uiStringLength = finalStringSize;
 }
@@ -134,7 +144,11 @@ void String::append(const char* string)
 
     tempString[finalStringSize] = NULL_TERMINATE_CHAR;
 
-    delete[] m_String;
+    if (!m_String)
+    {
+        delete[] m_String;
+    }
+
     m_String = tempString;
     m_uiStringLength = finalStringSize;
 }
@@ -163,7 +177,11 @@ void String::to_string(const uint16_t number)
 
     tempString[numberLength] = NULL_TERMINATE_CHAR;
 
-    delete[] m_String;
+    if (!m_String)
+    {
+        delete[] m_String;
+    }
+
     m_String = tempString;
     m_uiStringLength = numberLength;
 
@@ -181,7 +199,11 @@ String& String::operator=(const String& rhs)
 
     m_uiStringLength = static_cast<uint32_t>(strlen(rhs.c_str())) ;
 
-    delete[] m_String;
+    if (!m_String)
+    {
+        delete[] m_String;
+    }
+
     m_String = new char[m_uiStringLength + 1];
     strcpy(m_String, rhs.c_str());
 
@@ -200,7 +222,11 @@ String& String::operator=(const char* rhs)
 
     m_uiStringLength = static_cast<uint32_t>(strlen(rhs));
 
-    delete[] m_String;
+    if (!m_String)
+    {
+        delete[] m_String;
+    }
+
     m_String = new char[m_uiStringLength + 1];
     strcpy(m_String, rhs);
 
