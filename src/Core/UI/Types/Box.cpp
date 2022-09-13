@@ -69,7 +69,7 @@ void Box::RefreshUI()
     }
     case HorizontalAlignment::eRight:
     {
-        m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX;
+        m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX - GetWidth();
         break;
     }
     default:
@@ -91,7 +91,7 @@ void Box::RefreshUI()
     }
     case VerticalAlignment::eBottom:
     {
-        m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY;
+        m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY - GetHeight();
         break;
     }
     default:

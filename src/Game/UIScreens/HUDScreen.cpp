@@ -77,7 +77,7 @@ void HUDScreen::Initialize()
 
     
     m_DirectionsBox.SetAnchor(HorizontalAlignment::eRight,VerticalAlignment::eTop);
-    m_DirectionsBox.SetElementAlignment(HorizontalAlignment::eRight,VerticalAlignment::eTop);
+    m_DirectionsBox.SetElementAlignment(HorizontalAlignment::eLeft,VerticalAlignment::eTop);
     m_DirectionsBox.SetOffset(50,25);
     m_DirectionsBox.SetSize(300,250);
     m_DirectionsBox.SetColor(g_GameGlobals.COLOR_WHITE);
@@ -113,9 +113,9 @@ void HUDScreen::Initialize()
     m_DirectionsStack.AddChild(&m_KillGameText);
 
 
-    m_EventInfoText.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eBottom);
+    m_EventInfoText.SetAnchor(HorizontalAlignment::eRight,VerticalAlignment::eBottom);
     m_EventInfoText.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
-    m_EventInfoText.SetOffset(0,50);
+    m_EventInfoText.SetOffset(0,10);
     m_EventInfoText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_EventInfoText.SetText("Press F4 to trigger TestEvent and event system");
     m_EventInfoText.SetColor(g_GameGlobals.COLOR_BLACK);

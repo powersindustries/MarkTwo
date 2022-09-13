@@ -49,8 +49,6 @@ void StackPanel::SetPosition(int x, int y)
     m_BaseRectangle.y = y;
 
     RefreshUI();
-
-    //ResizeSpacing();
 }
 
 
