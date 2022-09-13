@@ -102,15 +102,15 @@ void HUDScreen::Initialize()
     m_KillGameText.SetText("Backspace - Kill Game");
     m_KillGameText.SetColor(g_GameGlobals.COLOR_BLACK);
 
-    m_DirectionsStack.SetAnchor(HorizontalAlignment::eRight,VerticalAlignment::eTop);
-    m_DirectionsStack.SetElementAlignment(HorizontalAlignment::eRight,VerticalAlignment::eTop);
-    m_DirectionsStack.SetOffset(60,25);
+    m_DirectionsStack.SetAnchor(HorizontalAlignment::eRight, VerticalAlignment::eTop);
+    m_DirectionsStack.SetChildAlignment(StackpanelAlignment::eVertical);
+    m_DirectionsStack.SetOffset(65,50);
+    m_DirectionsStack.SetPadding(20);
     m_DirectionsStack.AddChild(&m_DirectionTitle);
     m_DirectionsStack.AddChild(&m_MovementText);
     m_DirectionsStack.AddChild(&m_PauseText);
     m_DirectionsStack.AddChild(&m_DebugText);
     m_DirectionsStack.AddChild(&m_KillGameText);
-    m_DirectionsStack.SetPadding(20);
 
 
     m_EventInfoText.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eBottom);

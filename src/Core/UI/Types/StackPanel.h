@@ -32,7 +32,6 @@ public:
     void AddChild(UIBase* child);
     void SetChildAlignment(StackpanelAlignment alignment);
     void SetPadding(int padding);
-    void ResizeSpacing();
 
 
 public:

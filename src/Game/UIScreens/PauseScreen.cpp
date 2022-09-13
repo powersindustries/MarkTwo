@@ -87,11 +87,11 @@ void PauseScreen::Initialize()
     m_QuitGameButton.SetSize(300,50);
 
     m_StackPanel.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eBottom);
-    m_StackPanel.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);
+    m_StackPanel.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
+    m_StackPanel.SetPadding(25);
     m_StackPanel.SetOffset(0,150);
     m_StackPanel.AddChild(&m_ReturnToGameButton);
     m_StackPanel.AddChild(&m_QuitGameButton);
-    m_StackPanel.SetPadding(25);
 
 }
 
