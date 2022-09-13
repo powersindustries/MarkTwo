@@ -57,27 +57,25 @@ void StackPanel::SetPosition(int x, int y)
 void StackPanel::RefreshUI()
 {
     // Set Anchor position.
-    int leftX   = 0;
-    int centerX = MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2;
-    int rightX  = MarkTwo::g_GameGlobals.WINDOW_WIDTH;
+    int iLeftX   = 0;
+    int iCenterX = MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2;
+    int iRightX  = MarkTwo::g_GameGlobals.WINDOW_WIDTH;
 
-    int topY     = 0;
-    int middleY  = MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2;
-    int Bottom1Y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT;
+    int iTopY     = 0;
+    int iCenterY  = MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2;
+    int iBottomY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT;
 
     // Check to see if the position is an anchored position. If it is, reset m_BaseRectangle.
     bool bAnchoredPosition = (
-        (m_BaseRectangle.x == leftX && m_BaseRectangle.y == topY) ||
-        (m_BaseRectangle.x == leftX && m_BaseRectangle.y == middleY) ||
-        (m_BaseRectangle.x == leftX && m_BaseRectangle.y == Bottom1Y) ||
-
-        (m_BaseRectangle.x == centerX && m_BaseRectangle.y == topY) ||
-        (m_BaseRectangle.x == centerX && m_BaseRectangle.y == middleY) ||
-        (m_BaseRectangle.x == centerX && m_BaseRectangle.y == Bottom1Y) ||
-
-        (m_BaseRectangle.x == rightX && m_BaseRectangle.y == topY) ||
-        (m_BaseRectangle.x == rightX && m_BaseRectangle.y == middleY) ||
-        (m_BaseRectangle.x == rightX && m_BaseRectangle.y == Bottom1Y));
+        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iTopY) ||
+        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iCenterY) ||
+        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iBottomY) ||
+        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iTopY) ||
+        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iCenterY) ||
+        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iBottomY) ||
+        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iTopY) ||
+        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iCenterY) ||
+        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iBottomY));
 
 
     // If not unique, set m_BaseRectangle position to be an anchor point.
@@ -93,12 +91,12 @@ void StackPanel::RefreshUI()
         }
         case HorizontalAlignment::eCenter:
         {
-            m_BaseRectangle.x = (MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2) + m_vOffset.m_iX;
+            m_BaseRectangle.x = iCenterX + m_vOffset.m_iX;
             break;
         }
         case HorizontalAlignment::eRight:
         {
-            m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX;
+            m_BaseRectangle.x = iRightX - m_vOffset.m_iX;
             break;
         }
         default:
@@ -115,12 +113,12 @@ void StackPanel::RefreshUI()
         }
         case VerticalAlignment::eCenter:
         {
-            m_BaseRectangle.y = (MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2) + m_vOffset.m_iY;
+            m_BaseRectangle.y = iCenterY + m_vOffset.m_iY;
             break;
         }
         case VerticalAlignment::eBottom:
         {
-            m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY;
+            m_BaseRectangle.y = iBottomY - m_vOffset.m_iY;
             break;
         }
         default:

@@ -173,48 +173,73 @@ void Button::SetTextAlignment(HorizontalAlignment alignment)
 // -------------------------------------------------------
 void Button::RefreshUI()
 {
-    // Set x-index position based on Anchor.
-    switch (m_Anchor.m_Horizontal)
-    {
-    case HorizontalAlignment::eLeft:
-    {
-        m_BaseRectangle.x = m_vOffset.m_iX;
-        break;
-    }
-    case HorizontalAlignment::eCenter:
-    {
-        m_BaseRectangle.x = (MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2) + m_vOffset.m_iX;
-        break;
-    }
-    case HorizontalAlignment::eRight:
-    {
-        m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX - GetWidth();
-        break;
-    }
-    default:
-        break;
-    }
+    // Set Anchor position.
+    int iLeftX = 0;
+    int iCenterX = MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2;
+    int iRightX = MarkTwo::g_GameGlobals.WINDOW_WIDTH;
 
-    // Set y-index position based on Anchor.
-    switch (m_Anchor.m_Vertical)
+    int iTopY = 0;
+    int iCenterY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2;
+    int iBottomY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT;
+
+    // Check to see if the position is an anchored position. If it is, reset m_BaseRectangle.
+    bool bAnchoredPosition = (
+        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iTopY) ||
+        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iCenterY) ||
+        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iBottomY) ||
+        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iTopY) ||
+        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iCenterY) ||
+        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iBottomY) ||
+        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iTopY) ||
+        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iCenterY) ||
+        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iBottomY));
+
+
+    if (bAnchoredPosition)
     {
-    case VerticalAlignment::eTop:
-    {
-        m_BaseRectangle.y = m_vOffset.m_iY;
-        break;
-    }
-    case VerticalAlignment::eCenter:
-    {
-        m_BaseRectangle.y = (MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2) + m_vOffset.m_iY;
-        break;
-    }
-    case VerticalAlignment::eBottom:
-    {
-        m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY - GetHeight();
-        break;
-    }
-    default:
-        break;
+        // Set x-index position based on Anchor.
+        switch (m_Anchor.m_Horizontal)
+        {
+        case HorizontalAlignment::eLeft:
+        {
+            m_BaseRectangle.x = m_vOffset.m_iX;
+            break;
+        }
+        case HorizontalAlignment::eCenter:
+        {
+            m_BaseRectangle.x = iCenterX + m_vOffset.m_iX;
+            break;
+        }
+        case HorizontalAlignment::eRight:
+        {
+            m_BaseRectangle.x = iRightX - m_vOffset.m_iX - GetWidth();
+            break;
+        }
+        default:
+            break;
+        }
+
+        // Set y-index position based on Anchor.
+        switch (m_Anchor.m_Vertical)
+        {
+        case VerticalAlignment::eTop:
+        {
+            m_BaseRectangle.y = m_vOffset.m_iY;
+            break;
+        }
+        case VerticalAlignment::eCenter:
+        {
+            m_BaseRectangle.y = iCenterY + m_vOffset.m_iY;
+            break;
+        }
+        case VerticalAlignment::eBottom:
+        {
+            m_BaseRectangle.y = iBottomY - m_vOffset.m_iY - GetHeight();
+            break;
+        }
+        default:
+            break;
+        }
     }
 
     // Set x offset based on Element Alignment.
@@ -260,6 +285,7 @@ void Button::RefreshUI()
     }
 
     RefreshInternalUI();
+
 }
 
 

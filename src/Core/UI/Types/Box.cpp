@@ -139,7 +139,6 @@ void Box::RefreshUI()
     default:
         break;
     }
-
 }
 
 
