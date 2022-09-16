@@ -5,6 +5,7 @@
 #include "Core/UI/Types/TextBlock.h"
 #include "Core/UI/Types/Box.h"
 #include "Core/UI/Types/StackPanel.h"
+#include "Core/UI/Types/Button.h"
 
 using namespace CoreUI;
 
@@ -37,6 +38,9 @@ private:
     TextBlock m_KillGameText;
 
     TextBlock m_EventInfoText;
+
+
+    TextBlock m_TestBox;
 
 };
 }

@@ -25,6 +25,13 @@ enum class VerticalAlignment
 };
 
 
+enum class AlignmentType
+{
+    eAnchored,
+    ePoint
+};
+
+
 class AlignmentData
 {
 public:
@@ -78,6 +85,9 @@ public:
     inline int GetPositionX() const { return m_BaseRectangle.x; }
     inline int GetPositionY() const { return m_BaseRectangle.y; }
 
+
+    // Anchor point (x,y) relative to entire screen.
+    AlignmentType m_AnchorType;
 
     // Anchor point (x,y) relative to entire screen.
     AlignmentData m_Anchor;

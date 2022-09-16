@@ -40,6 +40,8 @@ void Box::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void Box::SetPosition(int x, int y)
 {
+    m_AnchorType = AlignmentType::ePoint;
+
     m_BaseRectangle.x = x;
     m_BaseRectangle.y = y;
 
@@ -54,49 +56,53 @@ void Box::SetPosition(int x, int y)
 // -------------------------------------------------------
 void Box::RefreshUI()
 {
-    // Set x-index position based on Anchor.
-    switch (m_Anchor.m_Horizontal)
+    if (m_AnchorType == AlignmentType::eAnchored)
     {
-    case HorizontalAlignment::eLeft:
-    {
-        m_BaseRectangle.x = m_vOffset.m_iX;
-        break;
-    }
-    case HorizontalAlignment::eCenter:
-    {
-        m_BaseRectangle.x = (MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2) + m_vOffset.m_iX;
-        break;
-    }
-    case HorizontalAlignment::eRight:
-    {
-        m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX - GetWidth();
-        break;
-    }
-    default:
-        break;
+        // Set x-index position based on Anchor.
+        switch (m_Anchor.m_Horizontal)
+        {
+        case HorizontalAlignment::eLeft:
+        {
+            m_BaseRectangle.x = m_vOffset.m_iX;
+            break;
+        }
+        case HorizontalAlignment::eCenter:
+        {
+            m_BaseRectangle.x = (MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2) + m_vOffset.m_iX;
+            break;
+        }
+        case HorizontalAlignment::eRight:
+        {
+            m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX - GetWidth();
+            break;
+        }
+        default:
+            break;
+        }
+
+        // Set y-index position based on Anchor.
+        switch (m_Anchor.m_Vertical)
+        {
+        case VerticalAlignment::eTop:
+        {
+            m_BaseRectangle.y = m_vOffset.m_iY;
+            break;
+        }
+        case VerticalAlignment::eCenter:
+        {
+            m_BaseRectangle.y = (MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2) + m_vOffset.m_iY;
+            break;
+        }
+        case VerticalAlignment::eBottom:
+        {
+            m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY - GetHeight();
+            break;
+        }
+        default:
+            break;
+        }
     }
 
-    // Set y-index position based on Anchor.
-    switch (m_Anchor.m_Vertical)
-    {
-    case VerticalAlignment::eTop:
-    {
-        m_BaseRectangle.y = m_vOffset.m_iY;
-        break;
-    }
-    case VerticalAlignment::eCenter:
-    {
-        m_BaseRectangle.y = (MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2) + m_vOffset.m_iY;
-        break;
-    }
-    case VerticalAlignment::eBottom:
-    {
-        m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY - GetHeight();
-        break;
-    }
-    default:
-        break;
-    }
 
     // Set x offset based on Element Alignment.
     switch (m_ElementAlignment.m_Horizontal)

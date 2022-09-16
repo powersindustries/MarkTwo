@@ -14,6 +14,8 @@ UIBase::UIBase()
     m_BaseRectangle.w = 100;
     m_BaseRectangle.h = 100;
 
+    m_AnchorType = AlignmentType::eAnchored;
+
     m_Anchor.m_Horizontal = HorizontalAlignment::eLeft;
     m_Anchor.m_Vertical = VerticalAlignment::eTop;
 
@@ -36,6 +38,8 @@ UIBase::~UIBase()
 // -------------------------------------------------------
 void UIBase::SetAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical)
 {
+    m_AnchorType = AlignmentType::eAnchored;
+
     m_Anchor.m_Horizontal = horizontal;
     m_Anchor.m_Vertical = vertical;
 
@@ -47,6 +51,8 @@ void UIBase::SetAnchor(HorizontalAlignment horizontal, VerticalAlignment vertica
 // -------------------------------------------------------
 void UIBase::SetElementAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical)
 {
+    m_AnchorType = AlignmentType::eAnchored;
+
     m_ElementAlignment.m_Horizontal = horizontal;
     m_ElementAlignment.m_Vertical = vertical;
 

@@ -115,6 +115,8 @@ void Button::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void Button::SetPosition(int x, int y)
 {
+    m_AnchorType = AlignmentType::ePoint;
+
     m_BaseRectangle.x = x;
     m_BaseRectangle.y = y;
 
@@ -174,28 +176,13 @@ void Button::SetTextAlignment(HorizontalAlignment alignment)
 void Button::RefreshUI()
 {
     // Set Anchor position.
-    int iLeftX = 0;
     int iCenterX = MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2;
     int iRightX = MarkTwo::g_GameGlobals.WINDOW_WIDTH;
 
-    int iTopY = 0;
     int iCenterY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2;
     int iBottomY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT;
 
-    // Check to see if the position is an anchored position. If it is, reset m_BaseRectangle.
-    bool bAnchoredPosition = (
-        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iTopY) ||
-        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iCenterY) ||
-        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iBottomY) ||
-        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iTopY) ||
-        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iCenterY) ||
-        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iBottomY) ||
-        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iTopY) ||
-        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iCenterY) ||
-        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iBottomY));
-
-
-    if (bAnchoredPosition)
+    if (m_AnchorType == AlignmentType::eAnchored)
     {
         // Set x-index position based on Anchor.
         switch (m_Anchor.m_Horizontal)

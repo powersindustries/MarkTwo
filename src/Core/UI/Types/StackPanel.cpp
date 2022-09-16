@@ -45,6 +45,8 @@ void StackPanel::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void StackPanel::SetPosition(int x, int y)
 {
+    m_AnchorType = AlignmentType::ePoint;
+
     m_BaseRectangle.x = x;
     m_BaseRectangle.y = y;
 
@@ -57,29 +59,14 @@ void StackPanel::SetPosition(int x, int y)
 void StackPanel::RefreshUI()
 {
     // Set Anchor position.
-    int iLeftX   = 0;
     int iCenterX = MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2;
     int iRightX  = MarkTwo::g_GameGlobals.WINDOW_WIDTH;
 
-    int iTopY     = 0;
     int iCenterY  = MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2;
     int iBottomY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT;
 
-    // Check to see if the position is an anchored position. If it is, reset m_BaseRectangle.
-    bool bAnchoredPosition = (
-        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iTopY) ||
-        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iCenterY) ||
-        (m_BaseRectangle.x == iLeftX && m_BaseRectangle.y == iBottomY) ||
-        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iTopY) ||
-        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iCenterY) ||
-        (m_BaseRectangle.x == iCenterX && m_BaseRectangle.y == iBottomY) ||
-        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iTopY) ||
-        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iCenterY) ||
-        (m_BaseRectangle.x == iRightX && m_BaseRectangle.y == iBottomY));
-
-
     // If not unique, set m_BaseRectangle position to be an anchor point.
-    if (bAnchoredPosition)
+    if (m_AnchorType == AlignmentType::eAnchored)
     {
         // Set x-index position based on Anchor.
         switch (m_Anchor.m_Horizontal)
@@ -164,7 +151,7 @@ void StackPanel::RefreshUI()
     }
     case HorizontalAlignment::eCenter: 
     {
-        m_BaseRectangle.x = m_BaseRectangle.x - (iStackWidth / 4);
+        m_BaseRectangle.x = m_BaseRectangle.x - (iStackWidth / 2);
         break;
     }
     case HorizontalAlignment::eRight: 
