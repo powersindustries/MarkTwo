@@ -42,8 +42,6 @@ void HUDScreen::Draw(SDL_Renderer* renderer)
 
     m_EventInfoText.Draw(renderer);
 
-    m_TestBox.Draw(renderer);
-
 }
 
 
@@ -122,13 +120,6 @@ void HUDScreen::Initialize()
     m_EventInfoText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_EventInfoText.SetText("Press F4 to trigger TestEvent and event system");
     m_EventInfoText.SetColor(g_GameGlobals.COLOR_BLACK);
-
-    m_TestBox.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Arial")));
-    //m_TestBox.SetPosition(123,123);
-    m_TestBox.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);
-    m_TestBox.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);
-    m_TestBox.SetText("Test Button");
-    m_TestBox.SetColor(g_GameGlobals.COLOR_FUCHSIA);
 
 }
 

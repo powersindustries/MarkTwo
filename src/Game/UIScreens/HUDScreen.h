@@ -39,8 +39,5 @@ private:
 
     TextBlock m_EventInfoText;
 
-
-    TextBlock m_TestBox;
-
 };
 }
