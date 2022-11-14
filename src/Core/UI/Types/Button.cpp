@@ -3,6 +3,7 @@
 #include "Core/Game.h"
 #include "Game/Managers/LoadManager.h"
 #include "Core/Systems/Systems.h"
+#include "Core/Managers/SettingsManager.h"
 
 namespace CoreUI
 {
@@ -169,11 +170,11 @@ void Button::SetTextAlignment(HorizontalAlignment alignment)
 void Button::RefreshUI()
 {
     // Set Anchor position.
-    int iCenterX = MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2;
-    int iRightX = MarkTwo::g_GameGlobals.WINDOW_WIDTH;
+    int iCenterX = CoreManagers::g_SettingsManager.GetScreenWidth() / 2;
+    int iRightX = CoreManagers::g_SettingsManager.GetScreenWidth();
 
-    int iCenterY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2;
-    int iBottomY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT;
+    int iCenterY = CoreManagers::g_SettingsManager.GetScreenHeight() / 2;
+    int iBottomY = CoreManagers::g_SettingsManager.GetScreenHeight();
 
     if (m_AnchorType == AlignmentType::eAnchored)
     {

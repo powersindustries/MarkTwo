@@ -4,6 +4,7 @@
 
 #include "Game/Managers/LoadManager.h"
 #include "Core/Systems/Systems.h"
+#include "Core/Managers/SettingsManager.h"
 
 namespace CoreUI
 {
@@ -72,12 +73,12 @@ void TextBlock::RefreshUI()
         }
         case HorizontalAlignment::eCenter:
         {
-            m_BaseRectangle.x = (MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2) + m_vOffset.m_iX;
+            m_BaseRectangle.x = (CoreManagers::g_SettingsManager.GetScreenWidth() / 2) + m_vOffset.m_iX;
             break;
         }
         case HorizontalAlignment::eRight:
         {
-            m_BaseRectangle.x = MarkTwo::g_GameGlobals.WINDOW_WIDTH - m_vOffset.m_iX - GetWidth();
+            m_BaseRectangle.x = CoreManagers::g_SettingsManager.GetScreenWidth() - m_vOffset.m_iX - GetWidth();
             break;
         }
         default:
@@ -94,12 +95,12 @@ void TextBlock::RefreshUI()
         }
         case VerticalAlignment::eCenter:
         {
-            m_BaseRectangle.y = (MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2) + m_vOffset.m_iY;
+            m_BaseRectangle.y = (CoreManagers::g_SettingsManager.GetScreenHeight() / 2) + m_vOffset.m_iY;
             break;
         }
         case VerticalAlignment::eBottom:
         {
-            m_BaseRectangle.y = MarkTwo::g_GameGlobals.WINDOW_HEIGHT - m_vOffset.m_iY - GetHeight();
+            m_BaseRectangle.y = CoreManagers::g_SettingsManager.GetScreenHeight() - m_vOffset.m_iY - GetHeight();
             break;
         }
         default:

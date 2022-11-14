@@ -1,5 +1,6 @@
 #include "StackPanel.h"
 #include "GameGlobals.h"
+#include "Core/Managers/SettingsManager.h"
 
 namespace CoreUI
 {
@@ -59,11 +60,11 @@ void StackPanel::SetPosition(int x, int y)
 void StackPanel::RefreshUI()
 {
     // Set Anchor position.
-    int iCenterX = MarkTwo::g_GameGlobals.WINDOW_WIDTH / 2;
-    int iRightX  = MarkTwo::g_GameGlobals.WINDOW_WIDTH;
+    int iCenterX = CoreManagers::g_SettingsManager.GetScreenWidth() / 2;
+    int iRightX  = CoreManagers::g_SettingsManager.GetScreenWidth();
 
-    int iCenterY  = MarkTwo::g_GameGlobals.WINDOW_HEIGHT / 2;
-    int iBottomY = MarkTwo::g_GameGlobals.WINDOW_HEIGHT;
+    int iCenterY = CoreManagers::g_SettingsManager.GetScreenHeight() / 2;
+    int iBottomY = CoreManagers::g_SettingsManager.GetScreenHeight();
 
     // If not unique, set m_BaseRectangle position to be an anchor point.
     if (m_AnchorType == AlignmentType::eAnchored)

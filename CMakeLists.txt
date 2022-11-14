@@ -43,6 +43,7 @@ endif ()
 set(RESOURCE_FILES
 
 src/Data/AssetManifest.xml
+src/Data/Settings.xml
 
 src/Assets/Textures/ChopperSpritesheet.png
 
@@ -75,6 +76,8 @@ src/Core/Systems/Event.h
 
 src/Core/Managers/InputManager.h
 src/Core/Managers/InputManager.cpp
+src/Core/Managers/SettingsManager.h
+src/Core/Managers/SettingsManager.cpp
 
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp

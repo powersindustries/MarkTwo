@@ -3,6 +3,7 @@
 #include "Game/Managers/UIManager.h"
 #include "Game/Managers/LoadManager.h"
 #include "Core/Systems/Systems.h"
+#include "Core/Managers/SettingsManager.h"
 
 namespace MarkTwo
 {
@@ -60,7 +61,7 @@ void PauseScreen::Initialize()
 {
     m_BackgroundBox.SetAnchor(HorizontalAlignment::eCenter, VerticalAlignment::eCenter);
     m_BackgroundBox.SetElementAlignment(HorizontalAlignment::eCenter, VerticalAlignment::eCenter);
-    m_BackgroundBox.SetSize(500, g_GameGlobals.WINDOW_HEIGHT - 50);
+    m_BackgroundBox.SetSize(500, CoreManagers::g_SettingsManager.GetScreenHeight() - 50);
     m_BackgroundBox.SetColor(g_GameGlobals.COLOR_SILVER);
 
     m_Title.SetAnchor(HorizontalAlignment::eCenter, VerticalAlignment::eTop);

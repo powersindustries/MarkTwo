@@ -5,6 +5,7 @@
 #include "Game/Managers/LoadManager.h"
 #include "Game/Managers/UIManager.h"
 #include "Game/Managers/EventManager.h"
+#include "Managers/SettingsManager.h"
 
 namespace MarkTwo
 {
@@ -51,12 +52,17 @@ void Game::InitializeSession()
         return;
     }
 
+    // Initialize game settings.
+    CoreManagers::g_SettingsManager.InitializeSettings();
+
+
+    // Create Window.
     m_Window = SDL_CreateWindow(
-        g_GameGlobals.TITLE_NAME,
+        CoreManagers::g_SettingsManager.GetTitle().c_str(),
         SDL_WINDOWPOS_UNDEFINED,
         SDL_WINDOWPOS_UNDEFINED,
-        g_GameGlobals.WINDOW_WIDTH,
-        g_GameGlobals.WINDOW_HEIGHT,
+        CoreManagers::g_SettingsManager.GetScreenWidth(),
+        CoreManagers::g_SettingsManager.GetScreenHeight(),
         SDL_WINDOW_SHOWN);
 
     if (!m_Window)
