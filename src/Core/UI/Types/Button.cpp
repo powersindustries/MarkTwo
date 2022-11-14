@@ -37,13 +37,6 @@ Button::~Button()
 // -------------------------------------------------------
 void Button::Update()
 {
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void Button::Update(MarkTwo::InputManager& inputManager)
-{
     int mouseX = 0;
     int mouseY = 0;
 
@@ -56,7 +49,7 @@ void Button::Update(MarkTwo::InputManager& inputManager)
         m_uiButtonStateFlags |= ButtonStates::eHover;
 
         // LMouse
-        if (inputManager.m_MouseButtonData.m_LeftClicked)
+        if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eMouse1))
         {
             m_uiButtonStateFlags |= ButtonStates::eLMouse;
         }
@@ -66,7 +59,7 @@ void Button::Update(MarkTwo::InputManager& inputManager)
         }
 
         // RMouse
-        if (inputManager.m_MouseButtonData.m_RightClicked)
+        if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eMouse2))
         {
             m_uiButtonStateFlags |= ButtonStates::eRMouse;
         }

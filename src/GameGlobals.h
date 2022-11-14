@@ -39,11 +39,6 @@ public:
     const double PI = 3.14;
 
 
-    // SDL Globals
-    SDL_Event m_SDLEvent;
-    SDL_Event m_PreviousSDLEvent;
-
-
     // Game Globals
     bool m_bGameRunning = false;
     bool m_bGamePaused = false;

@@ -1,5 +1,4 @@
 #include "PauseScreen.h"
-#include "Game/Managers/InputManager.h"
 #include "GameGlobals.h"
 #include "Game/Managers/UIManager.h"
 #include "Game/Managers/LoadManager.h"
@@ -27,8 +26,8 @@ PauseScreen::~PauseScreen()
 // -------------------------------------------------------
 void PauseScreen::Update()
 {
-    m_ReturnToGameButton.Update(g_InputManager);
-    m_QuitGameButton.Update(g_InputManager);
+    m_ReturnToGameButton.Update();
+    m_QuitGameButton.Update();
 
     // Button Click Event Check
     if (m_ReturnToGameButton.LeftClickPressed())

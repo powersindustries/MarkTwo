@@ -4,8 +4,8 @@
 #include <SDL_image.h> // SDL Image
 
 #include "../UICoreTypes.h"
-#include "Game/Managers/InputManager.h"
 #include "Core/Types/String.h"
+#include "Core/Managers/InputManager.h"
 
 enum ButtonStates
 {
@@ -23,7 +23,6 @@ public:
     ~Button();
 
     void Update();
-    void Update(MarkTwo::InputManager& inputManager);
     void Draw(SDL_Renderer* renderer);
     void SetPosition(int x, int y);
     void RefreshUI();

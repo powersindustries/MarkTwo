@@ -4,7 +4,6 @@
 #include "Systems/Logging.h"
 #include "Game/Managers/LoadManager.h"
 #include "Game/Managers/UIManager.h"
-#include "Game/Managers/InputManager.h"
 #include "Game/Managers/EventManager.h"
 
 namespace MarkTwo
@@ -101,41 +100,7 @@ void Game::EndSession()
 // -------------------------------------------------------
 void Game::ProcessInputs()
 {
-    g_InputManager.Refresh();
-
-    while (SDL_PollEvent(&g_GameGlobals.m_SDLEvent))
-    {
-        switch (g_GameGlobals.m_SDLEvent.type)
-        {
-        case SDL_QUIT:
-        {
-            g_GameGlobals.m_bGameRunning = false;
-            break;
-        }
-        case SDL_KEYDOWN:
-        {
-            g_InputManager.ManageKeyState(g_GameGlobals.m_SDLEvent.key);
-            break;
-        }
-        case SDL_KEYUP:
-        {
-            if (g_GameGlobals.m_SDLEvent.key.keysym.sym == SDLK_BACKSPACE)
-            {
-                g_GameGlobals.m_bGameRunning = false;
-            }
-
-            g_InputManager.RefreshKeyboardState(g_GameGlobals.m_SDLEvent.key);
-            break;
-        }
-        case SDL_MOUSEBUTTONUP:
-        {
-            g_InputManager.ManageMouseButtonState(g_GameGlobals.m_SDLEvent.button);
-            break;
-        }
-        default:
-            break;
-        }
-    }
+    CoreManagers::g_InputManager.ProcessInputs();
 }
 
 
@@ -159,14 +124,14 @@ void Game::Update()
 
 
     // Turn On/Off Pause Screen
-    if (g_InputManager.m_KeyboardPressedData.m_Escape)
+    if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eESCMenu))
     {
         g_GameGlobals.m_bGamePaused = !g_GameGlobals.m_bGamePaused;
         g_UIManager.ActivatePauseMenu();
     }
 
     // Turn on/off debug collision textures with F1 key
-    if (g_InputManager.m_KeyboardPressedData.m_F1)
+    if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eDebug1))
     {
         g_GameGlobals.m_bGraphicsDebugMode = !g_GameGlobals.m_bGraphicsDebugMode;
     }
@@ -181,10 +146,6 @@ void Game::Update()
     }
 
     g_UIManager.Update();
-
-
-    // Update stored last SDL_Event
-    g_GameGlobals.m_PreviousSDLEvent = g_GameGlobals.m_SDLEvent;
 }
 
 

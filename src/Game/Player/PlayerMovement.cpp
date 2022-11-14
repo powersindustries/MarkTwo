@@ -1,7 +1,7 @@
 #include "PlayerMovement.h"
 #include "Player.h"
+#include "Core/Managers/InputManager.h"
 
-#include "../Managers/InputManager.h"
 namespace MarkTwo
 {
 
@@ -28,22 +28,22 @@ void PlayerMovement::Update(float* deltaTime)
 {
     m_bPlayerMoving = false;
 
-    if (g_InputManager.m_KeyboardHeldData.m_UpArrow || g_InputManager.m_KeyboardHeldData.m_W)
+    if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eUp))
     {
         m_Direction = Direction::eUp;
         m_bPlayerMoving = true;
     }
-    else if (g_InputManager.m_KeyboardHeldData.m_DownArrow || g_InputManager.m_KeyboardHeldData.m_S)
+    else if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eDown))
     {
         m_Direction = Direction::eDown;
         m_bPlayerMoving = true;
     }
-    else if (g_InputManager.m_KeyboardHeldData.m_LeftArrow || g_InputManager.m_KeyboardHeldData.m_A)
+    else if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eLeft))
     {
         m_Direction = Direction::eLeft;
         m_bPlayerMoving = true;
     }
-    else if (g_InputManager.m_KeyboardHeldData.m_RightArrow || g_InputManager.m_KeyboardHeldData.m_D)
+    else if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eRight))
     {
         m_Direction = Direction::eRight;
         m_bPlayerMoving = true;

@@ -73,6 +73,9 @@ src/Core/Systems/Logging.h
 src/Core/Systems/Hash.h
 src/Core/Systems/Event.h
 
+src/Core/Managers/InputManager.h
+src/Core/Managers/InputManager.cpp
+
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp
 
@@ -97,8 +100,6 @@ src/Game/UIScreens/HUDScreen.cpp
 src/Game/UIScreens/PauseScreen.h
 src/Game/UIScreens/PauseScreen.cpp
 
-src/Game/Managers/InputManager.h
-src/Game/Managers/InputManager.cpp
 src/Game/Managers/LoadManager.h
 src/Game/Managers/LoadManager.cpp
 src/Game/Managers/UIManager.h
