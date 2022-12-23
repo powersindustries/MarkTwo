@@ -1,5 +1,4 @@
 #include "StackPanel.h"
-#include "GameGlobals.h"
 #include "Core/Managers/SettingsManager.h"
 
 namespace CoreUI
@@ -34,8 +33,8 @@ void StackPanel::Update()
 // -------------------------------------------------------
 void StackPanel::Draw(SDL_Renderer* renderer)
 {
-    int childCount = (int)m_Children.size();
-    for (int x = 0; x < childCount; ++x)
+    const uint8_t childCount = static_cast<uint8_t>(m_Children.size());
+    for (uint8_t x = 0; x < childCount; ++x)
     {
         m_Children[x]->Draw(renderer);
     }
@@ -233,6 +232,18 @@ void StackPanel::RefreshUI()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
+void StackPanel::SetDisplayType(DisplayType displayType)
+{
+    const uint8_t childCount = static_cast<uint8_t>(m_Children.size());
+    for (uint8_t x = 0; x < childCount; ++x)
+    {
+        m_Children[x]->SetDisplayType(displayType);
+    }
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
 void StackPanel::AddChild(UIBase* child)
 {
     m_Children.push_back(child);
@@ -258,6 +269,14 @@ void StackPanel::SetPadding(int padding)
     m_iPadding = padding;
 
     RefreshUI();
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void StackPanel::ClearChildren()
+{
+    m_Children.clear();
 }
 
 }

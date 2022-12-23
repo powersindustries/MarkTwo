@@ -22,6 +22,8 @@ UIBase::UIBase()
     m_ElementAlignment.m_Horizontal = HorizontalAlignment::eLeft;
     m_ElementAlignment.m_Vertical = VerticalAlignment::eTop;
 
+    m_DisplayType = DisplayType::eVisible;
+
     m_vOffset.m_iX = 0;
     m_vOffset.m_iY = 0;
 }

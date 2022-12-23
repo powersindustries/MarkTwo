@@ -32,6 +32,14 @@ enum class AlignmentType
 };
 
 
+enum class DisplayType
+{
+    eVisible,
+    eHidden,
+    eDisabled
+};
+
+
 class AlignmentData
 {
 public:
@@ -60,6 +68,7 @@ class UIScreenBase
     virtual void Update() = 0;
     virtual void Draw(SDL_Renderer* renderer) = 0;
     virtual void Initialize() = 0;
+    virtual void OnShow() = 0;
 };
 
 
@@ -78,6 +87,9 @@ public:
     void SetAnchor(HorizontalAlignment horizontal, VerticalAlignment vertical);
     void SetElementAlignment(HorizontalAlignment horizontal, VerticalAlignment vertical);
     void SetOffset(int xOffset, int yOffset);
+    
+    inline DisplayType GetDisplayType() { return m_DisplayType; }
+    inline void SetDisplayType(DisplayType displayType) { m_DisplayType = displayType; }
 
     inline int GetWidth() const  { return m_BaseRectangle.w; }
     inline int GetHeight() const { return m_BaseRectangle.h; }
@@ -100,6 +112,9 @@ public:
 
     // Rectangle for determining position and size of UI element.
     SDL_Rect m_BaseRectangle;
+
+    // Rectangle for determining position and size of UI element.
+    DisplayType m_DisplayType;
 
 };
 

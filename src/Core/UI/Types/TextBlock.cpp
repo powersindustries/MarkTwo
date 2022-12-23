@@ -37,6 +37,11 @@ void TextBlock::Update()
 // -------------------------------------------------------
 void TextBlock::Draw(SDL_Renderer* renderer)
 {
+    if (m_DisplayType == DisplayType::eHidden)
+    {
+        return;
+    }
+
     SDL_RenderCopy(renderer, m_MessageTexture, NULL, &m_BaseRectangle);
 }
 
@@ -155,7 +160,7 @@ void TextBlock::RefreshUI()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetText(CoreTypes::String text)
+void TextBlock::SetText(std::string text)
 {
     m_Text = text;
 

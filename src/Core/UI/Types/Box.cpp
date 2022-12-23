@@ -32,7 +32,12 @@ void Box::Update()
 // -------------------------------------------------------
 void Box::Draw(SDL_Renderer* renderer)
 {
-    SDL_SetRenderDrawColor(renderer, m_Color.r, m_Color.g, m_Color.b, m_Color.a);
+    if (m_DisplayType == DisplayType::eHidden)
+    {
+        return;
+    }
+    
+    SDL_SetRenderDrawColor(renderer, m_Color.r, m_Color.g, m_Color.b, m_DisplayType == DisplayType::eVisible ? m_Color.a : (m_Color.a / 2));
     SDL_RenderFillRect(renderer, &m_BaseRectangle);
 }
 

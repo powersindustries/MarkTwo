@@ -20,6 +20,7 @@ public:
     void Update();
     void Draw(SDL_Renderer* renderer);
     void Initialize();
+    void OnShow() {}
 
 
 private:

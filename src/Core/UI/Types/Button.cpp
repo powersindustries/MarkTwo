@@ -24,6 +24,9 @@ Button::Button()
     m_TextAlignment = HorizontalAlignment::eCenter;
     m_BaseColor = MarkTwo::g_GameGlobals.COLOR_BLACK;
     m_HoverColor = MarkTwo::g_GameGlobals.COLOR_GRAY;
+
+    m_iData1 = 0;
+    m_iData2 = 0;
 }
 
 
@@ -38,6 +41,20 @@ Button::~Button()
 // -------------------------------------------------------
 void Button::Update()
 {
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void Button::Update(CoreManagers::InputManager& inputManager)
+{
+    // Dont update button if hidden or disabled.
+    if (m_DisplayType == DisplayType::eHidden || m_DisplayType == DisplayType::eDisabled)
+    {
+        return;
+    }
+
+
     int mouseX = 0;
     int mouseY = 0;
 
@@ -50,7 +67,8 @@ void Button::Update()
         m_uiButtonStateFlags |= ButtonStates::eHover;
 
         // LMouse
-        if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eMouse1))
+        //if (inputManager.GetMouseButtonData().m_LeftClicked)
+        if (inputManager.GetActionPressed(CoreManagers::InputMappings::eMouse1))
         {
             m_uiButtonStateFlags |= ButtonStates::eLMouse;
         }
@@ -60,7 +78,8 @@ void Button::Update()
         }
 
         // RMouse
-        if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eMouse2))
+        //if (inputManager.GetMouseButtonData().m_RightClicked)
+        if (inputManager.GetActionPressed(CoreManagers::InputMappings::eMouse2))
         {
             m_uiButtonStateFlags |= ButtonStates::eRMouse;
         }
@@ -82,6 +101,11 @@ void Button::Update()
 // -------------------------------------------------------
 void Button::Draw(SDL_Renderer* renderer)
 {
+    if (m_DisplayType == DisplayType::eHidden)
+    {
+        return;
+    }
+
     if (MouseHovered())
     {
         SDL_SetRenderDrawColor(renderer,
@@ -96,7 +120,7 @@ void Button::Draw(SDL_Renderer* renderer)
             m_BaseColor.r,
             m_BaseColor.g,
             m_BaseColor.b,
-            m_BaseColor.a);
+            m_DisplayType == DisplayType::eVisible ? m_BaseColor.a : (m_BaseColor.a / 2) );
     }
 
     SDL_RenderFillRect(renderer, &m_BaseRectangle);
@@ -147,7 +171,7 @@ void Button::SetSize(int width, int height)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Button::SetText(CoreTypes::String text)
+void Button::SetText(std::string text)
 {
     m_Text = text;
 
@@ -171,7 +195,7 @@ void Button::RefreshUI()
 {
     // Set Anchor position.
     int iCenterX = CoreManagers::g_SettingsManager.GetScreenWidth() / 2;
-    int iRightX = CoreManagers::g_SettingsManager.GetScreenWidth();
+    int iRightX  = CoreManagers::g_SettingsManager.GetScreenWidth();
 
     int iCenterY = CoreManagers::g_SettingsManager.GetScreenHeight() / 2;
     int iBottomY = CoreManagers::g_SettingsManager.GetScreenHeight();
