@@ -46,7 +46,7 @@ public:
 
     void InitialLoad(SDL_Renderer* renderer);
 
-    void Update(float* deltaTime);
+    void Update(float deltaTime);
     void Draw(SDL_Renderer* renderer);
 
     std::map<uint32_t, TextureAssetData> m_TextureAssets; // ID as hash, Texture Data

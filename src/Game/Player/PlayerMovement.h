@@ -12,7 +12,7 @@ public:
     PlayerMovement();
     ~PlayerMovement();
 
-    void Update(float* deltaTime);
+    void Update(float deltaTime);
     void Draw(SDL_Renderer* renderer);
 
     bool GetPlayerMoving() { return m_bPlayerMoving; }

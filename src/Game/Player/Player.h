@@ -20,7 +20,7 @@ public:
 
     void InitializePlayer();
 
-    void Update(float* deltaTime);
+    void Update(float deltaTime);
     void Draw(SDL_Renderer* renderer);
 
     SDL_Rect GetPlayerRectangle() { return m_PlayerRectangle; }

@@ -48,7 +48,7 @@ void LoadManager::InitialLoad(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void LoadManager::Update(float* deltaTime)
+void LoadManager::Update(float deltaTime)
 {
 }
 

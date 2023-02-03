@@ -144,11 +144,11 @@ void Game::Update()
 
 
     // Update Managers
-    g_LoadManager.Update(&deltaTime);
+    g_LoadManager.Update(deltaTime);
 
     if (!g_GameGlobals.m_bGamePaused)
     {
-        g_Player.Update(&deltaTime);
+        g_Player.Update(deltaTime);
     }
 
     g_UIManager.Update();

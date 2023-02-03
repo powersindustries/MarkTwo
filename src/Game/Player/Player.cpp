@@ -47,7 +47,7 @@ void Player::InitializePlayer()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Player::Update(float* deltaTime)
+void Player::Update(float deltaTime)
 {
     // Update Player Movement
     m_PlayerMovement.Update(deltaTime);
@@ -56,7 +56,7 @@ void Player::Update(float* deltaTime)
     SetMouseRotation();
 
     // Update Player Assets
-    m_PlayerSprite->Update(*deltaTime, m_PlayerRectangle);
+    m_PlayerSprite->Update(deltaTime, m_PlayerRectangle);
 }
 
 
