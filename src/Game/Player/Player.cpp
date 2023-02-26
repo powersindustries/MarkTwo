@@ -3,6 +3,7 @@
 #include "Core/Systems/Systems.h"
 #include "../Managers/LoadManager.h"
 #include "../Managers/EventManager.h"
+#include "Core/Managers/InputManager.h"
 
 namespace MarkTwo
 {
@@ -47,7 +48,7 @@ void Player::InitializePlayer()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Player::Update(float deltaTime)
+void Player::Update(const float deltaTime)
 {
     // Update Player Movement
     m_PlayerMovement.Update(deltaTime);
@@ -57,6 +58,12 @@ void Player::Update(float deltaTime)
 
     // Update Player Assets
     m_PlayerSprite->Update(deltaTime, m_PlayerRectangle);
+
+    // Trigger Test Event if F4 is Pressed
+    if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eDebug4))
+    {
+        g_EventManager.Broadcast(Events::eTestEvent);
+    }
 }
 
 

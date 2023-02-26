@@ -123,7 +123,6 @@ void Game::Update()
     }
 
 
-    // Update Loop here
     int sdlTicks = SDL_GetTicks();
     float deltaTime = (sdlTicks - m_iTicksLastFrame) / 1000.0f;
     m_iTicksLastFrame = sdlTicks;

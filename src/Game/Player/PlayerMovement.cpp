@@ -24,7 +24,7 @@ PlayerMovement::~PlayerMovement()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void PlayerMovement::Update(float deltaTime)
+void PlayerMovement::Update(const float deltaTime)
 {
     m_bPlayerMoving = false;
 

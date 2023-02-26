@@ -48,8 +48,8 @@ public:
     // Animated Texture constructor
     Sprite(uint32_t assetIDHash, uint8_t animationSpeed, SpriteType spriteType = SpriteType::eAnimanted);
 
-    void Update(float deltaTime);
-    void Update(float deltaTime, SDL_Rect& inRectangle);
+    void Update(const float deltaTime);
+    void Update(const float deltaTime, SDL_Rect& inRectangle);
     void Draw(SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
 
     void SetTexture(uint32_t textureIDHash);

@@ -27,8 +27,8 @@ PauseScreen::~PauseScreen()
 // -------------------------------------------------------
 void PauseScreen::Update()
 {
-    m_ReturnToGameButton.Update();
-    m_QuitGameButton.Update();
+    m_ReturnToGameButton.Update(CoreManagers::g_InputManager);
+    m_QuitGameButton.Update(CoreManagers::g_InputManager);
 
     // Button Click Event Check
     if (m_ReturnToGameButton.LeftClickPressed())

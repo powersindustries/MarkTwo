@@ -79,7 +79,7 @@ Sprite::Sprite(uint32_t assetIDHash, uint8_t animationSpeed, SpriteType spriteTy
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::Update(float deltaTime)
+void Sprite::Update(const float deltaTime)
 {
     // Update Source Rectangle to next frame in spritesheet.
     // Spritesheets work horizontally for now. Will eventually be vertical instead.
@@ -98,7 +98,7 @@ void Sprite::Update(float deltaTime)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::Update(float deltaTime, SDL_Rect& inRectangle)
+void Sprite::Update(const float deltaTime, SDL_Rect& inRectangle)
 {
     // Update Transform Data.
     m_Transform.SetTransform(inRectangle);
