@@ -1,7 +1,6 @@
 #include "PauseScreen.h"
 #include "GameGlobals.h"
 #include "Game/Managers/UIManager.h"
-#include "Game/Managers/LoadManager.h"
 #include "Core/Systems/Systems.h"
 #include "Core/Managers/SettingsManager.h"
 

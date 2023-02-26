@@ -2,10 +2,10 @@
 #include "GameGlobals.h"
 #include "Game/Player/Player.h"
 #include "Systems/Logging.h"
-#include "Game/Managers/LoadManager.h"
 #include "Game/Managers/UIManager.h"
 #include "Game/Managers/EventManager.h"
 #include "Managers/SettingsManager.h"
+#include "Managers/AssetManager.h"
 
 namespace MarkTwo
 {
@@ -82,7 +82,7 @@ void Game::InitializeSession()
 
     // Do initial loading stuff here
     g_EventManager.InitializeEvents();
-    g_LoadManager.InitialLoad(m_Renderer);
+    CoreManagers::g_AssetManager.InitialializeAssetManager(m_Renderer);
     g_Player.InitializePlayer();
     g_UIManager.InitializeUIScreens();
 
@@ -143,8 +143,6 @@ void Game::Update()
 
 
     // Update Managers
-    g_LoadManager.Update(deltaTime);
-
     if (!g_GameGlobals.m_bGamePaused)
     {
         g_Player.Update(deltaTime);

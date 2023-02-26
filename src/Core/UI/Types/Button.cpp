@@ -1,9 +1,9 @@
 #include "Button.h"
 #include "GameGlobals.h"
 #include "Core/Game.h"
-#include "Game/Managers/LoadManager.h"
 #include "Core/Systems/Systems.h"
 #include "Core/Managers/SettingsManager.h"
+#include "Core/Managers/AssetManager.h"
 
 namespace CoreUI
 {
@@ -154,7 +154,7 @@ void Button::SetPosition(int x, int y)
 // -------------------------------------------------------
 void Button::SetFont(uint32_t fontIDHash)
 {
-    m_Font = MarkTwo::g_LoadManager.m_FontAssets[fontIDHash].m_Font;
+    m_Font = CoreManagers::g_AssetManager.m_FontAssets[fontIDHash].m_Font;
 }
 
 

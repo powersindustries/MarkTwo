@@ -1,9 +1,9 @@
 #include "Player.h"
 #include "GameGlobals.h"
 #include "Core/Systems/Systems.h"
-#include "../Managers/LoadManager.h"
 #include "../Managers/EventManager.h"
 #include "Core/Managers/InputManager.h"
+#include "Core/Managers/SoundManager.h"
 
 namespace MarkTwo
 {
@@ -58,6 +58,12 @@ void Player::Update(const float deltaTime)
 
     // Update Player Assets
     m_PlayerSprite->Update(deltaTime, m_PlayerRectangle);
+
+    // Play test Sound FX if F3 is Pressed
+    if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eDebug3))
+    {
+        CoreManagers::g_SoundManager.PlaySoundByID("snd_TestFX");
+    }
 
     // Trigger Test Event if F4 is Pressed
     if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eDebug4))

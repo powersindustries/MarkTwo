@@ -16,7 +16,8 @@ SettingsManager g_SettingsManager;
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-SettingsManager::SettingsManager() : m_MainWindow(nullptr)
+SettingsManager::SettingsManager()
+    : m_MainWindow(nullptr)
 {
     m_sSettingsFilepath.append(__PROJECT_DIRECTORY__);
     m_sSettingsFilepath.append("/src/Data/Settings.xml");
@@ -42,13 +43,14 @@ void SettingsManager::InitializeSettings()
     rapidxml::xml_document<> doc;
     doc.parse<0>(xmlFile.data());
 
-
-    // Initialize/Load Player Sprite
     rapidxml::xml_node<>* settingsNode = doc.first_node("Settings");
 
-    m_SettingsData.m_sTitle  = settingsNode->first_attribute("Title")->value();
-    m_SettingsData.m_iWidth  = std::stoi(settingsNode->first_attribute("Width")->value());
+    m_SettingsData.m_sTitle = settingsNode->first_attribute("Title")->value();
+    m_SettingsData.m_iWidth = std::stoi(settingsNode->first_attribute("Width")->value());
     m_SettingsData.m_iHeight = std::stoi(settingsNode->first_attribute("Height")->value());
+
+    m_SettingsData.m_iMusicVolumePercentage = std::stoi(settingsNode->first_attribute("MusicVolume")->value());
+    m_SettingsData.m_iFXVolumePercentage = std::stoi(settingsNode->first_attribute("FXVolume")->value());
 
 
     CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Settings initialization complete.");

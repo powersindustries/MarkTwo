@@ -26,4 +26,24 @@
 
   </Fonts>
 
+  <!--Sounds is where the sound FXs assets live--> 
+  <Sounds>
+
+    <Sound
+      ID="snd_TestFX"
+      File="TestFX.wav"
+      />
+
+  </Sounds>
+
+  <!--Music is where the background music assets live--> 
+  <Music>
+
+    <!--<Track
+      ID="ms_TRACKID"
+      File="TRACKID.wav"
+      />-->
+
+  </Music>
+
 </Assets>

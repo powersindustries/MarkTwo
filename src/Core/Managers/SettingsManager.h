@@ -13,6 +13,9 @@ struct SettingsData
     std::string m_sTitle;
     int m_iWidth;
     int m_iHeight;
+
+    int m_iMusicVolumePercentage;
+    int m_iFXVolumePercentage;
 };
 
 
@@ -36,6 +39,9 @@ public:
     // Get a screen position or length based on the screen's current size.
     int GetRelativeScreenX(int iX);
     int GetRelativeScreenY(int iY);
+
+    int GetMusicVolumePercentage() { return m_SettingsData.m_iMusicVolumePercentage; };
+    int GetFXVolumePercentage() { return m_SettingsData.m_iFXVolumePercentage; };
 
 
 private:

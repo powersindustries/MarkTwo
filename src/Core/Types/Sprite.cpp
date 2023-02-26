@@ -1,6 +1,6 @@
 #include "Sprite.h"
-#include "Game/Managers/LoadManager.h"
 #include "../Systems/Systems.h"
+#include "../Managers/AssetManager.h"
 
 namespace CoreTypes
 {
@@ -136,7 +136,7 @@ void Sprite::Draw(SDL_Renderer* renderer, SDL_RendererFlip flip)
 // -------------------------------------------------------
 void Sprite::SetTexture(uint32_t textureIDHash)
 {
-    MarkTwo::TextureAssetData& textureAssetData =  MarkTwo::g_LoadManager.m_TextureAssets[textureIDHash];
+    CoreManagers::TextureAssetData& textureAssetData = CoreManagers::g_AssetManager.m_TextureAssets[textureIDHash];
     m_Texture = textureAssetData.m_Texture;
     m_uiFrameNumber = textureAssetData.m_uiFrames;
     
