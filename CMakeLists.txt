@@ -23,18 +23,21 @@ set(CMAKE_EXE_LINKER_FLAGS "${CMAKE_EXE_LINKER_FLAGS} /SUBSYSTEM:WINDOWS /ENTRY:
 set( SDL2_INCLUDE_DIRS        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/include" )
 set( SDL2_IMAGE_INCLUDE_DIRS  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/include" )
 set( SDL2_TTF_INCLUDE_DIRS    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/include" )
+set( SDL2_MIXER_INCLUDE_DIRS  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/include" )
 
 if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
 
-set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x64/SDL2.lib;${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x64/SDL2main.lib" )
+set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x64/SDL2.lib;" )
 set( SDL2_IMAGE_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/lib/x64/SDL2_image.lib;" )
 set( SDL2_TTF_LIBRARIES    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/lib/x64/SDL2_ttf.lib;" )
+set( SDL2_MIXER_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/lib/x64/SDL2_mixer.lib;" )
 
 else ()
 
-set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x86/SDL2.lib;${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x86/SDL2main.lib" )
+set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x86/SDL2.lib;" )
 set( SDL2_IMAGE_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/lib/x86/SDL2_image.lib;" )
 set( SDL2_TTF_LIBRARIES    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/lib/x86/SDL2_ttf.lib;" )
+set( SDL2_MIXER_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/lib/x86/SDL2_mixer.lib;" )
 
 endif ()
 
@@ -78,6 +81,10 @@ src/Core/Managers/InputManager.h
 src/Core/Managers/InputManager.cpp
 src/Core/Managers/SettingsManager.h
 src/Core/Managers/SettingsManager.cpp
+src/Core/Managers/SoundManager.h
+src/Core/Managers/SoundManager.cpp
+src/Core/Managers/AssetManager.h
+src/Core/Managers/AssetManager.cpp
 
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp
@@ -103,8 +110,6 @@ src/Game/UIScreens/HUDScreen.cpp
 src/Game/UIScreens/PauseScreen.h
 src/Game/UIScreens/PauseScreen.cpp
 
-src/Game/Managers/LoadManager.h
-src/Game/Managers/LoadManager.cpp
 src/Game/Managers/UIManager.h
 src/Game/Managers/UIManager.cpp
 src/Game/Managers/EventManager.h
@@ -120,8 +125,31 @@ include_directories( ${CMAKE_SOURCE_DIR}/External/rapidxml/ )
 include_directories( ${CMAKE_SOURCE_DIR}/External/glm/ )
 include_directories( ${SDL2_INCLUDE_DIRS} ) 
 include_directories( ${SDL2_IMAGE_INCLUDE_DIRS} ) 
-include_directories( ${SDL2_TTF_INCLUDE_DIRS} ) 
+include_directories( ${SDL2_TTF_INCLUDE_DIRS} )
+include_directories( ${SDL2_MIXER_INCLUDE_DIRS} )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES})
+target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES})
+
+
+install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
+set(CPACK_PROJECT_NAME ${PROJECT_NAME})
+set(CPACK_PACKAGE_VENDOR "Powers Industries, LLC")
+set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "An ongoing open sourse game engine project made by Powers Industries, LLC.")
+
+set(CPACK_RESOURCE_FILE_LICENSE "${CMAKE_CURRENT_SOURCE_DIR}/License.txt")
+set(CPACK_RESOURCE_FILE_README "${CMAKE_CURRENT_SOURCE_DIR}/README.md")
+
+set(CPACK_PROJECT_VERSION_MAJOR 2)
+set(CPACK_PROJECT_VERSION_MINOR 0)
+
+include(CPack)
+
+
+
+
+
+
+
+

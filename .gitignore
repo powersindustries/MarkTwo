@@ -173,5 +173,6 @@ MigrationBackup/
 
 # CMake
 Debug/
+Release/
 
 Planning.docx
