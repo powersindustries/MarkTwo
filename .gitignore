@@ -174,5 +174,6 @@ MigrationBackup/
 # CMake
 Debug/
 Release/
+External/
 
 Planning.docx
