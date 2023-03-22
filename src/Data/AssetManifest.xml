@@ -9,19 +9,20 @@
       Frames="2"
       />
 
+    <Texture
+      ID="txt_TestIcon"
+      File="testIcon.png"
+      Frames="0"
+      />
+
   </Textures>
 
   <!--Fonts ID's and File names will go in the "Fonts" xml node below-->
   <Fonts>
 
     <Font
-      ID="fnt_Arial"
-      File="arial.ttf"
-      />
-
-    <Font
-      ID="fnt_Charriot"
-      File="charriot.ttf"
+      ID="fnt_Orbitron"
+      File="Orbitron-Regular.ttf"
       />
 
   </Fonts>

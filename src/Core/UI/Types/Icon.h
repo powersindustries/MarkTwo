@@ -7,21 +7,22 @@
 
 namespace CoreUI
 {
-class Box : public UIBase
+class Icon : public UIBase
 {
 public:
-    Box();
-    ~Box();
+    Icon();
+    ~Icon();
 
     void Draw(SDL_Renderer* renderer);
     void SetStyle(uint32_t uiStyleID);
 
     void SetSize(int width, int height);
+    void SetTexture(const uint32_t uiTextureID);
+
 
 private:
 
-    void SetPositionNoRefresh(const int x, const int y);
-
+    SDL_Texture* m_Texture;
 
 };
 }

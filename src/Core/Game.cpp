@@ -6,6 +6,7 @@
 #include "Game/Managers/EventManager.h"
 #include "Managers/SettingsManager.h"
 #include "Managers/AssetManager.h"
+#include "Managers/StyleManager.h"
 
 namespace MarkTwo
 {
@@ -55,7 +56,6 @@ void Game::InitializeSession()
     // Initialize game settings.
     CoreManagers::g_SettingsManager.InitializeSettings();
 
-
     // Create Window.
     m_Window = SDL_CreateWindow(
         CoreManagers::g_SettingsManager.GetTitle().c_str(),
@@ -80,9 +80,11 @@ void Game::InitializeSession()
         return;
     }
 
-    // Do initial loading stuff here
+    // Initialization.
     g_EventManager.InitializeEvents();
     CoreManagers::g_AssetManager.InitialializeAssetManager(m_Renderer);
+    CoreManagers::g_StyleManager.InitializeStyleManager();
+
     g_Player.InitializePlayer();
     g_UIManager.InitializeUIScreens();
 
@@ -164,6 +166,7 @@ void Game::Draw()
 
     SDL_RenderClear(m_Renderer);
 
+    SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 
     if (!g_GameGlobals.m_bGamePaused)
     {

@@ -5,6 +5,8 @@
 #include "Core/Systems/Systems.h"
 #include "Core/Managers/SettingsManager.h"
 #include "Core/Managers/AssetManager.h"
+#include "Core/Systems/Hash.h"
+#include "Core/Managers/StyleManager.h"
 
 namespace CoreUI
 {
@@ -15,7 +17,12 @@ namespace CoreUI
 TextBlock::TextBlock()
     : m_Font(nullptr), m_MessageTexture(nullptr)
 {
-    m_Color = MarkTwo::g_GameGlobals.COLOR_BLACK;
+    m_Text = "";
+
+    m_vSize.m_X = 0;
+    m_vSize.m_Y = 0;
+
+    m_uiWordWrap = 0;
 }
 
 
@@ -28,16 +35,9 @@ TextBlock::~TextBlock()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::Update()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void TextBlock::Draw(SDL_Renderer* renderer)
 {
-    if (m_DisplayType == DisplayType::eHidden)
+    if (m_Visibility == UIVisibility::eHidden)
     {
         return;
     }
@@ -48,113 +48,22 @@ void TextBlock::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetPosition(int x, int y)
+void TextBlock::SetStyle(uint32_t uiStyleID)
 {
-    m_AnchorType = AlignmentType::ePoint;
+    const CoreManagers::TextBlockStyle& currStyleData = CoreManagers::g_StyleManager.GetTextBlockStyle(uiStyleID);
 
-    m_BaseRectangle.x = x;
-    m_BaseRectangle.y = y;
+    m_Font = CoreManagers::g_AssetManager.m_FontAssets[currStyleData.m_uiFont].m_Font;
+    m_Color = currStyleData.m_Color;
 
-    m_Anchor.m_Horizontal = HorizontalAlignment::eLeft;
-    m_Anchor.m_Vertical = VerticalAlignment::eTop;
-    m_vOffset.m_iX = 0;
-    m_vOffset.m_iY = 0;
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void TextBlock::RefreshUI()
-{
-    if (m_AnchorType == AlignmentType::eAnchored)
+    if (m_Text == "")
     {
-        // Set x-index position based on Anchor.
-        switch (m_Anchor.m_Horizontal)
-        {
-        case HorizontalAlignment::eLeft:
-        {
-            m_BaseRectangle.x = m_vOffset.m_iX;
-            break;
-        }
-        case HorizontalAlignment::eCenter:
-        {
-            m_BaseRectangle.x = (CoreManagers::g_SettingsManager.GetScreenWidth() / 2) + m_vOffset.m_iX;
-            break;
-        }
-        case HorizontalAlignment::eRight:
-        {
-            m_BaseRectangle.x = CoreManagers::g_SettingsManager.GetScreenWidth() - m_vOffset.m_iX - GetWidth();
-            break;
-        }
-        default:
-            break;
-        }
-
-        // Set y-index position based on Anchor.
-        switch (m_Anchor.m_Vertical)
-        {
-        case VerticalAlignment::eTop:
-        {
-            m_BaseRectangle.y = m_vOffset.m_iY;
-            break;
-        }
-        case VerticalAlignment::eCenter:
-        {
-            m_BaseRectangle.y = (CoreManagers::g_SettingsManager.GetScreenHeight() / 2) + m_vOffset.m_iY;
-            break;
-        }
-        case VerticalAlignment::eBottom:
-        {
-            m_BaseRectangle.y = CoreManagers::g_SettingsManager.GetScreenHeight() - m_vOffset.m_iY - GetHeight();
-            break;
-        }
-        default:
-            break;
-        }
+        m_Text = currStyleData.m_sDefaultText;
     }
 
+    m_bStyleSet = true;
 
-    // Set x offset based on Element Alignment.
-    switch (m_ElementAlignment.m_Horizontal)
-    {
-    case HorizontalAlignment::eLeft:
-    {
-        break;
-    }
-    case HorizontalAlignment::eCenter:
-    {
-        m_BaseRectangle.x -= (m_BaseRectangle.w / 2);
-        break;
-    }
-    case HorizontalAlignment::eRight:
-    {
-        m_BaseRectangle.x -= m_BaseRectangle.w;
-        break;
-    }
-    default:
-        break;
-    }
-
-    // Set y offset based on Element Alignment.
-    switch (m_ElementAlignment.m_Vertical)
-    {
-    case VerticalAlignment::eTop:
-    {
-        break;
-    }
-    case VerticalAlignment::eCenter:
-    {
-        m_BaseRectangle.y -= (m_BaseRectangle.h / 2);
-        break;
-    }
-    case VerticalAlignment::eBottom:
-    {
-        m_BaseRectangle.y -= m_BaseRectangle.h;
-        break;
-    }
-    default:
-        break;
-    }
+    CreateWordTexture();
+    RefreshUI();
 }
 
 
@@ -164,30 +73,108 @@ void TextBlock::SetText(std::string text)
 {
     m_Text = text;
 
-    SDL_Surface* surface = TTF_RenderText_Solid(m_Font, m_Text.c_str(), m_Color);
-
-    SDL_DestroyTexture(m_MessageTexture);
-    m_MessageTexture = SDL_CreateTextureFromSurface(MarkTwo::Game::m_Renderer, surface);
-
-    SDL_FreeSurface(surface);
-
-    SDL_Point textureSize;
-    SDL_QueryTexture(m_MessageTexture, NULL, NULL, &textureSize.x, &textureSize.y);
-    m_BaseRectangle.w = textureSize.x;
-    m_BaseRectangle.h = textureSize.y;
-
+    CreateWordTexture();
     RefreshUI();
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetSize(int width, int height)
+void TextBlock::SetVisibility(UIVisibility visibility)
 {
-    m_BaseRectangle.w = width;
-    m_BaseRectangle.h = height;
+    UIBase::SetVisibility(visibility);
 
+    CreateWordTexture();
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void TextBlock::SetSize(const int x, const int y)
+{
+    m_vSize.m_X = x;
+    m_vSize.m_Y = y;
+
+    CreateWordTexture();
     RefreshUI();
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void TextBlock::SetWordWrap(uint8_t uiWordWrap)
+{
+    m_uiWordWrap = uiWordWrap;
+
+    CreateWordTexture();
+    RefreshUI();
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void TextBlock::SetPositionNoRefresh(const int x, const int y)
+{
+    m_BaseRectangle.x = x;
+    m_BaseRectangle.y = y;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void TextBlock::CreateWordTexture()
+{
+    SDL_Color tempColor = 
+    { 
+    m_Color.r, 
+    m_Color.g, 
+    m_Color.b, 
+    m_Visibility == UIVisibility::eVisible ? static_cast<Uint8>(m_Color.a) : static_cast<Uint8>(m_Color.a / 2)
+    };
+
+    SDL_Surface* surface = nullptr;
+    if (m_Font)
+    {
+        if (m_uiWordWrap > 0)
+        {
+            surface = TTF_RenderText_Blended_Wrapped(m_Font, m_Text.c_str(), tempColor, m_uiWordWrap);
+        }
+        else
+        {
+            surface = TTF_RenderText_Solid(m_Font, m_Text.c_str(), tempColor);
+        }
+    }
+    else
+    {
+        if (m_uiWordWrap > 0)
+        {
+            surface = TTF_RenderText_Blended_Wrapped(GetDefaultFont(), m_Text.c_str(), tempColor, m_uiWordWrap);
+        }
+        else
+        {
+            surface = TTF_RenderText_Solid(GetDefaultFont(), m_Text.c_str(), tempColor);
+        }
+    }
+
+    SDL_DestroyTexture(m_MessageTexture);
+    m_MessageTexture = SDL_CreateTextureFromSurface(MarkTwo::Game::m_Renderer, surface);
+
+    SDL_FreeSurface(surface);
+
+    // If the user has specifically declared the size of the font, use the declared size. Else, use default text font.
+    // Declared size being greater than 0 is how we determine if the size was declared. m_vSize is 0 by default.
+    if (m_vSize.m_X > 0 && m_vSize.m_Y > 0)
+    {
+        m_BaseRectangle.w = m_vSize.m_X;
+        m_BaseRectangle.h = m_vSize.m_Y;
+    }
+    else
+    {
+        SDL_Point textureSize;
+        SDL_QueryTexture(m_MessageTexture, NULL, NULL, &textureSize.x, &textureSize.y);
+        m_BaseRectangle.w = textureSize.x;
+        m_BaseRectangle.h = textureSize.y;
+    }
 }
 
 
@@ -203,14 +190,9 @@ void TextBlock::SetFont(uint32_t fontIDHash)
 // -------------------------------------------------------
 void TextBlock::SetColor(SDL_Color color)
 {
-    m_Color = color;
+    UIBase::SetColor(color);
 
-    SDL_Surface* surface = TTF_RenderText_Solid(m_Font, m_Text.c_str(), m_Color);
-
-    SDL_DestroyTexture(m_MessageTexture);
-    m_MessageTexture = SDL_CreateTextureFromSurface(MarkTwo::Game::m_Renderer, surface);
-
-    SDL_FreeSurface(surface);
+    CreateWordTexture();
 }
 
 }

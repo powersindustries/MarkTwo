@@ -2,10 +2,11 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
+
 #include "Core/UI/Types/TextBlock.h"
 #include "Core/UI/Types/Box.h"
-#include "Core/UI/Types/StackPanel.h"
-#include "Core/UI/Types/Button.h"
+#include "Core/UI/Types/VerticalStack.h"
+#include "Core/UI/Types/HorizontalStack.h"
 
 using namespace CoreUI;
 
@@ -24,6 +25,7 @@ public:
 
 
 private:
+ 
     Box m_TitleBox;
     TextBlock m_Title;
 
@@ -31,7 +33,9 @@ private:
     TextBlock m_PlayerText;
 
     Box m_DirectionsBox;
-    StackPanel m_DirectionsStack;
+
+    VerticalStack m_DirectionsStack;
+
     TextBlock m_DirectionTitle;
     TextBlock m_MovementText;
     TextBlock m_PauseText;

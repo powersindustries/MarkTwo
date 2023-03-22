@@ -4,33 +4,85 @@ namespace CoreMath
 {
 
 
-struct Vec2f
+class Vec2f
 {
-    float m_fX;
-    float m_fY;
+public:
+    Vec2f()
+    {
+        m_X = 0;
+        m_Y = 0;
+    }
+    Vec2f(const float x, const float y)
+    {
+        m_X = x;
+        m_Y = y;
+    }
+
+    float m_X;
+    float m_Y;
 };
 
 
 struct Vec2i
 {
-    int m_iX;
-    int m_iY;
+public:
+    Vec2i()
+    {
+        m_X = 0;
+        m_Y = 0;
+    }
+    Vec2i(const int x, const int y)
+    {
+        m_X = x;
+        m_Y = y;
+    }
+
+    int m_X;
+    int m_Y;
 };
 
 
 struct Vec3f
 {
-    float m_fX;
-    float m_fY;
-    float m_fZ;
+public:
+    Vec3f()
+    {
+        m_X = 0;
+        m_Y = 0;
+        m_Z = 0;
+    }
+    Vec3f(const float x, const float y, const float z)
+    {
+        m_X = x;
+        m_Y = y;
+        m_Z = z;
+    }
+
+    float m_X;
+    float m_Y;
+    float m_Z;
 };
 
 
 struct Vec3i
 {
-    int m_iX;
-    int m_iY;
-    int m_iZ;
+public:
+    Vec3i()
+    {
+        m_X = 0;
+        m_Y = 0;
+        m_Z = 0;
+    }
+    Vec3i(const int x, const int y, const int z)
+    {
+        m_X = x;
+        m_Y = y;
+        m_Z = z;
+    }
+
+    int m_X;
+    int m_Y;
+    int m_Z;
 };
 
 

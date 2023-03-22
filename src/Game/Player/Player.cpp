@@ -20,7 +20,7 @@ Player::Player()
     : m_PlayerSprite(nullptr)
 {
     m_PlayerRectangle.x = 100;
-    m_PlayerRectangle.y = 100;
+    m_PlayerRectangle.y = 150;
     m_PlayerRectangle.w = 32;
     m_PlayerRectangle.h = 32;
 }
@@ -38,7 +38,7 @@ Player::~Player()
 void Player::InitializePlayer()
 {
     // Initialize Player Sprite
-    m_PlayerSprite = new Sprite(CoreSystems::StringToHash32(CoreTypes::String("txt_Chopper")), 90);
+    m_PlayerSprite = new Sprite(CoreSystems::StringToHash32(std::string("txt_Chopper")), 90);
 
     // Subscribe to TestEvent
     g_EventManager.Subscribe(Events::eTestEvent, [this](){ Player::OnTestEvent(); });

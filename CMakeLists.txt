@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.7)
-project(MarkTwo VERSION 2.0)
+project(MarkTwo VERSION 2.1)
 
 
 # Set Source directory to be used in game.
@@ -47,11 +47,10 @@ set(RESOURCE_FILES
 
 src/Data/AssetManifest.xml
 src/Data/Settings.xml
+src/Data/Styles.xml
 
 src/Assets/Textures/ChopperSpritesheet.png
 
-src/Assets/Fonts/arial.ttf
-src/Assets/Fonts/charriot.ttf
 
 )
 
@@ -85,9 +84,13 @@ src/Core/Managers/SoundManager.h
 src/Core/Managers/SoundManager.cpp
 src/Core/Managers/AssetManager.h
 src/Core/Managers/AssetManager.cpp
+src/Core/Managers/StyleManager.h
+src/Core/Managers/StyleManager.cpp
 
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp
+src/Core/Math/Utility.h
+src/Core/Math/Utility.cpp
 
 src/Core/UI/UICoreTypes.h
 src/Core/UI/UICoreTypes.cpp
@@ -95,10 +98,14 @@ src/Core/UI/Types/Box.h
 src/Core/UI/Types/Box.cpp
 src/Core/UI/Types/Button.h
 src/Core/UI/Types/Button.cpp
-src/Core/UI/Types/StackPanel.h
-src/Core/UI/Types/StackPanel.cpp
+src/Core/UI/Types/VerticalStack.h
+src/Core/UI/Types/VerticalStack.cpp
+src/Core/UI/Types/HorizontalStack.h
+src/Core/UI/Types/HorizontalStack.cpp
 src/Core/UI/Types/TextBlock.h
 src/Core/UI/Types/TextBlock.cpp
+src/Core/UI/Types/Icon.h
+src/Core/UI/Types/Icon.cpp
 
 src/Game/Player/Player.h
 src/Game/Player/Player.cpp

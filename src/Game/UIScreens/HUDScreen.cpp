@@ -49,63 +49,44 @@ void HUDScreen::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void HUDScreen::Initialize()
 {
-    m_TitleBox.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
-    m_TitleBox.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);
-    m_TitleBox.SetOffset(0,50);
-    m_TitleBox.SetSize(300,50);
-    m_TitleBox.SetColor(g_GameGlobals.COLOR_WHITE);
-
-    m_Title.SetAnchor(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
-    m_Title.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eCenter);
-    m_Title.SetOffset(0,50);
-    m_Title.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
+    m_Title.SetAnchor(Anchor::eTopCenter);
     m_Title.SetText("MarkTwo Engine v2.0");
-    m_Title.SetColor(g_GameGlobals.COLOR_BLACK);
+    m_Title.SetOffset( 
+        ( (m_Title.GetWidth() / 2) * -1 ), 
+        50
+    );
 
+    m_TitleBox.SetAnchor(Anchor::eTopCenter);
+    m_TitleBox.SetColor(g_GameGlobals.COLOR_WHITE);
+    m_TitleBox.SetSize( 
+        (m_Title.GetWidth() + 50),
+        (m_Title.GetHeight() + 50)
+    );
+    m_TitleBox.SetOffset(
+        ( (m_TitleBox.GetWidth() / 2) * -1 ), 
+        25
+    );
     
-    m_PlayerBox.SetAnchor(HorizontalAlignment::eLeft,VerticalAlignment::eTop);
-    m_PlayerBox.SetElementAlignment(HorizontalAlignment::eLeft,VerticalAlignment::eCenter);
-    m_PlayerBox.SetOffset(50,50);
-    m_PlayerBox.SetSize(250,50);
-    m_PlayerBox.SetColor(g_GameGlobals.COLOR_WHITE);
-
-    m_PlayerText.SetAnchor(HorizontalAlignment::eLeft,VerticalAlignment::eTop);
-    m_PlayerText.SetElementAlignment(HorizontalAlignment::eLeft,VerticalAlignment::eCenter);
-    m_PlayerText.SetOffset(100,50);
-    m_PlayerText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
+    m_PlayerText.SetAnchor(Anchor::eTopLeft);
     m_PlayerText.SetText("Player Below");
-    m_PlayerText.SetColor(g_GameGlobals.COLOR_BLACK);
+    m_PlayerText.SetOffset(50,50);
 
-    
-    m_DirectionsBox.SetAnchor(HorizontalAlignment::eRight,VerticalAlignment::eTop);
-    m_DirectionsBox.SetElementAlignment(HorizontalAlignment::eLeft,VerticalAlignment::eTop);
-    m_DirectionsBox.SetOffset(50,25);
-    m_DirectionsBox.SetSize(300,250);
-    m_DirectionsBox.SetColor(g_GameGlobals.COLOR_WHITE);
+    m_PlayerBox.SetAnchor(Anchor::eTopLeft);
+    m_PlayerBox.SetColor(g_GameGlobals.COLOR_WHITE);
+    m_PlayerBox.SetSize(
+        (m_PlayerText.GetWidth() + 50),
+        (m_PlayerText.GetHeight() + 50)
+    );
+    m_PlayerBox.SetOffset(25,25);
 
-    m_DirectionTitle.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_DirectionTitle.SetText("Directions:");
-    m_DirectionTitle.SetColor(g_GameGlobals.COLOR_BLACK);
-
-    m_MovementText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_MovementText.SetText("WASD - Movement");
-    m_MovementText.SetColor(g_GameGlobals.COLOR_BLACK);
-
-    m_PauseText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_PauseText.SetText("ESC - Pause Menu");
-    m_PauseText.SetColor(g_GameGlobals.COLOR_BLACK);
-
-    m_DebugText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
     m_DebugText.SetText("F1 - Debug Mode");
-    m_DebugText.SetColor(g_GameGlobals.COLOR_BLACK);
+    m_KillGameText.SetText("Backspace - End");
 
-    m_KillGameText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
-    m_KillGameText.SetText("Backspace - Kill Game");
-    m_KillGameText.SetColor(g_GameGlobals.COLOR_BLACK);
-
-    m_DirectionsStack.SetAnchor(HorizontalAlignment::eRight, VerticalAlignment::eTop);
-    m_DirectionsStack.SetChildAlignment(StackpanelAlignment::eVertical);
-    m_DirectionsStack.SetOffset(65,50);
+    m_DirectionsStack.SetAnchor(Anchor::eTopRight);
+    m_DirectionsStack.SetOffset(-50,50);
     m_DirectionsStack.SetPadding(20);
     m_DirectionsStack.AddChild(&m_DirectionTitle);
     m_DirectionsStack.AddChild(&m_MovementText);
@@ -113,13 +94,20 @@ void HUDScreen::Initialize()
     m_DirectionsStack.AddChild(&m_DebugText);
     m_DirectionsStack.AddChild(&m_KillGameText);
 
+    m_DirectionsBox.SetAnchor(Anchor::eTopRight);
+    m_DirectionsBox.SetColor(g_GameGlobals.COLOR_WHITE);
+    m_DirectionsBox.SetOffset(-25,25);
+    m_DirectionsBox.SetSize(
+        (m_DirectionsStack.GetWidth() + 50),
+        (m_DirectionsStack.GetHeight() + 50)
+    );
 
-    m_EventInfoText.SetAnchor(HorizontalAlignment::eRight,VerticalAlignment::eBottom);
-    m_EventInfoText.SetElementAlignment(HorizontalAlignment::eCenter,VerticalAlignment::eTop);
-    m_EventInfoText.SetOffset(0,10);
-    m_EventInfoText.SetFont(CoreSystems::StringToHash32(CoreTypes::String("fnt_Charriot")));
+    m_EventInfoText.SetAnchor(Anchor::eBottomCenter);
     m_EventInfoText.SetText("Press F4 to trigger TestEvent and event system");
-    m_EventInfoText.SetColor(g_GameGlobals.COLOR_BLACK);
+    m_EventInfoText.SetOffset(
+        ( (m_EventInfoText.GetWidth() / 2) * -1 ),
+        -25
+    );
 
 }
 

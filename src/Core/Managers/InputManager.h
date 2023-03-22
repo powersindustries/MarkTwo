@@ -13,6 +13,7 @@ enum class InputMappings
     eMouse1,
     eMouse2,
     eMouse3,
+    eMouseMotion,
 
     // Navigation Actions.
     eRight,
@@ -50,6 +51,7 @@ struct InputMappingsData
     bool m_LeftClicked = false;
     bool m_RightClicked = false;
     bool m_MiddleClicked = false;
+    bool m_MouseMotion = false;
 
     // System Keys.
     bool m_Escape = false;
@@ -73,6 +75,50 @@ struct InputMappingsData
 };
 
 
+struct HeldInputMappingsData
+{
+    InputMappingsData m_InputMappingData;
+
+    // Debug Keys.
+    int64_t m_F1Stamp = -1;
+    int64_t m_F2Stamp = -1;
+    int64_t m_F3Stamp = -1;
+    int64_t m_F4Stamp = -1;
+
+    // Mouse Actions.
+    int64_t m_LeftClickedStamp = -1;
+    int64_t m_RightClickedStamp = -1;
+    int64_t m_MiddleClickedStamp = -1;
+
+    // System Keys.
+    int64_t m_EscapeStamp = -1;
+    int64_t m_TabStamp = -1;
+
+    // Player Keys.
+    int64_t m_UpArrowStamp = -1;
+    int64_t m_DownArrowStamp = -1;
+    int64_t m_LeftArrowStamp = -1;
+    int64_t m_RightArrowStamp = -1;
+    int64_t m_WStamp = -1;
+    int64_t m_AStamp = -1;
+    int64_t m_SStamp = -1;
+    int64_t m_DStamp = -1;
+
+    int64_t m_SpaceStamp = -1;
+
+    // Gameplay Keys.
+    int64_t m_EStamp = -1;
+    int64_t m_JStamp = -1;
+};
+
+
+struct MouseMotionData
+{
+    int8_t m_iMotionX = 0;
+    int8_t m_iMotionY = 0;
+};
+
+
 class InputManager
 {
 public:
@@ -83,6 +129,12 @@ public:
 
     bool GetActionPressed(const InputMappings Mapping);
     bool GetActionHeld(const InputMappings Mapping);
+    int64_t GetActionHeldTimestamp(const InputMappings Mapping);
+
+    const MouseMotionData& GetMouseMotionData() const { return m_MouseMotionData; }
+
+    bool GetMouseClickObsorbedByUI() { return m_bMouseClickObsorbedByUI; };
+    void SetMouseClickObsorbedByUI(bool bObsorbed) { m_bMouseClickObsorbedByUI = bObsorbed; };
 
 
 private:
@@ -99,8 +151,11 @@ private:
     SDL_Event* m_SDLEvent;
 
     InputMappingsData m_InputMappingPressedData;
-    InputMappingsData m_InputMappingHeldData;
+    HeldInputMappingsData m_InputMappingHeldData;
 
+    MouseMotionData m_MouseMotionData;
+
+    bool m_bMouseClickObsorbedByUI;
 };
 
 extern InputManager g_InputManager;
