@@ -81,7 +81,7 @@ public:
     TTF_Font* GetDefaultFont();
 
 
-private:
+protected:
 
     virtual void SetPositionNoRefresh(const int x, const int y) = 0;
 
@@ -123,13 +123,11 @@ public:
     SDL_Color m_Color;
 
 
-private:
+protected:
 
     bool m_bStyleSet;
 
 
-    friend class TextBlock;
-    friend class Button;
     friend class VerticalStack;
     friend class HorizontalStack;
 

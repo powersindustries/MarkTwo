@@ -80,8 +80,6 @@ void HorizontalStack::RefreshUI()
 		UIBase* currChild = m_Children[x];
 
 		// Set the position of current child.
-		//currChild->m_BaseRectangle.x = (m_BaseRectangle.x + m_BaseRectangle.w);
-		//currChild->m_BaseRectangle.y = m_BaseRectangle.y;
 		currChild->SetPositionNoRefresh((m_BaseRectangle.x + m_BaseRectangle.w), m_BaseRectangle.y);
 
 
