@@ -121,8 +121,17 @@ void Button::RefreshUI()
 {
     UIBase::RefreshUI();
 
-    m_TextRectangle.x = m_BaseRectangle.x + (m_BaseRectangle.w / 2) - (m_TextRectangle.w / 2);
-    m_TextRectangle.y = m_BaseRectangle.y + (m_BaseRectangle.h / 2) - (m_TextRectangle.h / 2);
+	UpdateTextPositionInternal();
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void Button::SetOffset(const int x, const int y)
+{
+    UIBase::SetOffset(x, y);
+
+	UpdateTextPositionInternal();
 }
 
 
@@ -142,8 +151,7 @@ void Button::SetPositionNoRefresh(const int x, const int y)
     m_BaseRectangle.x = x;
     m_BaseRectangle.y = y;
 
-    m_TextRectangle.x = m_BaseRectangle.x + (m_BaseRectangle.w / 2) - (m_TextRectangle.w / 2);
-    m_TextRectangle.y = m_BaseRectangle.y + (m_BaseRectangle.h / 2) - (m_TextRectangle.h / 2);
+    UpdateTextPositionInternal();
 }
 
 
@@ -178,6 +186,15 @@ void Button::CreateWordTexture()
     SDL_QueryTexture(m_MessageTexture, NULL, NULL, &textureSize.x, &textureSize.y);
     m_TextRectangle.w = textureSize.x;
     m_TextRectangle.h = textureSize.y;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void Button::UpdateTextPositionInternal()
+{
+    m_TextRectangle.x = m_BaseRectangle.x + (m_BaseRectangle.w / 2) - (m_TextRectangle.w / 2);
+    m_TextRectangle.y = m_BaseRectangle.y + (m_BaseRectangle.h / 2) - (m_TextRectangle.h / 2);
 }
 
 }

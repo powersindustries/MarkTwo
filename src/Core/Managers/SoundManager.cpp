@@ -48,7 +48,7 @@ void SoundManager::ResetSoundManager()
 // -------------------------------------------------------
 void SoundManager::PlaySoundByID(std::string sSoundID)
 {
-    uint32_t uiSoundHash = CoreSystems::StringToHash32(sSoundID.c_str(), sSoundID.length());
+    uint32_t uiSoundHash = CoreSystems::StringToHash32(sSoundID);
     SoundAssetData& currSound = g_AssetManager.m_SoundAssets[uiSoundHash];
 
     Mix_PlayChannel(SOUND_CHANNEL, currSound.m_SoundEffect, 0);
@@ -61,7 +61,7 @@ void SoundManager::PlayMusicByID(std::string sMusicID)
 {
     if (Mix_PlayingMusic() == 0)
     {
-        uint32_t uiMusicHash = CoreSystems::StringToHash32(sMusicID.c_str(), sMusicID.length());
+        uint32_t uiMusicHash = CoreSystems::StringToHash32(sMusicID);
         MusicAssetData& currMusic = g_AssetManager.m_MusicAssets[uiMusicHash];
 
         Mix_PlayMusic(currMusic.m_Music, -1);

@@ -242,10 +242,10 @@ void UIBase::SetAlignment(Anchor alignment)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIBase::SetOffset(int xOffset, int yOffset)
+void UIBase::SetOffset(const int x, const int y)
 {
-    m_vOffset.m_X = xOffset;
-    m_vOffset.m_Y = yOffset;
+    m_vOffset.m_X = x;
+    m_vOffset.m_Y = y;
 
     RefreshUI();
 }

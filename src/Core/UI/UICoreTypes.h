@@ -62,7 +62,7 @@ public:
 
     void SetAnchor(Anchor anchor);
     void SetAlignment(Anchor alignment);
-    void SetOffset(int xOffset, int yOffset);
+    void SetOffset(const int x, const int y);
     
     inline void SetVisibility(UIVisibility displayType) { m_Visibility = displayType; }
     inline UIVisibility GetVisibility() { return m_Visibility; }

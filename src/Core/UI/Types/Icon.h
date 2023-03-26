@@ -22,6 +22,11 @@ public:
 
 private:
 
+    void SetPositionNoRefresh(const int x, const int y);
+
+
+private:
+
     SDL_Texture* m_Texture;
 
 };

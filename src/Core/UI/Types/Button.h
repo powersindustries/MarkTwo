@@ -20,6 +20,7 @@ public:
 
     void RefreshUI();
 
+    void SetOffset(const int x, const int y);
     void SetSize(const int x, const int y);
 
     void SetText(std::string text);
@@ -38,6 +39,7 @@ private:
     void SetPositionNoRefresh(const int x, const int y);
 
     void CreateWordTexture();
+    void UpdateTextPositionInternal();
 
 
 private:

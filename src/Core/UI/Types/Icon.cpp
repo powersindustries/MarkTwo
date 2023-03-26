@@ -89,4 +89,13 @@ void Icon::SetTexture(const uint32_t uiTextureID)
     }
 }
 
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void Icon::SetPositionNoRefresh(const int x, const int y)
+{
+    m_BaseRectangle.x = x;
+    m_BaseRectangle.y = y;
+}
+
 }
