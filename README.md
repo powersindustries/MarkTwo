@@ -38,7 +38,7 @@ The project uses CPack and Nullsoft Install System for its packaging system. Cli
 > mkdir Release
 > cd Release
 > cmake -DCMAKE_BUILD_TYPE=Release ..
-> cmake --build .
+> cmake --build . --config Release
 > cpack --config CPackConfig.cmake
 ```
 5. After CPack is complete, it will create a `.exe` file in the Release directory. Double click the `.exe` file and follow the prompts.

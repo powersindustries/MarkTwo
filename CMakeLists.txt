@@ -1,9 +1,17 @@
 cmake_minimum_required(VERSION 3.7)
 project(MarkTwo VERSION 2.1)
 
-
 # Set Source directory to be used in game.
 add_definitions(-DPROJECT_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
+
+# Set build types.
+IF(CMAKE_BUILD_TYPE MATCHES Release)
+  message("Release build.")
+  add_definitions(-DDEBUG_BUILD=false)
+ELSE()
+  message("Debug build.")
+  add_definitions(-DDEBUG_BUILD=true)
+ENDIF()
 
 # Remove warnings from C deprication warnings.
 if(MSVC)
@@ -50,7 +58,6 @@ src/Data/Settings.xml
 src/Data/Styles.xml
 
 src/Assets/Textures/ChopperSpritesheet.png
-
 
 )
 
