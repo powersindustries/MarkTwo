@@ -28,22 +28,22 @@ void PlayerMovement::Update(const float deltaTime)
 {
     m_bPlayerMoving = false;
 
-    if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eUp))
+    if (Core::g_InputManager.GetActionHeld(Core::InputMappings::eUp))
     {
         m_Direction = Direction::eUp;
         m_bPlayerMoving = true;
     }
-    else if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eDown))
+    else if (Core::g_InputManager.GetActionHeld(Core::InputMappings::eDown))
     {
         m_Direction = Direction::eDown;
         m_bPlayerMoving = true;
     }
-    else if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eLeft))
+    else if (Core::g_InputManager.GetActionHeld(Core::InputMappings::eLeft))
     {
         m_Direction = Direction::eLeft;
         m_bPlayerMoving = true;
     }
-    else if (CoreManagers::g_InputManager.GetActionHeld(CoreManagers::InputMappings::eRight))
+    else if (Core::g_InputManager.GetActionHeld(Core::InputMappings::eRight))
     {
         m_Direction = Direction::eRight;
         m_bPlayerMoving = true;

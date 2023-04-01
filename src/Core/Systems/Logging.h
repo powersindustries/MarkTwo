@@ -4,7 +4,7 @@
 #include "../Types/String.h"
 
 
-namespace CoreSystems
+namespace Core
 {
 
 
@@ -18,9 +18,9 @@ enum class LoggingLevel
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-static void SYSTEMS_LOG(const LoggingLevel level, const CoreTypes::String& message)
+static void SYSTEMS_LOG(const LoggingLevel level, const Core::String& message)
 {
-    CoreTypes::String sOutputMessage;
+    Core::String sOutputMessage;
     switch (level)
     {
     case LoggingLevel::eInfo:
@@ -57,7 +57,7 @@ static void SYSTEMS_LOG(const LoggingLevel level, const CoreTypes::String& messa
 // -------------------------------------------------------
 static void SYSTEMS_LOG(const LoggingLevel level, const char* message)
 {
-    CoreTypes::String sOutputMessage;
+    Core::String sOutputMessage;
     switch (level)
     {
     case LoggingLevel::eInfo:

@@ -1,7 +1,7 @@
 #include "Transform.h"
 #include <iostream>
 
-namespace CoreTypes
+namespace Core
 {
 
 

@@ -6,7 +6,7 @@
 #include "../Systems/Hash.h"
 #include "../Types/LuaTableLoader.h"
 
-namespace CoreManagers
+namespace Core
 {
 
 
@@ -35,7 +35,7 @@ StyleManager::~StyleManager()
 // -------------------------------------------------------
 void StyleManager::InitializeStyleManager()
 {
-    CoreTypes::LuaTableLoader* luaLoader = new CoreTypes::LuaTableLoader(m_sStyleFilepath);
+    Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sStyleFilepath);
 
     // Load TextBlock Styles.
     luaLoader->LoadTableByID("TextBlocks");
@@ -51,8 +51,8 @@ void StyleManager::InitializeStyleManager()
         }
 
 		TextBlockStyle textBlockStyle;
-		textBlockStyle.m_uiID = CoreSystems::StringToHash32(luaLoader->GetStringByID("ID"));
-		textBlockStyle.m_uiFont = CoreSystems::StringToHash32(luaLoader->GetStringByID("Font"));
+		textBlockStyle.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
+		textBlockStyle.m_uiFont = Core::StringToHash32(luaLoader->GetStringByID("Font"));
 
 		textBlockStyle.m_Color = ColorStringToSDLColor(luaLoader->GetStringByID("Color"));
 
@@ -77,8 +77,8 @@ void StyleManager::InitializeStyleManager()
         }
 
         ButtonStyle buttonStyle;
-        buttonStyle.m_uiID = CoreSystems::StringToHash32(luaLoader->GetStringByID("ID"));
-        buttonStyle.m_uiFont = CoreSystems::StringToHash32(luaLoader->GetStringByID("Font"));
+        buttonStyle.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
+        buttonStyle.m_uiFont = Core::StringToHash32(luaLoader->GetStringByID("Font"));
 
         buttonStyle.m_HoverColor = ColorStringToSDLColor(luaLoader->GetStringByID("HoverColor"));
         buttonStyle.m_PressedColor = ColorStringToSDLColor(luaLoader->GetStringByID("PressedColor"));
@@ -94,7 +94,7 @@ void StyleManager::InitializeStyleManager()
 
     delete luaLoader;
 
-    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Style Data Load Complete!");
+    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Style Data Load Complete!");
 }
 
 
@@ -132,7 +132,7 @@ SDL_Color StyleManager::ColorStringToSDLColor(std::string string)
     }
     else
     {
-        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "Unable to load color from string!");
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "Unable to load color from string!");
     }
 
     return output;

@@ -2,7 +2,7 @@
 #include "../Systems/Systems.h"
 #include "../Managers/AssetManager.h"
 
-namespace CoreTypes
+namespace Core
 {
 
 
@@ -136,7 +136,7 @@ void Sprite::Draw(SDL_Renderer* renderer, SDL_RendererFlip flip)
 // -------------------------------------------------------
 void Sprite::SetTexture(uint32_t textureIDHash)
 {
-    CoreManagers::TextureAssetData& textureAssetData = CoreManagers::g_AssetManager.m_TextureAssets[textureIDHash];
+    Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssets[textureIDHash];
     m_Texture = textureAssetData.m_Texture;
     m_uiFrameNumber = textureAssetData.m_uiFrames;
     

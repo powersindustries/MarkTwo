@@ -5,7 +5,7 @@
 #define PRIME_1 37
 #define PRIME_2 1993
 
-namespace CoreSystems
+namespace Core
 {
 // -------------------------------------------------------
 // DISCLAIMER: These hashing methods are note safe! Do not use the hashing methods in this class for any security uses.

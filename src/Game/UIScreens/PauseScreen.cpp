@@ -60,7 +60,7 @@ void PauseScreen::Initialize()
 {
     m_BackgroundBox.SetAnchor(Anchor::eCenter);
     m_BackgroundBox.SetColor(g_GameGlobals.COLOR_SILVER);
-    m_BackgroundBox.SetSize(500, CoreManagers::g_SettingsManager.GetScreenHeight() - 50);
+    m_BackgroundBox.SetSize(500, Core::g_SettingsManager.GetScreenHeight() - 50);
     m_BackgroundBox.SetOffset(
         (m_BackgroundBox.GetWidth() / 2) * -1, 
         (m_BackgroundBox.GetHeight() / 2) * -1

@@ -1,7 +1,7 @@
 #include "LuaTableLoader.h"
 #include "../Systems/Logging.h"
 
-namespace CoreTypes
+namespace Core
 {
 
 
@@ -15,7 +15,7 @@ LuaTableLoader::LuaTableLoader(const std::string sFilePath)
 
 	if (!CheckLuaStatus(m_LuaState, luaL_dofile(m_LuaState, sFilePath.c_str())))
 	{
-		CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "Input Lua File was not able to load.");
+		Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "Input Lua File was not able to load.");
 	}
 }
 

@@ -38,7 +38,7 @@ Player::~Player()
 void Player::InitializePlayer()
 {
     // Initialize Player Sprite
-    m_PlayerSprite = new Sprite(CoreSystems::StringToHash32(std::string("txt_Chopper")), 90);
+    m_PlayerSprite = new Sprite(Core::StringToHash32(std::string("txt_Chopper")), 90);
 
     // Subscribe to TestEvent
     g_EventManager.Subscribe(Events::eTestEvent, [this](){ Player::OnTestEvent(); });
@@ -60,13 +60,13 @@ void Player::Update(const float deltaTime)
     m_PlayerSprite->Update(deltaTime, m_PlayerRectangle);
 
     // Play test Sound FX if F3 is Pressed
-    if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eDebug3))
+    if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eDebug3))
     {
-        CoreManagers::g_SoundManager.PlaySoundByID("snd_TestFX");
+        Core::g_SoundManager.PlaySoundByID("snd_TestFX");
     }
 
     // Trigger Test Event if F4 is Pressed
-    if (CoreManagers::g_InputManager.GetActionPressed(CoreManagers::InputMappings::eDebug4))
+    if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eDebug4))
     {
         g_EventManager.Broadcast(Events::eTestEvent);
     }
@@ -101,7 +101,7 @@ void Player::SetPlayerPosition(int x, int y)
 // -------------------------------------------------------
 void Player::OnTestEvent()
 {
-    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "TestEvent triggered from the Player class after pressing F4 button.");
+    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "TestEvent triggered from the Player class after pressing F4 button.");
 }
 
 

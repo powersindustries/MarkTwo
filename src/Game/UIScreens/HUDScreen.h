@@ -8,7 +8,7 @@
 #include "Core/UI/Types/VerticalStack.h"
 #include "Core/UI/Types/HorizontalStack.h"
 
-using namespace CoreUI;
+using namespace UI;
 
 namespace MarkTwo
 {

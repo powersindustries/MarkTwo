@@ -3,7 +3,7 @@
 #include "GameGlobals.h"
 #include "../Types/LuaTableLoader.h"
 
-namespace CoreManagers
+namespace Core
 {
 
 
@@ -37,7 +37,7 @@ SettingsManager::~SettingsManager()
 // -------------------------------------------------------
 void SettingsManager::InitializeSettings()
 {
-	CoreTypes::LuaTableLoader* luaLoader = new CoreTypes::LuaTableLoader(m_sSettingsFilepath);
+	Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sSettingsFilepath);
 	luaLoader->LoadTableByID("Settings");
 
     m_SettingsData.m_sTitle = luaLoader->GetStringByID("Title");
@@ -50,7 +50,7 @@ void SettingsManager::InitializeSettings()
 	delete luaLoader;
 
 
-    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Settings initialization complete.");
+    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Settings initialization complete.");
 }
 
 

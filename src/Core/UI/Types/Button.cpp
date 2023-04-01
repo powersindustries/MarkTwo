@@ -6,7 +6,7 @@
 #include "Core/Managers/AssetManager.h"
 #include "Core/Managers/StyleManager.h"
 
-namespace CoreUI
+namespace UI
 {
 
 
@@ -83,9 +83,9 @@ void Button::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void Button::SetStyle(uint32_t uiStyleID)
 {
-    const CoreManagers::ButtonStyle& currStyleData = CoreManagers::g_StyleManager.GetButtonStyle(uiStyleID);
+    const Core::ButtonStyle& currStyleData = Core::g_StyleManager.GetButtonStyle(uiStyleID);
 
-    m_Font = CoreManagers::g_AssetManager.m_FontAssets[currStyleData.m_uiFont].m_Font;
+    m_Font = Core::g_AssetManager.m_FontAssets[currStyleData.m_uiFont].m_Font;
 
     m_BaseColor = currStyleData.m_BaseColor;
     m_HoverColor = currStyleData.m_HoverColor;

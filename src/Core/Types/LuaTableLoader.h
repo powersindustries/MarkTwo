@@ -10,7 +10,7 @@ extern "C"
 }
 
 
-namespace CoreTypes
+namespace Core
 {
 
 class LuaTableLoader

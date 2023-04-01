@@ -8,7 +8,7 @@
 
 #define DEFAULT_FONT_SIZE 24
 
-namespace CoreManagers
+namespace Core
 {
 
 
@@ -60,7 +60,7 @@ void AssetManager::InitialializeAssetManager(SDL_Renderer* renderer)
 // -------------------------------------------------------
 SDL_Surface* AssetManager::GetAssetSurfaceByID(std::string AssetID)
 {
-    TextureAssetData& iconTextureData = m_TextureAssets[CoreSystems::StringToHash32(AssetID)];
+    TextureAssetData& iconTextureData = m_TextureAssets[Core::StringToHash32(AssetID)];
     std::string sAssetPath = m_sTextureDirectorypath + iconTextureData.m_File;
     return IMG_Load(sAssetPath.c_str());
 }
@@ -70,7 +70,7 @@ SDL_Surface* AssetManager::GetAssetSurfaceByID(std::string AssetID)
 // -------------------------------------------------------
 void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
 {
-    CoreTypes::LuaTableLoader* luaLoader = new CoreTypes::LuaTableLoader(m_sManifestFilepath);
+    Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
 
     // Load Textures table.
     luaLoader->LoadTableByID("Textures");
@@ -99,7 +99,7 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
 
         SDL_QueryTexture(textureAssetData.m_Texture, NULL, NULL, &textureAssetData.m_iWidth, &textureAssetData.m_iHeight);
 
-        m_TextureAssets[CoreSystems::StringToHash32(textureAssetData.m_ID)] = textureAssetData;
+        m_TextureAssets[Core::StringToHash32(textureAssetData.m_ID)] = textureAssetData;
 
         luaLoader->PopTopTableElement();
     }
@@ -107,7 +107,7 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
     delete luaLoader;
 
 
-    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Texture Load Complete!");
+    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Texture Load Complete!");
 }
 
 
@@ -115,7 +115,7 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
 {
-    CoreTypes::LuaTableLoader* luaLoader = new CoreTypes::LuaTableLoader(m_sManifestFilepath);
+    Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
 
     // Load Textures table.
     luaLoader->LoadTableByID("Fonts");
@@ -138,7 +138,7 @@ void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
         assetPath.append(fontAssetData.m_File);
         fontAssetData.m_Font = TTF_OpenFont(assetPath.c_str(), DEFAULT_FONT_SIZE);
 
-        m_FontAssets[CoreSystems::StringToHash32(fontAssetData.m_ID)] = fontAssetData;
+        m_FontAssets[Core::StringToHash32(fontAssetData.m_ID)] = fontAssetData;
 
         luaLoader->PopTopTableElement();
     }
@@ -146,7 +146,7 @@ void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
     delete luaLoader;
 
 
-    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Fonts Load Complete!");
+    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Fonts Load Complete!");
 }
 
 
@@ -154,7 +154,7 @@ void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void AssetManager::LoadSoundAssets()
 {
-    CoreTypes::LuaTableLoader* luaLoader = new CoreTypes::LuaTableLoader(m_sManifestFilepath);
+    Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
 
     // Load Textures table.
     luaLoader->LoadTableByID("Sounds");
@@ -180,14 +180,14 @@ void AssetManager::LoadSoundAssets()
 
         if (soundAssetData.m_SoundEffect)
         {
-            m_SoundAssets[CoreSystems::StringToHash32(soundAssetData.m_ID)] = soundAssetData;
+            m_SoundAssets[Core::StringToHash32(soundAssetData.m_ID)] = soundAssetData;
         }
         else
         {
             std::string errorMessage = "Sound asset unable to load: ";
             errorMessage.append(soundAssetData.m_ID);
 
-            CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, errorMessage.c_str());
+            Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage.c_str());
         }
 
         luaLoader->PopTopTableElement();
@@ -196,7 +196,7 @@ void AssetManager::LoadSoundAssets()
     delete luaLoader;
 
 
-    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Sounds Load Complete!");
+    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Sounds Load Complete!");
 }
 
 
@@ -204,7 +204,7 @@ void AssetManager::LoadSoundAssets()
 // -------------------------------------------------------
 void AssetManager::LoadMusicAssets()
 {
-    CoreTypes::LuaTableLoader* luaLoader = new CoreTypes::LuaTableLoader(m_sManifestFilepath);
+    Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
 
     // Load Textures table.
     luaLoader->LoadTableByID("Sounds");
@@ -230,14 +230,14 @@ void AssetManager::LoadMusicAssets()
 
         if (musicAssetData.m_Music)
         {
-            m_MusicAssets[CoreSystems::StringToHash32(musicAssetData.m_ID)] = musicAssetData;
+            m_MusicAssets[Core::StringToHash32(musicAssetData.m_ID)] = musicAssetData;
         }
         else
         {
             std::string errorMessage = "Music asset unable to load: ";
             errorMessage.append(musicAssetData.m_ID);
 
-            CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, errorMessage.c_str());
+            Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage.c_str());
         }
 
         luaLoader->PopTopTableElement();
@@ -246,7 +246,7 @@ void AssetManager::LoadMusicAssets()
     delete luaLoader;
 
 
-    CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eInfo, "Music Load Complete!");
+    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Music Load Complete!");
 }
 
 }

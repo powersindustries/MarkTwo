@@ -8,7 +8,7 @@
 #include "Core/Systems/Hash.h"
 #include "Core/Managers/StyleManager.h"
 
-namespace CoreUI
+namespace UI
 {
 
 
@@ -50,9 +50,9 @@ void TextBlock::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void TextBlock::SetStyle(uint32_t uiStyleID)
 {
-    const CoreManagers::TextBlockStyle& currStyleData = CoreManagers::g_StyleManager.GetTextBlockStyle(uiStyleID);
+    const Core::TextBlockStyle& currStyleData = Core::g_StyleManager.GetTextBlockStyle(uiStyleID);
 
-    m_Font = CoreManagers::g_AssetManager.m_FontAssets[currStyleData.m_uiFont].m_Font;
+    m_Font = Core::g_AssetManager.m_FontAssets[currStyleData.m_uiFont].m_Font;
     m_Color = currStyleData.m_Color;
 
     if (m_Text == "")
@@ -182,7 +182,7 @@ void TextBlock::CreateWordTexture()
 // -------------------------------------------------------
 void TextBlock::SetFont(uint32_t fontIDHash)
 {
-    m_Font = CoreManagers::g_AssetManager.m_FontAssets[fontIDHash].m_Font;
+    m_Font = Core::g_AssetManager.m_FontAssets[fontIDHash].m_Font;
 }
 
 

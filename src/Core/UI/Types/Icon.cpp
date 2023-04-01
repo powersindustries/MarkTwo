@@ -4,7 +4,7 @@
 #include "Core/Managers/AssetManager.h"
 #include "Core/Systems/Logging.h"
 
-namespace CoreUI
+namespace UI
 {
 
 
@@ -71,7 +71,7 @@ void Icon::SetSize(int width, int height)
 // -------------------------------------------------------
 void Icon::SetTexture(const uint32_t uiTextureID)
 {
-	CoreManagers::TextureAssetData& textureAssetData = CoreManagers::g_AssetManager.m_TextureAssets[uiTextureID];
+	Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssets[uiTextureID];
     if (textureAssetData.m_Texture)
     {
 		m_Texture = textureAssetData.m_Texture;
@@ -85,7 +85,7 @@ void Icon::SetTexture(const uint32_t uiTextureID)
     }
     else
     {
-        CoreSystems::SYSTEMS_LOG(CoreSystems::LoggingLevel::eError, "Texture Asset ID does not exist!");
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "Texture Asset ID does not exist!");
     }
 }
 

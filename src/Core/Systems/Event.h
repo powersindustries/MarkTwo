@@ -3,7 +3,7 @@
 #include <functional>
 
 
-namespace CoreSystems
+namespace Core
 {
 
 

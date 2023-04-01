@@ -6,7 +6,7 @@
 #define DEFAULT_VOLUME 128
 #define SOUND_CHANNEL -1
 
-namespace CoreManagers
+namespace Core
 {
 
 
@@ -48,7 +48,7 @@ void SoundManager::ResetSoundManager()
 // -------------------------------------------------------
 void SoundManager::PlaySoundByID(std::string sSoundID)
 {
-    uint32_t uiSoundHash = CoreSystems::StringToHash32(sSoundID);
+    uint32_t uiSoundHash = Core::StringToHash32(sSoundID);
     SoundAssetData& currSound = g_AssetManager.m_SoundAssets[uiSoundHash];
 
     Mix_PlayChannel(SOUND_CHANNEL, currSound.m_SoundEffect, 0);
@@ -61,7 +61,7 @@ void SoundManager::PlayMusicByID(std::string sMusicID)
 {
     if (Mix_PlayingMusic() == 0)
     {
-        uint32_t uiMusicHash = CoreSystems::StringToHash32(sMusicID);
+        uint32_t uiMusicHash = Core::StringToHash32(sMusicID);
         MusicAssetData& currMusic = g_AssetManager.m_MusicAssets[uiMusicHash];
 
         Mix_PlayMusic(currMusic.m_Music, -1);
