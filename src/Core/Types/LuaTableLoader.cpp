@@ -15,7 +15,9 @@ LuaTableLoader::LuaTableLoader(const std::string sFilePath)
 
 	if (!CheckLuaStatus(m_LuaState, luaL_dofile(m_LuaState, sFilePath.c_str())))
 	{
-		Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "Input Lua File was not able to load.");
+		std::string errorMessage = "Input Lua File was not able to load: ";
+		errorMessage.append(sFilePath);
+		Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage.c_str());
 	}
 }
 

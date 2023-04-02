@@ -207,7 +207,7 @@ void AssetManager::LoadMusicAssets()
     Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
 
     // Load Textures table.
-    luaLoader->LoadTableByID("Sounds");
+    luaLoader->LoadTableByID("Music");
 
     const uint8_t uiMusicTableSize = luaLoader->GetCurrentTableSize();
     for (uint8_t x=0; x < uiMusicTableSize; ++x)
