@@ -5,37 +5,9 @@
 #include <map>
 
 #include "Transform.h"
-#include "String.h"
 
 namespace Core
 {
-
-
-enum class SpriteType
-{
-    eAnimanted,
-    eNonAnimated
-};
-
-
-class AnimationData
-{
-public:
-    AnimationData() : m_uiIndex(0), m_uiFrameCount(0), m_uiAnimationSpeed(0) {};
-    ~AnimationData() {};
-
-    AnimationData(unsigned int index, unsigned int frameCount, unsigned int animationSpeed)
-    {
-        m_uiIndex = index;
-        m_uiFrameCount = frameCount;
-        m_uiAnimationSpeed = animationSpeed;
-    }
-
-    unsigned int m_uiIndex;
-    unsigned int m_uiFrameCount;
-    unsigned int m_uiAnimationSpeed;
-};
-
 
 class Sprite
 {
@@ -43,10 +15,8 @@ public:
     Sprite();
     ~Sprite();
 
-    // Non-Animated Texture constructor
-    Sprite(uint32_t assetIDHash, SpriteType spriteType = SpriteType::eNonAnimated);
-    // Animated Texture constructor
-    Sprite(uint32_t assetIDHash, uint8_t animationSpeed, SpriteType spriteType = SpriteType::eAnimanted);
+    Sprite(uint32_t assetIDHash);
+    Sprite(uint32_t assetIDHash, uint8_t animationSpeed);
 
     void Update(const float deltaTime);
     void Update(const float deltaTime, SDL_Rect& inRectangle);
@@ -65,7 +35,6 @@ private:
 
     Transform m_Transform;
 
-    SpriteType m_SpriteType;
     uint8_t m_uiFrameNumber;
     uint8_t m_uiAnimationSpeed;
 
@@ -73,6 +42,5 @@ private:
     double m_dRotation;
 
 };
-
 
 }

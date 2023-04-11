@@ -83,6 +83,8 @@ src/Core/Types/String.h
 src/Core/Types/String.cpp
 src/Core/Types/LuaTableLoader.h
 src/Core/Types/LuaTableLoader.cpp
+src/Core/Types/Texture.h
+src/Core/Types/Texture.cpp
 
 src/Core/Systems/Systems.h
 src/Core/Systems/Assert.h
