@@ -54,7 +54,7 @@ void Game::InitializeSession()
     }
 
     // Initialize game settings.
-    Core::g_SettingsManager.InitializeSettings();
+    Core::g_SettingsManager.Initialize();
 
     // Create Window.
     m_Window = SDL_CreateWindow(
@@ -81,11 +81,11 @@ void Game::InitializeSession()
     }
 
     // Initialization.
-    g_EventManager.InitializeEvents();
-    Core::g_AssetManager.InitialializeAssetManager(m_Renderer);
-    Core::g_StyleManager.InitializeStyleManager();
+    g_EventManager.Initialize();
+    Core::g_AssetManager.Initialialize(m_Renderer);
+    Core::g_StyleManager.Initialize();
 
-    g_Player.InitializePlayer();
+    g_Player.Initialize();
     g_UIManager.Initialize();
 
     g_GameGlobals.m_bGameRunning = true;

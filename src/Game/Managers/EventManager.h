@@ -22,7 +22,7 @@ public:
     EventManager();
     ~EventManager();
 
-    void InitializeEvents();
+    void Initialize();
 
     void Broadcast(Events eEvent);
     void Subscribe(Events eEvent, std::function<void()> inDelegate);

@@ -47,7 +47,7 @@ AssetManager::~AssetManager()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void AssetManager::InitialializeAssetManager(SDL_Renderer* renderer)
+void AssetManager::Initialialize(SDL_Renderer* renderer)
 {
     LoadTextureAssets(renderer);
     LoadFontAssets(renderer);

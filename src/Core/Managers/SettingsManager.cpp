@@ -35,7 +35,7 @@ SettingsManager::~SettingsManager()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void SettingsManager::InitializeSettings()
+void SettingsManager::Initialize()
 {
 	Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sSettingsFilepath);
 	luaLoader->LoadTableByID("Settings");

@@ -35,7 +35,7 @@ Player::~Player()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Player::InitializePlayer()
+void Player::Initialize()
 {
     // Initialize Player Sprite
     m_PlayerSprite = new Sprite(Core::StringToHash32(std::string("txt_Chopper")), 90);
