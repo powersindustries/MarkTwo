@@ -12,6 +12,7 @@ namespace MarkTwo
 // -------------------------------------------------------
 PauseScreen::PauseScreen()
 {
+    m_ScreenID = UI::UIScreenID::ePause;
 }
 
 
@@ -19,6 +20,51 @@ PauseScreen::PauseScreen()
 // -------------------------------------------------------
 PauseScreen::~PauseScreen()
 {
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void PauseScreen::Initialize()
+{
+	m_BackgroundBox.SetAnchor(Anchor::eCenter);
+	m_BackgroundBox.SetColor(g_GameGlobals.COLOR_SILVER);
+	m_BackgroundBox.SetSize(500, Core::g_SettingsManager.GetScreenHeight() - 50);
+	m_BackgroundBox.SetOffset(
+		(m_BackgroundBox.GetWidth() / 2) * -1,
+		(m_BackgroundBox.GetHeight() / 2) * -1
+	);
+
+
+	m_Title.SetAnchor(Anchor::eTopCenter);
+	m_Title.SetText("Pause Menu");
+	m_Title.SetOffset(
+		((m_Title.GetWidth() / 2) * -1),
+		75
+	);
+
+	m_EngineText.SetAnchor(Anchor::eTopCenter);
+	m_EngineText.SetText("MarkTwo Engine v2.0");
+	m_EngineText.SetOffset(
+		((m_EngineText.GetWidth() / 2) * -1),
+		200
+	);
+
+	m_ReturnToGameButton.SetText("RETURN");
+	m_ReturnToGameButton.SetSize(300, 50);
+
+	m_QuitGameButton.SetText("QUIT");
+	m_QuitGameButton.SetSize(300, 50);
+
+	m_Stack.SetAnchor(Anchor::eCenter);
+	m_Stack.SetPadding(25);
+	m_Stack.AddChild(&m_ReturnToGameButton);
+	m_Stack.AddChild(&m_QuitGameButton);
+	m_Stack.SetOffset(
+		((m_Stack.GetWidth() / 2) * -1),
+		150
+	);
+
 }
 
 
@@ -33,7 +79,7 @@ void PauseScreen::Update()
     if (m_ReturnToGameButton.LeftClickPressed())
     {
         g_GameGlobals.m_bGamePaused = false;
-        g_UIManager.ActivatePauseMenu();
+        RemoveSelf();
     }
 
     if (m_QuitGameButton.LeftClickPressed())
@@ -56,46 +102,16 @@ void PauseScreen::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void PauseScreen::Initialize()
+void PauseScreen::OnShow()
 {
-    m_BackgroundBox.SetAnchor(Anchor::eCenter);
-    m_BackgroundBox.SetColor(g_GameGlobals.COLOR_SILVER);
-    m_BackgroundBox.SetSize(500, Core::g_SettingsManager.GetScreenHeight() - 50);
-    m_BackgroundBox.SetOffset(
-        (m_BackgroundBox.GetWidth() / 2) * -1, 
-        (m_BackgroundBox.GetHeight() / 2) * -1
-    );
+}
 
 
-    m_Title.SetAnchor(Anchor::eTopCenter);
-    m_Title.SetText("Pause Menu");
-    m_Title.SetOffset(
-        ( (m_Title.GetWidth() / 2) * -1), 
-        75
-    );
-
-    m_EngineText.SetAnchor(Anchor::eTopCenter);
-    m_EngineText.SetText("MarkTwo Engine v2.0");
-    m_EngineText.SetOffset(
-        ( (m_EngineText.GetWidth() / 2) * -1),
-        200
-    );
-
-    m_ReturnToGameButton.SetText("RETURN");
-    m_ReturnToGameButton.SetSize(300,50);
-
-    m_QuitGameButton.SetText("QUIT");
-    m_QuitGameButton.SetSize(300,50);
-
-    m_Stack.SetAnchor(Anchor::eCenter);
-    m_Stack.SetPadding(25);
-    m_Stack.AddChild(&m_ReturnToGameButton);
-    m_Stack.AddChild(&m_QuitGameButton);
-    m_Stack.SetOffset(
-        ((m_Stack.GetWidth() / 2) * -1 ),
-        150
-    );
-
+// -------------------------------------------------------
+// -------------------------------------------------------
+void PauseScreen::RemoveSelf()
+{
+    g_UIManager.RemoveScreen(m_ScreenID);
 }
 
 }

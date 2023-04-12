@@ -17,7 +17,8 @@ UIManager g_UIManager;
 // -------------------------------------------------------
 UIManager::UIManager()
 {
-    m_ActiveScreen = ActiveScreen::eHud;
+    // Default add HUD UI Screen to stack.
+    m_ScreenStack.push(UI::UIScreenID::eHud);
 }
 
 
@@ -30,7 +31,7 @@ UIManager::~UIManager()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIManager::InitializeUIScreens()
+void UIManager::Initialize()
 {
     m_HUDScreen.Initialize();
     m_PauseScreen.Initialize();
@@ -41,17 +42,26 @@ void UIManager::InitializeUIScreens()
 // -------------------------------------------------------
 void UIManager::Update()
 {
-    switch (m_ActiveScreen)
+    switch (GetActiveScreenID())
     {
-    case ActiveScreen::eHud:
+    case UIScreenID::eHud : 
+    {
         m_HUDScreen.Update();
         break;
-    case ActiveScreen::ePause:
+    }
+    case UIScreenID::ePause :
+    {
         m_PauseScreen.Update();
         break;
-    default:
-        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "UI Update corrupted.");
+    }
+    case UIScreenID::eDEFAULT :
+    default :
+    {
+        m_HUDScreen.Update();
+
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "UIManager m_ScreenStack is empty. Defaulting to HUD.");
         break;
+    }
     }
 }
 
@@ -60,33 +70,102 @@ void UIManager::Update()
 // -------------------------------------------------------
 void UIManager::Draw(SDL_Renderer* renderer)
 {
-    switch (m_ActiveScreen)
+    switch (GetActiveScreenID())
     {
-    case ActiveScreen::eHud:
+    case UIScreenID::eHud :
+    {
         m_HUDScreen.Draw(renderer);
         break;
-    case ActiveScreen::ePause:
+    }
+    case UIScreenID::ePause :
+    {
         m_PauseScreen.Draw(renderer);
         break;
-    default:
+    }
+    case UIScreenID::eDEFAULT :
+    default :
+    {
+        m_HUDScreen.Draw(renderer);
+
         Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "UI Draw corrupted.");
         break;
+    }
     }
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIManager::ActivatePauseMenu()
+void UIManager::ActivateScreen(UIScreenID screenID)
 {
-    if (m_ActiveScreen == ActiveScreen::ePause)
+    if (GetActiveScreenID() != screenID)
     {
-        m_ActiveScreen = ActiveScreen::eHud;
-        g_GameGlobals.m_bGamePaused = false;
-        return;
+        m_ScreenStack.push(screenID);
+        CallOnShow();
     }
+    else
+    {
+        std::string errorMessage = "Youre attempting to activate a screen that is already active. Current active ScreenID: ";
+        errorMessage.append(std::to_string(static_cast<int>(GetActiveScreenID())));
 
-    m_ActiveScreen = ActiveScreen::ePause;
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage);
+    }
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void UIManager::RemoveScreen(UIScreenID screenID)
+{
+    if (GetActiveScreenID() == screenID)
+    {
+        m_ScreenStack.pop();
+    }
+    else
+    {
+        std::string errorMessage = "Screen youre removing is not current active screen. Current active ScreenID: ";
+        errorMessage.append(std::to_string(static_cast<int>(GetActiveScreenID())));
+        errorMessage.append(", input screenID: ");
+        errorMessage.append(std::to_string(static_cast<int>(screenID)));
+
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage);
+    }
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void UIManager::CallOnShow()
+{
+	switch (GetActiveScreenID())
+	{
+	case UIScreenID::eHud:
+	{
+		m_HUDScreen.OnShow();
+		break;
+	}
+	case UIScreenID::ePause:
+	{
+		m_PauseScreen.OnShow();
+		break;
+	}
+	case UIScreenID::eDEFAULT:
+	default:
+	{
+		m_HUDScreen.OnShow();
+
+		Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "UIManager m_ScreenStack is empty. Defaulting to HUD.");
+		break;
+	}
+	}
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+const UI::UIScreenID UIManager::GetActiveScreenID()
+{
+    return m_ScreenStack.top();
 }
 
 }

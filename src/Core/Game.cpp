@@ -86,7 +86,7 @@ void Game::InitializeSession()
     Core::g_StyleManager.InitializeStyleManager();
 
     g_Player.InitializePlayer();
-    g_UIManager.InitializeUIScreens();
+    g_UIManager.Initialize();
 
     g_GameGlobals.m_bGameRunning = true;
 
@@ -134,7 +134,14 @@ void Game::Update()
     if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eESCMenu))
     {
         g_GameGlobals.m_bGamePaused = !g_GameGlobals.m_bGamePaused;
-        g_UIManager.ActivatePauseMenu();
+        if (g_UIManager.GetActiveScreenID() == UI::UIScreenID::ePause)
+        {
+            g_UIManager.RemoveScreen(UI::UIScreenID::ePause);
+        }
+        else
+        {
+            g_UIManager.ActivateScreen(UI::UIScreenID::ePause);
+        }
     }
 
     // Turn on/off debug collision textures with F1 key

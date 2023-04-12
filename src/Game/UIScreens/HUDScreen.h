@@ -7,6 +7,7 @@
 #include "Core/UI/Types/Box.h"
 #include "Core/UI/Types/VerticalStack.h"
 #include "Core/UI/Types/HorizontalStack.h"
+#include "Core/UI/UIScreenBase.h"
 
 using namespace UI;
 
@@ -18,10 +19,11 @@ public:
     HUDScreen();
     ~HUDScreen();
 
+    void Initialize();
     void Update();
     void Draw(SDL_Renderer* renderer);
-    void Initialize();
-    void OnShow() {}
+    void OnShow();
+    void RemoveSelf();
 
 
 private:

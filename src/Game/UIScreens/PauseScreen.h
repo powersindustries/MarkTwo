@@ -7,6 +7,7 @@
 #include "Core/UI/Types/TextBlock.h"
 #include "Core/UI/Types/Button.h"
 #include "Core/UI/Types/VerticalStack.h"
+#include "Core/UI/UIScreenBase.h"
 
 using namespace UI;
 
@@ -18,10 +19,12 @@ public:
     PauseScreen();
     ~PauseScreen();
 
+    void Initialize();
+
     void Update();
     void Draw(SDL_Renderer* renderer);
-    void Initialize();
-    void OnShow() {}
+    void OnShow();
+    void RemoveSelf();
 
 
 private:
