@@ -1,7 +1,5 @@
 #include "AssetManager.h"
-
 #include "GameGlobals.h"
-#include "Core/Systems/Systems.h"
 #include "../Systems/Hash.h"
 #include "../Systems/Logging.h"
 #include "../Types/LuaTableLoader.h"
@@ -50,6 +48,7 @@ AssetManager::~AssetManager()
 void AssetManager::Initialialize(SDL_Renderer* renderer)
 {
     LoadTextureAssets(renderer);
+    LoadTileMapAssets();
     LoadFontAssets(renderer);
     LoadSoundAssets();
     LoadMusicAssets();
@@ -72,7 +71,6 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
 {
     Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
 
-    // Load Textures table.
     luaLoader->LoadTableByID("Textures");
 
     const uint8_t uiTexturesTableSize = luaLoader->GetCurrentTableSize();
@@ -113,11 +111,66 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
+void AssetManager::LoadTileMapAssets()
+{
+	Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
+
+	luaLoader->LoadTableByID("TileMaps");
+
+	const uint8_t uiTexturesTableSize = luaLoader->GetCurrentTableSize();
+	for (uint8_t x = 0; x < uiTexturesTableSize; ++x)
+	{
+		int indexOffset = x + 1;
+
+		if (luaLoader->PushIntegerAndGetTable(indexOffset))
+		{
+			break;
+		}
+
+        TileMapAssetData newTileMap;
+        newTileMap.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
+        newTileMap.m_TextureAssetData = &m_TextureAssets[newTileMap.m_uiID];
+
+        newTileMap.m_uiLength = newTileMap.m_TextureAssetData->m_iWidth / MarkTwo::g_GameGlobals.TILE_SIZE;
+
+        uint8_t uiRow = 0;
+        const uint8_t tilemapSize = newTileMap.m_uiLength * newTileMap.m_uiLength;
+        for (uint8_t x=0; x < tilemapSize; ++x)
+        {
+            // Calculate current row.
+            if ((x != 0) && (x % newTileMap.m_uiLength == 0))
+            {
+                uiRow++;
+            }
+
+            SDL_Rect newRect;
+            newRect.x = (x - (uiRow * newTileMap.m_uiLength)) * MarkTwo::g_GameGlobals.TILE_SIZE;
+		    newRect.y = uiRow * MarkTwo::g_GameGlobals.TILE_SIZE;
+
+            newRect.w = MarkTwo::g_GameGlobals.TILE_SIZE;
+            newRect.h = MarkTwo::g_GameGlobals.TILE_SIZE;
+
+            newTileMap.m_SourceRectangles.push_back(newRect);
+        }
+
+        m_TileMapAssets.insert( {newTileMap.m_uiID, newTileMap } );
+
+		luaLoader->PopTopTableElement();
+	}
+
+	delete luaLoader;
+
+
+	Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Texture Load Complete!");
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
 void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
 {
     Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sManifestFilepath);
 
-    // Load Textures table.
     luaLoader->LoadTableByID("Fonts");
 
     const uint8_t uiFontsTableSize = luaLoader->GetCurrentTableSize();

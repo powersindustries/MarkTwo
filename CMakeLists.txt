@@ -62,7 +62,14 @@ src/Data/AssetManifest.lua
 src/Data/Settings.lua
 src/Data/Styles.lua
 
+src/Data/MapsManifest.lua
+src/Data/Maps/mp_1.lua
+
+src/Data/TileMaps/tm_1.lua
+
 src/Assets/Textures/ChopperSpritesheet.png
+src/Assets/Textures/testIcon.png
+src/Assets/Textures/testTileMap.png
 
 )
 
@@ -139,6 +146,8 @@ src/Game/Managers/UIManager.h
 src/Game/Managers/UIManager.cpp
 src/Game/Managers/EventManager.h
 src/Game/Managers/EventManager.cpp
+src/Game/Managers/MapManager.h
+src/Game/Managers/MapManager.cpp
 
 ${RESOURCE_FILES}
 

@@ -35,6 +35,8 @@ public:
     const int FPS = 60;
     const int FRAME_TARGET_TIME = 1000 / FPS;
 
+    const int TILE_SIZE = 32;
+
     const double PI = 3.14159265;
 
     // Game Globals

@@ -5,6 +5,7 @@
 #include <SDL_mixer.h>
 #include <map>
 #include <string>
+#include <vector>
 
 
 
@@ -25,6 +26,23 @@ struct TextureAssetData
 
     int m_iWidth;
     int m_iHeight;
+};
+
+
+class TileMapAssetData
+{
+public:
+    TileMapAssetData() 
+        : m_TextureAssetData(nullptr), m_uiID(0), m_uiLength(0)
+    {}
+
+    uint32_t m_uiID;
+
+    TextureAssetData* m_TextureAssetData;
+
+    uint8_t m_uiLength;
+
+    std::vector<SDL_Rect> m_SourceRectangles;
 };
 
 
@@ -72,6 +90,7 @@ public:
     SDL_Surface* GetAssetSurfaceByID(std::string AssetID);
 
     std::map<uint32_t, TextureAssetData> m_TextureAssets; // ID as hash, Texture Data
+    std::map<uint32_t, TileMapAssetData> m_TileMapAssets; // ID as hash, TileMap Data
     std::map<uint32_t, FontAssetData> m_FontAssets; // ID as hash, Font Data
     std::map<uint32_t, SoundAssetData> m_SoundAssets; // ID as hash, Sound Data
     std::map<uint32_t, MusicAssetData> m_MusicAssets; // ID as hash, Music Data
@@ -80,6 +99,7 @@ public:
 private:
 
     void LoadTextureAssets(SDL_Renderer* renderer);
+    void LoadTileMapAssets();
     void LoadFontAssets(SDL_Renderer* renderer);
     void LoadSoundAssets();
     void LoadMusicAssets();

@@ -82,6 +82,36 @@ int LuaTableLoader::GetIntByID(std::string sID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
+int LuaTableLoader::GetTopValueAsInt()
+{
+	int output = NULL;
+
+	if (lua_isnumber(m_LuaState, -1))
+	{
+		output = static_cast<int>(lua_tonumber(m_LuaState, -1));
+	}
+
+	return output;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+std::string LuaTableLoader::GetTopValueAsString()
+{
+	std::string output = "";
+
+	if (lua_isstring(m_LuaState, -1))
+	{
+		output = lua_tostring(m_LuaState, -1);
+	}
+
+	return output;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
 uint8_t LuaTableLoader::GetCurrentTableSize()
 {
 	return static_cast<uint8_t>(lua_rawlen(m_LuaState, -1));

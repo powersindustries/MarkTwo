@@ -30,6 +30,14 @@ public:
 	// Get the int value by key. 
 	int GetIntByID(std::string sID);
 
+	// Get the top table value as an int. 
+	// Great usecase is iterating through a table of pure numbers without an ID. 
+	int GetTopValueAsInt();
+
+	// Get the top table value as a string. 
+	// Great usecase is iterating through a table of pure strings without an ID. 
+	std::string GetTopValueAsString();
+
 	// Returns false if the pushed value is NULL.
 	bool PushIntegerAndGetTable(const int iIndex);
 

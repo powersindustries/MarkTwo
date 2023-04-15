@@ -7,6 +7,7 @@
 #include "Managers/SettingsManager.h"
 #include "Managers/AssetManager.h"
 #include "Managers/StyleManager.h"
+#include "Game/Managers/MapManager.h"
 
 namespace MarkTwo
 {
@@ -85,6 +86,7 @@ void Game::InitializeSession()
     Core::g_AssetManager.Initialialize(m_Renderer);
     Core::g_StyleManager.Initialize();
 
+    g_MapManager.Initialize();
     g_Player.Initialize();
     g_UIManager.Initialize();
 
@@ -175,6 +177,8 @@ void Game::Draw()
 
     SDL_SetRenderDrawBlendMode(m_Renderer, SDL_BLENDMODE_BLEND);
 
+    g_MapManager.Draw(m_Renderer);
+ 
     if (!g_GameGlobals.m_bGamePaused)
     {
         g_Player.Draw(m_Renderer);

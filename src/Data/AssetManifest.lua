@@ -9,6 +9,19 @@ Textures =
         ID="txt_TestIcon",
         File="testIcon.png",
         Frames="0"
+    },
+    {
+        ID="txt_TestTileMap",
+        File="testTileMap.png",
+        Frames=0
+    }
+}
+
+TileMaps =
+{
+    {
+        ID="txt_TestTileMap",
+        File="testTileMap.png"
     }
 }
 
