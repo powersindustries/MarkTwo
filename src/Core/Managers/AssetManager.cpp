@@ -84,7 +84,7 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
         }
 
         TextureAssetData textureAssetData;
-        textureAssetData.m_ID = luaLoader->GetStringByID("ID");
+        textureAssetData.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
         textureAssetData.m_File = luaLoader->GetStringByID("File");
         textureAssetData.m_uiFrames = luaLoader->GetIntByID("Frames");
 
@@ -97,7 +97,7 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
 
         SDL_QueryTexture(textureAssetData.m_Texture, NULL, NULL, &textureAssetData.m_iWidth, &textureAssetData.m_iHeight);
 
-        m_TextureAssets[Core::StringToHash32(textureAssetData.m_ID)] = textureAssetData;
+        m_TextureAssets[textureAssetData.m_uiID] = textureAssetData;
 
         luaLoader->PopTopTableElement();
     }
@@ -184,14 +184,14 @@ void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
         }
 
         FontAssetData fontAssetData;
-        fontAssetData.m_ID = luaLoader->GetStringByID("ID");
+        fontAssetData.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
         fontAssetData.m_File = luaLoader->GetStringByID("File");
 
         std::string assetPath = m_sFontsDirectorypath;
         assetPath.append(fontAssetData.m_File);
         fontAssetData.m_Font = TTF_OpenFont(assetPath.c_str(), DEFAULT_FONT_SIZE);
 
-        m_FontAssets[Core::StringToHash32(fontAssetData.m_ID)] = fontAssetData;
+        m_FontAssets[fontAssetData.m_uiID] = fontAssetData;
 
         luaLoader->PopTopTableElement();
     }
@@ -223,7 +223,7 @@ void AssetManager::LoadSoundAssets()
         }
 
         SoundAssetData soundAssetData;
-        soundAssetData.m_ID = luaLoader->GetStringByID("ID");
+        soundAssetData.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
         soundAssetData.m_File = luaLoader->GetStringByID("File");
 
         std::string assetPath = m_sSoundsDirectorypath;
@@ -233,12 +233,11 @@ void AssetManager::LoadSoundAssets()
 
         if (soundAssetData.m_SoundEffect)
         {
-            m_SoundAssets[Core::StringToHash32(soundAssetData.m_ID)] = soundAssetData;
+            m_SoundAssets[soundAssetData.m_uiID] = soundAssetData;
         }
         else
         {
-            std::string errorMessage = "Sound asset unable to load: ";
-            errorMessage.append(soundAssetData.m_ID);
+            std::string errorMessage = "Sound asset unable to load.";
 
             Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage.c_str());
         }
@@ -273,7 +272,7 @@ void AssetManager::LoadMusicAssets()
         }
 
         MusicAssetData musicAssetData;
-        musicAssetData.m_ID = luaLoader->GetStringByID("ID");
+        musicAssetData.m_ID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
         musicAssetData.m_File = luaLoader->GetStringByID("File");
 
         std::string assetPath = m_sSoundsDirectorypath;
@@ -283,12 +282,11 @@ void AssetManager::LoadMusicAssets()
 
         if (musicAssetData.m_Music)
         {
-            m_MusicAssets[Core::StringToHash32(musicAssetData.m_ID)] = musicAssetData;
+            m_MusicAssets[musicAssetData.m_ID] = musicAssetData;
         }
         else
         {
-            std::string errorMessage = "Music asset unable to load: ";
-            errorMessage.append(musicAssetData.m_ID);
+            std::string errorMessage = "Music asset unable to load.";
 
             Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage.c_str());
         }

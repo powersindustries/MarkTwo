@@ -15,9 +15,12 @@ namespace Core
 
 struct TextureAssetData
 {
-    TextureAssetData() : m_Texture(nullptr), m_iHeight(0), m_iWidth(0), m_uiFrames(0) {}
+    TextureAssetData() 
+        : m_Texture(nullptr), m_uiID(0), m_File(""), m_iHeight(0), m_iWidth(0), m_uiFrames(0)
+    {}
 
-    std::string m_ID;
+    uint32_t m_uiID;
+
     std::string m_File;
 
     SDL_Texture* m_Texture;
@@ -48,9 +51,11 @@ public:
 
 struct FontAssetData
 {
-    FontAssetData() : m_Font(nullptr) {}
+    FontAssetData() 
+        : m_Font(nullptr), m_uiID(0), m_File("")
+    {}
 
-    std::string m_ID;
+    uint32_t m_uiID;
     std::string m_File;
 
     TTF_Font* m_Font;
@@ -59,9 +64,11 @@ struct FontAssetData
 
 struct SoundAssetData
 {
-    SoundAssetData() : m_SoundEffect(nullptr) {}
+    SoundAssetData() 
+        : m_SoundEffect(nullptr), m_uiID(0), m_File("")
+    {}
 
-    std::string m_ID;
+    uint32_t m_uiID;
     std::string m_File;
 
     Mix_Chunk* m_SoundEffect;
@@ -70,9 +77,11 @@ struct SoundAssetData
 
 struct MusicAssetData
 {
-    MusicAssetData() : m_Music(nullptr) {}
+    MusicAssetData() 
+        : m_Music(nullptr), m_ID(0), m_File("")
+    {}
 
-    std::string m_ID;
+    uint32_t m_ID;
     std::string m_File;
 
     Mix_Music* m_Music;
