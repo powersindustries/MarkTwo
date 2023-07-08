@@ -1,7 +1,7 @@
 # MarkTwo Engine v2.0
 
 ### Overview
-![alt text](src/Assets/READMEImages/markTwoScreenshot.PNG "MarkTwo")
+![alt text](src/Assets/READMEImages/markTwoGithub.png "MarkTwo")
 
 The MarkTwo engine is the second iteration of an ongoing 2D game engine project. Just like Tony Stark making his Iron Man suit in a cave with a “Box of scraps,” the MarkTwo engine project uses all open source libraries and dependencies to create 2D games. The engine was made for educational purposes under the MIT license.
 
