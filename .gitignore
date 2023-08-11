@@ -175,5 +175,9 @@ MigrationBackup/
 Debug/
 Release/
 External/
+cmake-build-debug/
 
 Planning.docx
+
+# CLion/JetBrains
+.idea/

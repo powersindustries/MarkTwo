@@ -1,6 +1,7 @@
 #include "MapManager.h"
-#include "GameGlobals.h"
+#include <cmath>
 
+#include "GameGlobals.h"
 #include "Core/Systems/Logging.h"
 #include "Core/Systems/Hash.h"
 #include "Core/Types/LuaTableLoader.h"

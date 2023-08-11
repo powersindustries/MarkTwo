@@ -1,4 +1,6 @@
 #include "Player.h"
+#include <cmath>
+
 #include "GameGlobals.h"
 #include "Core/Systems/Systems.h"
 #include "../Managers/EventManager.h"

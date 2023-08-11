@@ -1,4 +1,6 @@
 #include "Utility.h"
+#include <cmath>
+#include <cfloat>
 
 namespace Core
 {
