@@ -6,6 +6,7 @@
 
 namespace MarkTwo
 {
+
 class PlayerMovement
 {
 public:
@@ -15,10 +16,10 @@ public:
     void Update(const float deltaTime);
     void Draw(SDL_Renderer* renderer);
 
-    bool GetPlayerMoving() { return m_bPlayerMoving; }
+    bool GetPlayerMoving() const { return m_bPlayerMoving; }
     void SetPlayerMoving(bool isMoving) { m_bPlayerMoving = isMoving; }
 
-    Direction GetDirection() { return m_Direction; }
+    Direction GetDirection() const { return m_Direction; }
     void SetPlayerMoving(Direction direction) { m_Direction = direction; }
 
 

@@ -16,11 +16,11 @@ public:
     VerticalStack();
     ~VerticalStack();
 
-    void Draw(SDL_Renderer* renderer);
-    void SetStyle(uint32_t uiStyleID);
-    void SetOffset(int xOffset, int yOffset);
+    void Draw(SDL_Renderer* renderer) override;
+    void SetStyle(uint32_t uiStyleID) override;
+    void SetOffset(int xOffset, int yOffset) override;
 
-    void RefreshUI();
+    void RefreshUI() override;
 
     void AddChild(UIBase* child);
     void ClearChildren();
@@ -30,7 +30,7 @@ public:
 
 private:
 
-    void SetPositionNoRefresh(const int x, const int y);
+    void SetPositionNoRefresh(const int x, const int y) override;
 
 
 public:

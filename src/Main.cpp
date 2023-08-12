@@ -11,7 +11,6 @@ int main()
     Game* m_Game = new Game;
     m_Game->InitializeSession();
 
-
     while (g_GameGlobals.m_bGameRunning)
     {
         m_Game->ProcessInputs();

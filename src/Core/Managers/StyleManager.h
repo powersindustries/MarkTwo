@@ -8,7 +8,6 @@
 namespace Core
 {
 
-
 struct TextBlockStyle
 {
     uint32_t m_uiID;
@@ -18,23 +17,18 @@ struct TextBlockStyle
     std::string m_sDefaultText;
 };
 
-
 struct ButtonStyle
 {
     uint32_t m_uiID;
     uint32_t m_uiFont;
-    
+
     SDL_Color m_HoverColor;
     SDL_Color m_PressedColor;
     SDL_Color m_TextColor;
     SDL_Color m_BaseColor;
-    
-    
-    
+
     std::string m_sDefaultText;
 };
-
-
 
 class StyleManager
 {
@@ -59,9 +53,7 @@ private:
     std::map<uint32_t, TextBlockStyle> m_TextBlockStyles; // ID as hash, TextBlockStyle Data
     std::map<uint32_t, ButtonStyle> m_ButtonStyles; // ID as hash, ButtonStyle Data
 
-
 };
 
 extern StyleManager g_StyleManager;
-
 }

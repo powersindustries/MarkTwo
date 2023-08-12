@@ -20,5 +20,4 @@ static void SYSTEMS_ASSERT(bool expression)
     assert(expression);
 }
 
-
 }

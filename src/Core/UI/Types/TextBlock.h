@@ -14,8 +14,8 @@ public:
     TextBlock();
     ~TextBlock();
 
-    void Draw(SDL_Renderer* renderer);
-    void SetStyle(uint32_t uiStyleID);
+    void Draw(SDL_Renderer* renderer) override;
+    void SetStyle(uint32_t uiStyleID) override;
 
     void SetFont(uint32_t fontIDHash);
     void SetColor(SDL_Color color);
@@ -27,7 +27,7 @@ public:
 
 private:
 
-    void SetPositionNoRefresh(const int x, const int y);
+    void SetPositionNoRefresh(const int x, const int y) override;
 
     void CreateWordTexture();
 

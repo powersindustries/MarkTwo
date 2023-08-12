@@ -7,16 +7,13 @@
 #include <string>
 #include <vector>
 
-
-
 namespace Core
 {
-
 
 struct TextureAssetData
 {
     TextureAssetData() 
-        : m_Texture(nullptr), m_uiID(0), m_File(""), m_iHeight(0), m_iWidth(0), m_uiFrames(0)
+        : m_Texture(nullptr), m_uiID(0), m_iHeight(0), m_iWidth(0), m_uiFrames(0)
     {}
 
     uint32_t m_uiID;
@@ -30,7 +27,6 @@ struct TextureAssetData
     int m_iWidth;
     int m_iHeight;
 };
-
 
 class TileMapAssetData
 {
@@ -52,7 +48,7 @@ public:
 struct FontAssetData
 {
     FontAssetData() 
-        : m_Font(nullptr), m_uiID(0), m_File("")
+        : m_Font(nullptr), m_uiID(0)
     {}
 
     uint32_t m_uiID;
@@ -65,7 +61,7 @@ struct FontAssetData
 struct SoundAssetData
 {
     SoundAssetData() 
-        : m_SoundEffect(nullptr), m_uiID(0), m_File("")
+        : m_SoundEffect(nullptr), m_uiID(0)
     {}
 
     uint32_t m_uiID;
@@ -78,7 +74,7 @@ struct SoundAssetData
 struct MusicAssetData
 {
     MusicAssetData() 
-        : m_Music(nullptr), m_ID(0), m_File("")
+        : m_Music(nullptr), m_ID(0)
     {}
 
     uint32_t m_ID;
@@ -94,7 +90,7 @@ public:
     AssetManager();
     ~AssetManager();
 
-    void Initialialize(SDL_Renderer* renderer);
+    void Initialize(SDL_Renderer* renderer);
 
     SDL_Surface* GetAssetSurfaceByID(std::string AssetID);
 

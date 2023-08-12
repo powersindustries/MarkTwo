@@ -19,11 +19,11 @@ public:
     HUDScreen();
     ~HUDScreen();
 
-    void Initialize();
-    void Update();
-    void Draw(SDL_Renderer* renderer);
-    void OnShow();
-    void RemoveSelf();
+    void Initialize() override;
+    void Update() override;
+    void Draw(SDL_Renderer* renderer) override;
+    void OnShow() override;
+    void RemoveSelf()override;
 
 
 private:

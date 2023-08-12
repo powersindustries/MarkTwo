@@ -6,7 +6,6 @@
 namespace UI
 {
 
-
 enum class UIScreenID
 {
     eDEFAULT,
@@ -14,7 +13,6 @@ enum class UIScreenID
     eHud,
     ePause
 };
-
 
 class UIScreenBase
 {

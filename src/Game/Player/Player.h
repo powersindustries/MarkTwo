@@ -11,7 +11,6 @@ using namespace Core;
 namespace MarkTwo
 {
 
-
 class Player
 {
 public:
@@ -23,7 +22,7 @@ public:
     void Update(const float deltaTime);
     void Draw(SDL_Renderer* renderer);
 
-    SDL_Rect GetPlayerRectangle() { return m_PlayerRectangle; }
+    SDL_Rect GetPlayerRectangle() const { return m_PlayerRectangle; }
     void SetPlayerRectangle(SDL_Rect rectangle) { m_PlayerRectangle = rectangle; }
 
     void SetPlayerPosition(int x, int y);
@@ -33,21 +32,20 @@ public:
     void OnTestEvent();
 
 private:
+
     void SetMouseRotation();
 
 
-
 private:
+
     SDL_Rect m_PlayerRectangle;
 
     Sprite* m_PlayerSprite;
 
     PlayerMovement m_PlayerMovement;
 
-
 };
 
 extern Player g_Player;
-
 
 }

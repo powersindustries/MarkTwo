@@ -45,7 +45,7 @@ AssetManager::~AssetManager()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void AssetManager::Initialialize(SDL_Renderer* renderer)
+void AssetManager::Initialize(SDL_Renderer* renderer)
 {
     LoadTextureAssets(renderer);
     LoadTileMapAssets();

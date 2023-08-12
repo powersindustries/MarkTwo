@@ -45,7 +45,6 @@ public:
     bool m_bGraphicsDebugMode = false;
     bool m_bDebugScreenActive = false;
 
-
     // Colors
     const SDL_Color COLOR_BLACK   = { 0  , 0 ,  0, 255 };
     const SDL_Color COLOR_WHITE   = { 255, 255, 255, 255 };

@@ -10,13 +10,11 @@
 namespace MarkTwo
 {
 
-
 enum class Events
 {
     eTestEvent,
     eCount
 };
-
 
 class EventManager
 {
@@ -34,7 +32,6 @@ private:
 
     std::vector<std::vector<Core::Event>> m_EventsVector;
     std::unordered_map<Events, uint16_t> m_EventsMap; // Key: Events enum, Value: index in m_EventsVector
-
 
 };
 

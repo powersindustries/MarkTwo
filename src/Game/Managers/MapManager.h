@@ -9,7 +9,6 @@
 namespace MarkTwo
 {
 
-
 struct TileMapData
 {
     uint32_t m_uiID;
@@ -18,7 +17,6 @@ struct TileMapData
     std::vector<SDL_Rect> m_vScreenTiles;
     std::vector<uint8_t> m_vMap;
 };
-
 
 struct MapData
 {
@@ -29,7 +27,6 @@ struct MapData
     SDL_Color m_BackgroundColor;
     SDL_Rect m_BackgroundRectangle;
 };
-
 
 class MapManager
 {
@@ -66,5 +63,4 @@ private:
 };
 
 extern MapManager g_MapManager;
-
 }

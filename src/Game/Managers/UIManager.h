@@ -43,5 +43,4 @@ private:
 };
 
 extern UIManager g_UIManager;
-
 }

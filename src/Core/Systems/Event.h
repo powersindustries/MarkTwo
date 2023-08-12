@@ -6,7 +6,6 @@
 namespace Core
 {
 
-
 class Event
 {
 public:
@@ -29,6 +28,5 @@ private:
     std::function<void()> m_InFunction;
 
 };
-
 
 }

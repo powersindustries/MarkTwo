@@ -83,7 +83,7 @@ void Game::InitializeSession()
 
     // Initialization.
     g_EventManager.Initialize();
-    Core::g_AssetManager.Initialialize(m_Renderer);
+    Core::g_AssetManager.Initialize(m_Renderer);
     Core::g_StyleManager.Initialize();
 
     g_MapManager.Initialize();
