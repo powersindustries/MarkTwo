@@ -1,4 +1,5 @@
 #pragma once
+#include <cstdint>
 #include <stdint.h>
 
 namespace Core
@@ -7,6 +8,7 @@ namespace Core
 class String
 {
 public:
+
     String();
     ~String();
 
@@ -33,7 +35,7 @@ public:
     bool operator>(const String& rhs) const;
     bool operator>(const char* rhs) const;
 
-    char& operator[](size_t index);
+    char& operator[](uint32_t index);
 
 private:
 

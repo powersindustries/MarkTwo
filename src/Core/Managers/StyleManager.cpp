@@ -1,10 +1,11 @@
 #include "StyleManager.h"
 #include <vector>
 
+#include "rapidxml_utils.hpp"
+
 #include "GameGlobals.h"
 #include "../Systems/Logging.h"
 #include "../Systems/Hash.h"
-#include "../Types/LuaTableLoader.h"
 
 namespace Core
 {
@@ -20,7 +21,7 @@ StyleManager g_StyleManager;
 StyleManager::StyleManager()
 {
     m_sStyleFilepath.append(__PROJECT_DIRECTORY__);
-    m_sStyleFilepath.append("/src/Data/Styles.lua");
+    m_sStyleFilepath.append("/src/Data/Styles.xml");
 }
 
 
@@ -35,64 +36,52 @@ StyleManager::~StyleManager()
 // -------------------------------------------------------
 void StyleManager::Initialize()
 {
-    Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sStyleFilepath);
+    rapidxml::file<> xmlFile(m_sStyleFilepath.c_str());
+    rapidxml::xml_document<> doc;
+    doc.parse<0>(xmlFile.data());
 
     // Load TextBlock Styles.
-    luaLoader->LoadTableByID("TextBlocks");
-
-    const uint8_t uiTextblockTableSize = luaLoader->GetCurrentTableSize();
-    for (uint8_t x=0; x < uiTextblockTableSize; ++x)
+    rapidxml::xml_node<>* textBlockNode = doc.first_node()->first_node("TextBlocks");
+    if (textBlockNode)
     {
-        int indexOffset = x + 1;
-
-        if (luaLoader->PushIntegerAndGetTable(indexOffset))
+        for (rapidxml::xml_node<>* child = textBlockNode->first_node(); child; child = child->next_sibling())
         {
-            break;
+            if (!child)
+            {
+                Core::SYSTEMS_LOG(Core::LoggingLevel::eWarning, "Child node in StyleManager::Initialize() method is nullptr.");
+                continue;
+            }
+
+            TextBlockStyle textBlockStyle;
+            textBlockStyle.m_uiID = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            textBlockStyle.m_uiFont = Core::StringToHash32(std::string(child->first_attribute("Font")->value()));
+            textBlockStyle.m_Color = ColorStringToSDLColor(std::string(child->first_attribute("Color")->value()));
+            textBlockStyle.m_sDefaultText = std::string(child->first_attribute("DefaultText")->value());
+
+            m_TextBlockStyles.insert({ textBlockStyle.m_uiID, textBlockStyle });
         }
-
-		TextBlockStyle textBlockStyle;
-		textBlockStyle.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
-		textBlockStyle.m_uiFont = Core::StringToHash32(luaLoader->GetStringByID("Font"));
-
-		textBlockStyle.m_Color = ColorStringToSDLColor(luaLoader->GetStringByID("Color"));
-
-		textBlockStyle.m_sDefaultText = luaLoader->GetStringByID("DefaultText");
-
-		m_TextBlockStyles.insert({ textBlockStyle.m_uiID, textBlockStyle });
-
-        luaLoader->PopTopTableElement();
     }
 
     // Load Button Styles.
-    luaLoader->LoadTableByID("Buttons");
-
-    const uint8_t uiButtonsTableSize = luaLoader->GetCurrentTableSize();
-    for (uint8_t x=0; x < uiButtonsTableSize; ++x)
+    rapidxml::xml_node<>* buttonNode = doc.first_node()->first_node("Buttons");
+    if (buttonNode)
     {
-        int indexOffset = x + 1;
-
-        if (luaLoader->PushIntegerAndGetTable(indexOffset))
+        for (rapidxml::xml_node<>* child = buttonNode->first_node(); child; child = child->next_sibling())
         {
-            break;
+            ButtonStyle buttonStyle;
+            buttonStyle.m_uiID = Core::StringToHash32(child->first_attribute("ID")->value());
+            buttonStyle.m_uiFont = Core::StringToHash32(child->first_attribute("Font")->value());
+
+            buttonStyle.m_HoverColor = ColorStringToSDLColor(child->first_attribute("HoverColor")->value());
+            buttonStyle.m_PressedColor = ColorStringToSDLColor(child->first_attribute("PressedColor")->value());
+            buttonStyle.m_TextColor = ColorStringToSDLColor(child->first_attribute("TextColor")->value());
+            buttonStyle.m_BaseColor = ColorStringToSDLColor(child->first_attribute("BaseColor")->value());
+
+            buttonStyle.m_sDefaultText = std::string(child->first_attribute("DefaultText")->value());
+
+            m_ButtonStyles.insert({ buttonStyle.m_uiID, buttonStyle });
         }
-
-        ButtonStyle buttonStyle;
-        buttonStyle.m_uiID = Core::StringToHash32(luaLoader->GetStringByID("ID"));
-        buttonStyle.m_uiFont = Core::StringToHash32(luaLoader->GetStringByID("Font"));
-
-        buttonStyle.m_HoverColor = ColorStringToSDLColor(luaLoader->GetStringByID("HoverColor"));
-        buttonStyle.m_PressedColor = ColorStringToSDLColor(luaLoader->GetStringByID("PressedColor"));
-        buttonStyle.m_TextColor = ColorStringToSDLColor(luaLoader->GetStringByID("TextColor"));
-        buttonStyle.m_BaseColor = ColorStringToSDLColor(luaLoader->GetStringByID("BaseColor"));
-
-        buttonStyle.m_sDefaultText = luaLoader->GetStringByID("DefaultText");
-    
-        m_ButtonStyles.insert( { buttonStyle.m_uiID, buttonStyle } );
-
-        luaLoader->PopTopTableElement();
     }
-
-    delete luaLoader;
 
     Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Style Data Load Complete!");
 }
@@ -100,15 +89,15 @@ void StyleManager::Initialize()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-SDL_Color StyleManager::ColorStringToSDLColor(std::string string)
+SDL_Color StyleManager::ColorStringToSDLColor(std::string inString)
 {
     std::vector<int> vTempVector;
     std::string sTempString = "";
 
-    const uint8_t uiStringSize = static_cast<uint8_t>(string.length());
-    for (uint8_t x=0; x < uiStringSize; ++x)
+    const uint8_t uiStringSize = static_cast<uint8_t>(inString.length());
+    for (uint8_t x = 0; x < uiStringSize; ++x)
     {
-        const char currChar = string[x];
+        const char currChar = inString[x];
 
         if (currChar == ' ')
         {
@@ -120,6 +109,7 @@ SDL_Color StyleManager::ColorStringToSDLColor(std::string string)
             sTempString += currChar;
         }
     }
+
     vTempVector.push_back(std::stoi(sTempString));
 
     SDL_Color output;

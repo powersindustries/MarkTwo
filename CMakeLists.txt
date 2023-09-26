@@ -18,52 +18,67 @@ if(MSVC)
     add_definitions(-D_CRT_SECURE_NO_WARNINGS)
 endif()
 
+set(CMAKE_BUILD_TYPE Debug)
+
 # Set CMake Library/Package Paths.
-set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake )
+set( CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_SOURCE_DIR}/cmake/ )
 set( CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR} )
 
 list(APPEND CMAKE_MODULE_PATH ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 
-# Setup SDL include directory and libraries.
-set( SDL2_INCLUDE_DIRS        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/include" )
-set( SDL2_IMAGE_INCLUDE_DIRS  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/include" )
-set( SDL2_TTF_INCLUDE_DIRS    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/include" )
-set( SDL2_MIXER_INCLUDE_DIRS  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/include" )
+# Set Libraries for Windows.
+if(WIN32)
 
-if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
+    # Setup SDL include directory and libraries.
+    set( SDL2_INCLUDE_DIRS        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/include" )
+    set( SDL2_IMAGE_INCLUDE_DIRS  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/include" )
+    set( SDL2_TTF_INCLUDE_DIRS    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/include" )
+    set( SDL2_MIXER_INCLUDE_DIRS  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/include" )
 
-set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x64/SDL2.lib;" )
-set( SDL2_IMAGE_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/lib/x64/SDL2_image.lib;" )
-set( SDL2_TTF_LIBRARIES    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/lib/x64/SDL2_ttf.lib;" )
-set( SDL2_MIXER_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/lib/x64/SDL2_mixer.lib;" )
+    if (${CMAKE_SIZEOF_VOID_P} MATCHES 8)
 
-else ()
+        set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x64/SDL2.lib;" )
+        set( SDL2_IMAGE_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/lib/x64/SDL2_image.lib;" )
+        set( SDL2_TTF_LIBRARIES    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/lib/x64/SDL2_ttf.lib;" )
+        set( SDL2_MIXER_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/lib/x64/SDL2_mixer.lib;" )
 
-set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x86/SDL2.lib;" )
-set( SDL2_IMAGE_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/lib/x86/SDL2_image.lib;" )
-set( SDL2_TTF_LIBRARIES    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/lib/x86/SDL2_ttf.lib;" )
-set( SDL2_MIXER_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/lib/x86/SDL2_mixer.lib;" )
+    else ()
 
-endif ()
+        set( SDL2_LIBRARIES        "${CMAKE_CURRENT_LIST_DIR}/External/SDL2/lib/x86/SDL2.lib;" )
+        set( SDL2_IMAGE_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_image/lib/x86/SDL2_image.lib;" )
+        set( SDL2_TTF_LIBRARIES    "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_ttf/lib/x86/SDL2_ttf.lib;" )
+        set( SDL2_MIXER_LIBRARIES  "${CMAKE_CURRENT_LIST_DIR}/External/SDL2_mixer/lib/x86/SDL2_mixer.lib;" )
+
+    endif ()
 
 
-# Setup Lua include directories and libraries.
-set( LUA_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/External/lua/include" )
-set( LUA_LIBRARIES   "${CMAKE_CURRENT_LIST_DIR}/External/lua/liblua54.a" )
+# Set Libraries for Linux.
+else()
+
+    find_package(SDL2 REQUIRED)
+    find_package(SDL2_image REQUIRED)
+    find_package(SDL2_ttf REQUIRED)
+    find_package(SDL2_mixer REQUIRED)
+
+endif()
+
+
+# Include RapidXml includes.
+set( RAPID_XML_INCLUDE_DIRS "${CMAKE_CURRENT_LIST_DIR}/External/RapidXml" )
 
 
 # Add Resource paths to includes.
 set(RESOURCE_FILES
 
-src/Data/AssetManifest.lua
-src/Data/Settings.lua
-src/Data/Styles.lua
+src/Data/AssetManifest.xml
+src/Data/Settings.xml
+src/Data/Styles.xml
 
-src/Data/MapsManifest.lua
-src/Data/Maps/mp_1.lua
+src/Data/MapsManifest.xml
+src/Data/Maps/mp_1.xml
 
-src/Data/TileMaps/tm_1.lua
+src/Data/TileMaps/tm_1.xml
 
 src/Assets/Textures/ChopperSpritesheet.png
 src/Assets/Textures/testIcon.png
@@ -86,8 +101,6 @@ src/Core/Types/Transform.h
 src/Core/Types/Transform.cpp
 src/Core/Types/String.h
 src/Core/Types/String.cpp
-src/Core/Types/LuaTableLoader.h
-src/Core/Types/LuaTableLoader.cpp
 src/Core/Types/Texture.h
 src/Core/Types/Texture.cpp
 
@@ -157,12 +170,18 @@ include_directories( ${SDL2_INCLUDE_DIRS} )
 include_directories( ${SDL2_IMAGE_INCLUDE_DIRS} ) 
 include_directories( ${SDL2_TTF_INCLUDE_DIRS} )
 include_directories( ${SDL2_MIXER_INCLUDE_DIRS} )
-include_directories( ${LUA_INCLUDE_DIRS} )
+include_directories( ${RAPID_XML_INCLUDE_DIRS} )
 
 add_executable(${PROJECT_NAME} ${SOURCE_FILES})
 
-target_link_libraries(${PROJECT_NAME} ${SDL2_LIBRARIES} ${SDL2_IMAGE_LIBRARIES} ${SDL2_TTF_LIBRARIES} ${SDL2_MIXER_LIBRARIES} ${LUA_LIBRARIES})
-
+target_link_libraries(
+    ${PROJECT_NAME} 
+    
+    ${SDL2_LIBRARIES} 
+    ${SDL2_IMAGE_LIBRARIES} 
+    ${SDL2_TTF_LIBRARIES} 
+    ${SDL2_MIXER_LIBRARIES} 
+    )
 
 install(TARGETS ${PROJECT_NAME} RUNTIME DESTINATION bin)
 set(CPACK_PROJECT_NAME ${PROJECT_NAME})
@@ -176,11 +195,3 @@ set(CPACK_PROJECT_VERSION_MAJOR 2)
 set(CPACK_PROJECT_VERSION_MINOR 1)
 
 include(CPack)
-
-
-
-
-
-
-
-

@@ -43,7 +43,7 @@ public:
 
 private:
 
-    SDL_Color ColorStringToSDLColor(std::string string );
+    SDL_Color ColorStringToSDLColor(std::string inString );
 
 
 private:

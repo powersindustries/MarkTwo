@@ -74,10 +74,10 @@ struct SoundAssetData
 struct MusicAssetData
 {
     MusicAssetData() 
-        : m_Music(nullptr), m_ID(0)
+        : m_Music(nullptr), m_uiID(0)
     {}
 
-    uint32_t m_ID;
+    uint32_t m_uiID;
     std::string m_File;
 
     Mix_Music* m_Music;

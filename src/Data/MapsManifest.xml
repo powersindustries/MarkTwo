@@ -1,0 +1,17 @@
+<MapsManifest>
+
+<Maps>
+
+    <Map File="mp_1.xml" />
+
+</Maps>
+
+
+<TileMaps>
+
+    <TileMap File="tm_1.xml" />
+
+</Maps>
+
+
+</MapsManifest>

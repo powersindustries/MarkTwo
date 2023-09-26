@@ -1,0 +1,72 @@
+<Assets>
+
+
+<!-- Texture List -->
+<Textures>
+
+<Texture
+    ID="txt_Chopper"
+    File="ChopperSpritesheet.png"
+    Frames="2"
+    />
+
+<Texture
+    ID="txt_TestIcon"
+    File="testIcon.png"
+    Frames="0"
+    />
+
+<Texture
+    ID="txt_TestTileMap"
+    File="testTileMap.png"
+    Frames="0"
+    />
+
+</Textures>
+
+
+<!-- Tile Maps List -->
+<TileMaps>
+
+<TileMap
+    ID="txt_TestTileMap"
+    File="testTileMap.png"
+    />
+
+</TileMaps>
+
+
+<!-- Fonts List -->
+<Fonts>
+
+<Font
+    ID="fnt_Orbitron"
+    File="Orbitron-Regular.ttf"
+    />
+
+</Fonts>
+
+
+<!-- Sounds List -->
+<Sounds>
+
+<Sound
+    ID="snd_TestFX"
+    File="TestFX.wav"
+    />
+
+</Sounds>
+
+
+<!-- Musics List -->
+<!-- <Musics> -->
+
+<!-- <Music -->
+<!--     ID="ms_TRACKID", -->
+<!--     File="TRACKID.wav" -->
+<!--     /> -->
+
+<!-- </Musics> -->
+
+
+</Assets>

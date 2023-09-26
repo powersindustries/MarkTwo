@@ -17,6 +17,11 @@ public:
     void PauseMusic();
     void StopAllMusic();
 
+private:
+
+    
+
+
 };
 
 extern SoundManager g_SoundManager;

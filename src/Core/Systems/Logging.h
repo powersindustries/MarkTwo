@@ -1,7 +1,6 @@
 #pragma once
-#include <Windows.h>
 #include <string>
-
+#include <iostream>
 
 namespace Core
 {
@@ -11,7 +10,8 @@ enum class LoggingLevel
 {
     eInfo,
     eWarning,
-    eError
+    eError,
+    eTemp
 };
 
 
@@ -37,6 +37,11 @@ static void SYSTEMS_LOG(const LoggingLevel level, const std::string message)
         sOutputMessage.append("ERROR: ");
         break;
     }
+    case LoggingLevel::eTemp:
+    {
+        sOutputMessage.append("TEMP: ");
+        break;
+    }
     default:
     {
         // Default to info if LoggingLevel doesnt exist.
@@ -48,7 +53,7 @@ static void SYSTEMS_LOG(const LoggingLevel level, const std::string message)
     sOutputMessage.append(message);
     sOutputMessage.push_back('\n');
 
-    OutputDebugString(sOutputMessage.c_str());
+    std::clog << sOutputMessage << std::endl;
 }
 
 }

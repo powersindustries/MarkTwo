@@ -1,7 +1,9 @@
 #include "SettingsManager.h"
+
+#include "rapidxml_utils.hpp"
+
 #include "Core/Systems/Logging.h"
 #include "GameGlobals.h"
-#include "../Types/LuaTableLoader.h"
 
 namespace Core
 {
@@ -18,7 +20,7 @@ SettingsManager::SettingsManager()
     : m_MainWindow(nullptr)
 {
     m_sSettingsFilepath.append(__PROJECT_DIRECTORY__);
-    m_sSettingsFilepath.append("/src/Data/Settings.lua");
+    m_sSettingsFilepath.append("/src/Data/Settings.xml");
 
     m_SettingsData.m_iWidth = 0;
     m_SettingsData.m_iHeight = 0;
@@ -37,20 +39,22 @@ SettingsManager::~SettingsManager()
 // -------------------------------------------------------
 void SettingsManager::Initialize()
 {
-	Core::LuaTableLoader* luaLoader = new Core::LuaTableLoader(m_sSettingsFilepath);
-	luaLoader->LoadTableByID("Settings");
+    rapidxml::file<> xmlFile(m_sSettingsFilepath.c_str());
+    rapidxml::xml_document<> doc;
+    doc.parse<0>(xmlFile.data());
 
-    m_SettingsData.m_sTitle = luaLoader->GetStringByID("Title");
-    m_SettingsData.m_iWidth = luaLoader->GetIntByID("Width");
-    m_SettingsData.m_iHeight = luaLoader->GetIntByID("Height");
+    rapidxml::xml_node<>* settingsNode = doc.first_node("Settings");
+    if (settingsNode)
+    {
+        m_SettingsData.m_sTitle = settingsNode->first_attribute("Title")->value();
+        m_SettingsData.m_iWidth = std::stoi(settingsNode->first_attribute("Width")->value());
+        m_SettingsData.m_iHeight = std::stoi(settingsNode->first_attribute("Height")->value());
 
-    m_SettingsData.m_iMusicVolumePercentage = luaLoader->GetIntByID("MusicVolume");
-    m_SettingsData.m_iFXVolumePercentage = luaLoader->GetIntByID("FXVolume");
+        m_SettingsData.m_iMusicVolumePercentage = std::stoi(settingsNode->first_attribute("MusicVolume")->value());
+        m_SettingsData.m_iFXVolumePercentage = std::stoi(settingsNode->first_attribute("FXVolume")->value());
 
-	delete luaLoader;
-
-
-    Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Settings initialization complete.");
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Settings initialization complete.");
+    }
 }
 
 
