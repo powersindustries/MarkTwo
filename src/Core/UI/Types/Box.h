@@ -1,4 +1,6 @@
-#pragma once
+#ifndef Box_h
+#define Box_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -24,3 +26,5 @@ private:
 
 };
 }
+
+#endif

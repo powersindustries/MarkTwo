@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SettingsManager_h
+#define SettingsManager_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -53,3 +55,5 @@ private:
 
 extern SettingsManager g_SettingsManager;
 }
+
+#endif

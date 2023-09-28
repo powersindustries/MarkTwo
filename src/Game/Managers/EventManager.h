@@ -1,4 +1,6 @@
-#pragma once
+#ifndef EventManager_h
+#define EventManager_h
+
 #include <vector>
 #include <functional>
 #include <unordered_map>
@@ -39,3 +41,5 @@ extern EventManager g_EventManager;
 
 
 }
+
+#endif

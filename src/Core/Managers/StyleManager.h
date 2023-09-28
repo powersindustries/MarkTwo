@@ -1,4 +1,6 @@
-#pragma once
+#ifndef StyleManager_h
+#define StyleManager_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -57,3 +59,5 @@ private:
 
 extern StyleManager g_StyleManager;
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef Hash_h
+#define Hash_h
+
 #include <stdint.h>
 #include <string>
 
@@ -41,3 +43,5 @@ static uint32_t StringToHash32(const char* string, const uint32_t size)
 }
 
 }
+
+#endif

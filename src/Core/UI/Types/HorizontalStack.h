@@ -1,4 +1,6 @@
-#pragma once
+#ifndef HorizontalStack_h
+#define HorizontalStack_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -42,3 +44,5 @@ public:
 
 };
 }
+
+#endif

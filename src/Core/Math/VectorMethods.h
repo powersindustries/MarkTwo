@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VectorMethods_h
+#define VectorMethods_h
 
 namespace Core
 {
@@ -127,3 +128,5 @@ public:
 };
 
 }
+
+#endif

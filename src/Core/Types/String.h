@@ -1,4 +1,6 @@
-#pragma once
+#ifndef String_h
+#define String_h
+
 #include <cstdint>
 #include <stdint.h>
 
@@ -45,3 +47,5 @@ private:
 };
 
 }
+
+#endif

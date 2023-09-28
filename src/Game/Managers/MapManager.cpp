@@ -1,7 +1,6 @@
 #include "MapManager.h"
 #include <cctype>
 #include <cmath>
-#include <cstdint>
 #include <vector>
 
 #include "rapidxml_utils.hpp"

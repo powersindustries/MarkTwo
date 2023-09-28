@@ -1,4 +1,6 @@
-#pragma once
+#ifndef Player_h
+#define Player_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -49,3 +51,5 @@ private:
 extern Player g_Player;
 
 }
+
+#endif

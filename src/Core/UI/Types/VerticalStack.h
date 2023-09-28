@@ -1,4 +1,6 @@
-#pragma once
+#ifndef VerticalStack_h
+#define VerticalStack_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -28,6 +30,7 @@ public:
     void SetVisibility(UIVisibility visibility);
     void SetPadding(int padding);
 
+
 private:
 
     void SetPositionNoRefresh(const int x, const int y) override;
@@ -41,3 +44,5 @@ public:
 
 };
 }
+
+#endif

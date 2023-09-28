@@ -1,4 +1,6 @@
-#pragma once
+#ifndef SoundManager_h
+#define SoundManager_h
+
 #include <string>
 
 namespace Core
@@ -27,3 +29,5 @@ private:
 extern SoundManager g_SoundManager;
 
 }
+
+#endif

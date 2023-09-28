@@ -1,7 +1,6 @@
 #include "EventManager.h"
 #include "Core/Systems/Assert.h"
 
-
 namespace MarkTwo
 {
 

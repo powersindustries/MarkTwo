@@ -1,7 +1,8 @@
-#pragma once
+#ifndef Event_h
+#define Event_h
+
 #include <vector>
 #include <functional>
-
 
 namespace Core
 {
@@ -30,3 +31,5 @@ private:
 };
 
 }
+
+#endif

@@ -1,4 +1,6 @@
-#pragma once
+#ifndef AssetManager_h
+#define AssetManager_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -122,3 +124,5 @@ private:
 
 extern AssetManager g_AssetManager;
 }
+
+#endif

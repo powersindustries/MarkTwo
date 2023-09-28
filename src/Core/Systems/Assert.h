@@ -1,4 +1,6 @@
-#pragma once
+#ifndef Assert_h
+#define Assert_h
+
 #include <assert.h>
 
 #include "Logging.h"
@@ -21,3 +23,5 @@ static void SYSTEMS_ASSERT(bool expression)
 }
 
 }
+
+#endif

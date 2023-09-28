@@ -1,4 +1,6 @@
-#pragma once
+#ifndef Logging_h
+#define Logging_h
+
 #include <string>
 #include <iostream>
 
@@ -57,3 +59,5 @@ static void SYSTEMS_LOG(const LoggingLevel level, const std::string message)
 }
 
 }
+
+#endif

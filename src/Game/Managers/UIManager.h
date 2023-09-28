@@ -1,4 +1,6 @@
-#pragma once
+#ifndef UIManager_h
+#define UIManager_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -44,3 +46,5 @@ private:
 
 extern UIManager g_UIManager;
 }
+
+#endif

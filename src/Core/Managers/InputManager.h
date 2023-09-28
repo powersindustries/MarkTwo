@@ -1,4 +1,6 @@
-#pragma once
+#ifndef InputManager_h
+#define InputManager_h
+
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
@@ -156,3 +158,5 @@ private:
 extern InputManager g_InputManager;
 
 }
+
+#endif
