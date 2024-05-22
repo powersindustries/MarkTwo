@@ -71,73 +71,73 @@ void InputManager::ProcessInputs()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-bool InputManager::GetActionPressed(const InputMappings Mapping)
+bool InputManager::GetActionPressed(const InputMappings& mapping)
 {
-    switch (Mapping)
+    switch (mapping)
     {
     case InputMappings::eMouse1:
     {
-        return m_InputMappingPressedData.m_LeftClicked;
+        return m_InputMappingPressedData.m_bLeftClicked;
     }
     case InputMappings::eMouse2:
     {
-        return m_InputMappingPressedData.m_RightClicked;
+        return m_InputMappingPressedData.m_bRightClicked;
     }
     case InputMappings::eMouse3:
     {
-        return m_InputMappingPressedData.m_MiddleClicked;
+        return m_InputMappingPressedData.m_bMiddleClicked;
     }
     case InputMappings::eMouseMotion:
     {
-        return m_InputMappingPressedData.m_MouseMotion;
+        return m_InputMappingPressedData.m_bMouseMotion;
     }
     case InputMappings::eESCMenu:
     {
-        return m_InputMappingPressedData.m_Escape;
+        return m_InputMappingPressedData.m_bEscape;
     }
     case InputMappings::eTabMenu:
     {
-        return m_InputMappingPressedData.m_Tab;
+        return m_InputMappingPressedData.m_bTab;
     }
     case InputMappings::eRight:
     {
-        return m_InputMappingPressedData.m_D || m_InputMappingPressedData.m_RightArrow;
+        return m_InputMappingPressedData.m_bD || m_InputMappingPressedData.m_bRightArrow;
     }
     case InputMappings::eLeft:
     {
-        return m_InputMappingPressedData.m_A || m_InputMappingPressedData.m_LeftArrow;
+        return m_InputMappingPressedData.m_bA || m_InputMappingPressedData.m_bLeftArrow;
     }
     case InputMappings::eUp:
     {
-        return m_InputMappingPressedData.m_W || m_InputMappingPressedData.m_UpArrow;
+        return m_InputMappingPressedData.m_bW || m_InputMappingPressedData.m_bUpArrow;
     }
     case InputMappings::eDown:
     {
-        return m_InputMappingPressedData.m_S || m_InputMappingPressedData.m_DownArrow;
+        return m_InputMappingPressedData.m_bS || m_InputMappingPressedData.m_bDownArrow;
     }
     case InputMappings::eRun:
     {
-        return m_InputMappingPressedData.m_Space;
+        return m_InputMappingPressedData.m_bSpace;
     }
     case InputMappings::eInteract:
     {
-        return m_InputMappingPressedData.m_E;
+        return m_InputMappingPressedData.m_bE;
     }
     case InputMappings::eAction:
     {
-        return m_InputMappingPressedData.m_LeftClicked || m_InputMappingPressedData.m_J;
+        return m_InputMappingPressedData.m_bLeftClicked || m_InputMappingPressedData.m_bJ;
     }
     case InputMappings::eDebug1:
     {
-        return m_InputMappingPressedData.m_F1;
+        return m_InputMappingPressedData.m_bF1;
     }
     case InputMappings::eDebug2:
     {
-        return m_InputMappingPressedData.m_F2;
+        return m_InputMappingPressedData.m_bF2;
     }
     case InputMappings::eDebug3:
     {
-        return m_InputMappingPressedData.m_F3;
+        return m_InputMappingPressedData.m_bF3;
     }
     case InputMappings::eDebug4:
     {
@@ -151,73 +151,73 @@ bool InputManager::GetActionPressed(const InputMappings Mapping)
 }
 
 
-bool InputManager::GetActionHeld(const InputMappings Mapping)
+bool InputManager::GetActionHeld(const InputMappings& mapping)
 {
-    switch (Mapping)
+    switch (mapping)
     {
     case InputMappings::eMouse1:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_LeftClicked;
+        return m_InputMappingHeldData.m_InputMappingData.m_bLeftClicked;
     }
     case InputMappings::eMouse2:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_RightClicked;
+        return m_InputMappingHeldData.m_InputMappingData.m_bRightClicked;
     }
     case InputMappings::eMouse3:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_MiddleClicked;
+        return m_InputMappingHeldData.m_InputMappingData.m_bMiddleClicked;
     }
     case InputMappings::eMouseMotion:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_MouseMotion;
+        return m_InputMappingHeldData.m_InputMappingData.m_bMouseMotion;
     }
     case InputMappings::eESCMenu:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_Escape;
+        return m_InputMappingHeldData.m_InputMappingData.m_bEscape;
     }
     case InputMappings::eTabMenu:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_Tab;
+        return m_InputMappingHeldData.m_InputMappingData.m_bTab;
     }
     case InputMappings::eRight:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_D || m_InputMappingHeldData.m_InputMappingData.m_RightArrow;
+        return m_InputMappingHeldData.m_InputMappingData.m_bD || m_InputMappingHeldData.m_InputMappingData.m_bRightArrow;
     }
     case InputMappings::eLeft:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_A || m_InputMappingHeldData.m_InputMappingData.m_LeftArrow;
+        return m_InputMappingHeldData.m_InputMappingData.m_bA || m_InputMappingHeldData.m_InputMappingData.m_bLeftArrow;
     }
     case InputMappings::eUp:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_W || m_InputMappingHeldData.m_InputMappingData.m_UpArrow;
+        return m_InputMappingHeldData.m_InputMappingData.m_bW || m_InputMappingHeldData.m_InputMappingData.m_bUpArrow;
     }
     case InputMappings::eDown:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_S || m_InputMappingHeldData.m_InputMappingData.m_DownArrow;
+        return m_InputMappingHeldData.m_InputMappingData.m_bS || m_InputMappingHeldData.m_InputMappingData.m_bDownArrow;
     }
     case InputMappings::eRun:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_Space;
+        return m_InputMappingHeldData.m_InputMappingData.m_bSpace;
     }
     case InputMappings::eInteract:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_E;
+        return m_InputMappingHeldData.m_InputMappingData.m_bE;
     }
     case InputMappings::eAction:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_LeftClicked || m_InputMappingHeldData.m_InputMappingData.m_J;
+        return m_InputMappingHeldData.m_InputMappingData.m_bLeftClicked || m_InputMappingHeldData.m_InputMappingData.m_bJ;
     }
     case InputMappings::eDebug1:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_F1;
+        return m_InputMappingHeldData.m_InputMappingData.m_bF1;
     }
     case InputMappings::eDebug2:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_F2;
+        return m_InputMappingHeldData.m_InputMappingData.m_bF2;
     }
     case InputMappings::eDebug3:
     {
-        return m_InputMappingHeldData.m_InputMappingData.m_F3;
+        return m_InputMappingHeldData.m_InputMappingData.m_bF3;
     }
     case InputMappings::eDebug4:
     {
@@ -233,9 +233,9 @@ bool InputManager::GetActionHeld(const InputMappings Mapping)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-int64_t InputManager::GetActionHeldTimestamp(const InputMappings Mapping)
+int64_t InputManager::GetActionHeldTimestamp(const InputMappings& mapping)
 {
-    switch (Mapping)
+    switch (mapping)
     {
     case InputMappings::eMouse1:
     {
@@ -314,27 +314,27 @@ int64_t InputManager::GetActionHeldTimestamp(const InputMappings Mapping)
 // -------------------------------------------------------
 void InputManager::ResetAllPressedData()
 {
-    m_InputMappingPressedData.m_F1 = false;
-    m_InputMappingPressedData.m_F2 = false;
-    m_InputMappingPressedData.m_F3 = false;
+    m_InputMappingPressedData.m_bF1 = false;
+    m_InputMappingPressedData.m_bF2 = false;
+    m_InputMappingPressedData.m_bF3 = false;
     m_InputMappingPressedData.m_F4 = false;
-    m_InputMappingPressedData.m_LeftClicked = false;
-    m_InputMappingPressedData.m_RightClicked = false;
-    m_InputMappingPressedData.m_MiddleClicked = false;
-    m_InputMappingPressedData.m_MouseMotion = false;
-    m_InputMappingPressedData.m_Escape = false;
-    m_InputMappingPressedData.m_Tab = false;
-    m_InputMappingPressedData.m_UpArrow = false;
-    m_InputMappingPressedData.m_DownArrow = false;
-    m_InputMappingPressedData.m_LeftArrow = false;
-    m_InputMappingPressedData.m_RightArrow = false;
-    m_InputMappingPressedData.m_Space = false;
-    m_InputMappingPressedData.m_W = false;
-    m_InputMappingPressedData.m_A = false;
-    m_InputMappingPressedData.m_S = false;
-    m_InputMappingPressedData.m_D = false;
-    m_InputMappingPressedData.m_E = false;
-    m_InputMappingPressedData.m_J = false;
+    m_InputMappingPressedData.m_bLeftClicked = false;
+    m_InputMappingPressedData.m_bRightClicked = false;
+    m_InputMappingPressedData.m_bMiddleClicked = false;
+    m_InputMappingPressedData.m_bMouseMotion = false;
+    m_InputMappingPressedData.m_bEscape = false;
+    m_InputMappingPressedData.m_bTab = false;
+    m_InputMappingPressedData.m_bUpArrow = false;
+    m_InputMappingPressedData.m_bDownArrow = false;
+    m_InputMappingPressedData.m_bLeftArrow = false;
+    m_InputMappingPressedData.m_bRightArrow = false;
+    m_InputMappingPressedData.m_bSpace = false;
+    m_InputMappingPressedData.m_bW = false;
+    m_InputMappingPressedData.m_bA = false;
+    m_InputMappingPressedData.m_bS = false;
+    m_InputMappingPressedData.m_bD = false;
+    m_InputMappingPressedData.m_bE = false;
+    m_InputMappingPressedData.m_bJ = false;
 
     m_bMouseClickAbsorbedByUI = false;
 }
@@ -349,31 +349,31 @@ void InputManager::OnKeyUpEvent()
     {
     case SDLK_ESCAPE:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_Escape = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bEscape = false;
         m_InputMappingHeldData.m_EscapeStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_TAB:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_Tab = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bTab = false;
         m_InputMappingHeldData.m_TabStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_F1:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_F1 = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bF1 = false;
         m_InputMappingHeldData.m_F1Stamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_F2:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_F2 = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bF2 = false;
         m_InputMappingHeldData.m_F2Stamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_F3:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_F3 = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bF3 = false;
         m_InputMappingHeldData.m_F3Stamp = DEFAULT_TIMESTAMP;
         break;
     }
@@ -385,67 +385,67 @@ void InputManager::OnKeyUpEvent()
     }
     case SDLK_UP:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_UpArrow = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bUpArrow = false;
         m_InputMappingHeldData.m_UpArrowStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_DOWN:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_DownArrow = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bDownArrow = false;
         m_InputMappingHeldData.m_DownArrowStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_LEFT:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_LeftArrow = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bLeftArrow = false;
         m_InputMappingHeldData.m_LeftArrowStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_RIGHT:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_RightArrow = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bRightArrow = false;
         m_InputMappingHeldData.m_RightArrowStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_SPACE:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_Space = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bSpace = false;
         m_InputMappingHeldData.m_SpaceStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_w:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_W = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bW = false;
         m_InputMappingHeldData.m_WStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_a:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_A = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bA = false;
         m_InputMappingHeldData.m_AStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_s:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_S = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bS = false;
         m_InputMappingHeldData.m_SStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_d:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_D = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bD = false;
         m_InputMappingHeldData.m_DStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_e:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_E = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bE = false;
         m_InputMappingHeldData.m_EStamp = DEFAULT_TIMESTAMP;
         break;
     }
     case SDLK_j:
     {
-        m_InputMappingHeldData.m_InputMappingData.m_J = false;
+        m_InputMappingHeldData.m_InputMappingData.m_bJ = false;
         m_InputMappingHeldData.m_JStamp = DEFAULT_TIMESTAMP;
         break;
     }
@@ -459,12 +459,12 @@ void InputManager::OnKeyUpEvent()
 void InputManager::OnMouseEvent()
 {
     SDL_MouseButtonEvent& mouseButtonEvent = m_SDLEvent->button;
-    m_InputMappingPressedData.m_LeftClicked = mouseButtonEvent.button == SDL_BUTTON_LEFT;
-    m_InputMappingPressedData.m_RightClicked = mouseButtonEvent.button == SDL_BUTTON_RIGHT;
-    m_InputMappingPressedData.m_MiddleClicked = mouseButtonEvent.button == SDL_BUTTON_MIDDLE;
-    m_InputMappingHeldData.m_InputMappingData.m_LeftClicked = mouseButtonEvent.button == SDL_BUTTON_LEFT;
-    m_InputMappingHeldData.m_InputMappingData.m_RightClicked = mouseButtonEvent.button == SDL_BUTTON_RIGHT;
-    m_InputMappingHeldData.m_InputMappingData.m_MiddleClicked = mouseButtonEvent.button == SDL_BUTTON_MIDDLE;
+    m_InputMappingPressedData.m_bLeftClicked = mouseButtonEvent.button == SDL_BUTTON_LEFT;
+    m_InputMappingPressedData.m_bRightClicked = mouseButtonEvent.button == SDL_BUTTON_RIGHT;
+    m_InputMappingPressedData.m_bMiddleClicked = mouseButtonEvent.button == SDL_BUTTON_MIDDLE;
+    m_InputMappingHeldData.m_InputMappingData.m_bLeftClicked = mouseButtonEvent.button == SDL_BUTTON_LEFT;
+    m_InputMappingHeldData.m_InputMappingData.m_bRightClicked = mouseButtonEvent.button == SDL_BUTTON_RIGHT;
+    m_InputMappingHeldData.m_InputMappingData.m_bMiddleClicked = mouseButtonEvent.button == SDL_BUTTON_MIDDLE;
 
     SDL_MouseMotionEvent& mouseMotionEvent = m_SDLEvent->motion;
     int32_t xRel = static_cast<int32_t>(mouseMotionEvent.xrel);
@@ -473,9 +473,9 @@ void InputManager::OnMouseEvent()
     uint32_t xRelAbs = static_cast<int32_t>(abs(mouseMotionEvent.xrel));
     uint32_t yRelAbs = static_cast<int32_t>(abs(mouseMotionEvent.yrel));
 
-    m_InputMappingPressedData.m_MouseMotion = (xRelAbs > 1 && yRelAbs > 1);
-    m_InputMappingHeldData.m_InputMappingData.m_MouseMotion = (xRelAbs > 1 && yRelAbs > 1);
-    if (m_InputMappingPressedData.m_MouseMotion)
+    m_InputMappingPressedData.m_bMouseMotion = (xRelAbs > 1 && yRelAbs > 1);
+    m_InputMappingHeldData.m_InputMappingData.m_bMouseMotion = (xRelAbs > 1 && yRelAbs > 1);
+    if (m_InputMappingPressedData.m_bMouseMotion)
     {
         if (xRelAbs == yRelAbs)
         {
@@ -510,9 +510,9 @@ void InputManager::OnKeyDownEvent()
         {
         case SDLK_ESCAPE:
         {
-            m_InputMappingPressedData.m_Escape = true;
+            m_InputMappingPressedData.m_bEscape = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_Escape = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bEscape = true;
             if (m_InputMappingHeldData.m_EscapeStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_EscapeStamp = m_SDLEvent->common.timestamp;
@@ -521,9 +521,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_TAB:
         {
-            m_InputMappingPressedData.m_Tab = true;
+            m_InputMappingPressedData.m_bTab = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_Tab = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bTab = true;
             if (m_InputMappingHeldData.m_TabStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_TabStamp = m_SDLEvent->common.timestamp;
@@ -532,9 +532,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_F1:
         {
-            m_InputMappingPressedData.m_F1 = true;
+            m_InputMappingPressedData.m_bF1 = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_F1 = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bF1 = true;
             if (m_InputMappingHeldData.m_F1Stamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_F1Stamp = m_SDLEvent->common.timestamp;
@@ -543,9 +543,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_F2:
         {
-            m_InputMappingPressedData.m_F2 = true;
+            m_InputMappingPressedData.m_bF2 = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_F2 = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bF2 = true;
             if (m_InputMappingHeldData.m_F2Stamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_F2Stamp = m_SDLEvent->common.timestamp;
@@ -554,9 +554,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_F3:
         {
-            m_InputMappingPressedData.m_F3 = true;
+            m_InputMappingPressedData.m_bF3 = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_F3 = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bF3 = true;
             if (m_InputMappingHeldData.m_F3Stamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_F3Stamp = m_SDLEvent->common.timestamp;
@@ -576,8 +576,8 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_UP:
         {
-            m_InputMappingPressedData.m_UpArrow = true;
-            m_InputMappingHeldData.m_InputMappingData.m_UpArrow = true;
+            m_InputMappingPressedData.m_bUpArrow = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bUpArrow = true;
             if (m_InputMappingHeldData.m_UpArrowStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_UpArrowStamp = m_SDLEvent->common.timestamp;
@@ -586,9 +586,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_DOWN:
         {
-            m_InputMappingPressedData.m_DownArrow = true;
+            m_InputMappingPressedData.m_bDownArrow = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_DownArrow = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bDownArrow = true;
             if (m_InputMappingHeldData.m_DownArrowStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_DownArrowStamp = m_SDLEvent->common.timestamp;
@@ -597,9 +597,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_LEFT:
         {
-            m_InputMappingPressedData.m_LeftArrow = true;
+            m_InputMappingPressedData.m_bLeftArrow = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_LeftArrow = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bLeftArrow = true;
             if (m_InputMappingHeldData.m_LeftArrowStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_LeftArrowStamp = m_SDLEvent->common.timestamp;
@@ -608,9 +608,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_RIGHT:
         {
-            m_InputMappingPressedData.m_RightArrow = true;
+            m_InputMappingPressedData.m_bRightArrow = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_RightArrow = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bRightArrow = true;
             if (m_InputMappingHeldData.m_RightArrowStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_RightArrowStamp = m_SDLEvent->common.timestamp;
@@ -619,9 +619,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_SPACE:
         {
-            m_InputMappingPressedData.m_Space = true;
+            m_InputMappingPressedData.m_bSpace = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_Space = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bSpace = true;
             if (m_InputMappingHeldData.m_SpaceStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_SpaceStamp = m_SDLEvent->common.timestamp;
@@ -630,9 +630,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_w:
         {
-            m_InputMappingPressedData.m_W = true;
+            m_InputMappingPressedData.m_bW = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_W = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bW = true;
             if (m_InputMappingHeldData.m_WStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_WStamp = m_SDLEvent->common.timestamp;
@@ -641,9 +641,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_a:
         {
-            m_InputMappingPressedData.m_A = true;
+            m_InputMappingPressedData.m_bA = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_A = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bA = true;
             if (m_InputMappingHeldData.m_AStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_AStamp = m_SDLEvent->common.timestamp;
@@ -652,9 +652,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_s:
         {
-            m_InputMappingPressedData.m_S = true;
+            m_InputMappingPressedData.m_bS = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_S = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bS = true;
             if (m_InputMappingHeldData.m_SStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_SStamp = m_SDLEvent->common.timestamp;
@@ -663,9 +663,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_d:
         {
-            m_InputMappingPressedData.m_D = true;
+            m_InputMappingPressedData.m_bD = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_D = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bD = true;
             if (m_InputMappingHeldData.m_DStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_DStamp = m_SDLEvent->common.timestamp;
@@ -674,9 +674,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_e:
         {
-            m_InputMappingPressedData.m_E = true;
+            m_InputMappingPressedData.m_bE = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_E = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bE = true;
             if (m_InputMappingHeldData.m_EStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_EStamp = m_SDLEvent->common.timestamp;
@@ -685,9 +685,9 @@ void InputManager::OnKeyDownEvent()
         }
         case SDLK_j:
         {
-            m_InputMappingPressedData.m_J = true;
+            m_InputMappingPressedData.m_bJ = true;
 
-            m_InputMappingHeldData.m_InputMappingData.m_J = true;
+            m_InputMappingHeldData.m_InputMappingData.m_bJ = true;
             if (m_InputMappingHeldData.m_JStamp == DEFAULT_TIMESTAMP)
             {
                 m_InputMappingHeldData.m_JStamp = m_SDLEvent->common.timestamp;

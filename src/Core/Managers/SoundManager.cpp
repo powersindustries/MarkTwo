@@ -17,39 +17,25 @@ SoundManager g_SoundManager;
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-SoundManager::SoundManager()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-SoundManager::~SoundManager()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void SoundManager::ResetSoundManager()
 {
     Mix_HaltMusic();
 
-    int iFXVolume = static_cast<int>(DEFAULT_VOLUME * (g_SettingsManager.GetFXVolumePercentage() * 0.01));
-    Mix_Volume(SOUND_CHANNEL, iFXVolume);
+    int fXVolume = static_cast<int>(DEFAULT_VOLUME * (g_SettingsManager.GetFXVolumePercentage() * 0.01));
+    Mix_Volume(SOUND_CHANNEL, fXVolume);
 
-    int iMusicVolume = static_cast<int>(DEFAULT_VOLUME * (g_SettingsManager.GetMusicVolumePercentage() * 0.01));
-    Mix_VolumeMusic(iMusicVolume);
+    int musicVolume = static_cast<int>(DEFAULT_VOLUME * (g_SettingsManager.GetMusicVolumePercentage() * 0.01));
+    Mix_VolumeMusic(musicVolume);
 
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void SoundManager::PlaySoundByID(std::string sSoundID)
+void SoundManager::PlaySoundByID(const std::string& sSoundID)
 {
-    uint32_t uiSoundHash = Core::StringToHash32(sSoundID);
-    SoundAssetData& currSound = g_AssetManager.m_SoundAssets[uiSoundHash];
+    uint32_t soundHash = Core::StringToHash32(sSoundID);
+    SoundAssetData& currSound = g_AssetManager.m_SoundAssetsMap[soundHash];
 
     Mix_PlayChannel(SOUND_CHANNEL, currSound.m_SoundEffect, 0);
 }
@@ -57,12 +43,12 @@ void SoundManager::PlaySoundByID(std::string sSoundID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void SoundManager::PlayMusicByID(std::string sMusicID)
+void SoundManager::PlayMusicByID(const std::string& sMusicID)
 {
     if (Mix_PlayingMusic() == 0)
     {
-        uint32_t uiMusicHash = Core::StringToHash32(sMusicID);
-        MusicAssetData& currMusic = g_AssetManager.m_MusicAssets[uiMusicHash];
+        uint32_t musicHash = Core::StringToHash32(sMusicID);
+        MusicAssetData& currMusic = g_AssetManager.m_MusicAssetsMap[musicHash];
 
         Mix_PlayMusic(currMusic.m_Music, -1);
     }

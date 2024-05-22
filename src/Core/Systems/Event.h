@@ -10,8 +10,6 @@ namespace Core
 class Event
 {
 public:
-    Event() {}
-    ~Event() {}
 
     void SetEvent(std::function<void()>& inDelegate)
     {

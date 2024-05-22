@@ -14,6 +14,7 @@ namespace MarkTwo
 
 enum class Events
 {
+    eDebugUIHotReload,
     eTestEvent,
     eCount
 };
@@ -21,13 +22,11 @@ enum class Events
 class EventManager
 {
 public:
-    EventManager();
-    ~EventManager();
 
     void Initialize();
 
-    void Broadcast(Events eEvent);
-    void Subscribe(Events eEvent, std::function<void()> inDelegate);
+    void Broadcast(const Events& event);
+    void Subscribe(const Events& event, std::function<void()> inDelegate);
 
 
 private:

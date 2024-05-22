@@ -1,0 +1,77 @@
+<Widget id="w_hud_screen">
+
+
+    <!--    Title-->
+    <Box
+        id="version_box"
+        Anchor="TopCenter"
+        Alignment="TopCenter"
+        Color="192 192 192 255"
+        Offset="0 25"
+    />
+
+    <TextBlock
+        id="version_textblock"
+        Anchor="TopCenter"
+        Alignment="TopCenter"
+        Offset="0 50"
+        Text="MarkTwo Engine v"
+    />
+
+
+    <!--    Player Text-->
+    <Box
+        Anchor="TopLeft"
+        Alignment="TopLeft"
+        Color="192 192 192 255"
+        Offset="25 25"
+        Margin="25 25 25 25"
+    >
+
+        <TextBlock
+            Text="Player Below"
+        />
+
+    </Box>
+
+
+    <!--    Directions Text-->
+    <Box
+        Anchor="TopRight"
+        Alignment="TopLeft"
+        Color="192 192 192 255"
+        Offset="-25 25"
+        Margin="25 25 25 25"
+    >
+
+        <VerticalStack
+            Padding="10">
+            <TextBlock
+                Text="Directions:"
+            />
+            <TextBlock
+                Text="WASD - Movement"
+            />
+            <TextBlock
+                Text="ESC - Pause Menu"
+            />
+            <TextBlock
+                Text="F1 - Debug Mode"
+            />
+            <TextBlock
+                Text="Backspace - End"
+            />
+        </VerticalStack>
+
+    </Box>
+
+
+    <!--    Event Info-->
+    <TextBlock
+        id="event_text"
+        Anchor="BottomCenter"
+        Alignment="Center"
+        Text="Press F4 to trigger TestEvent and event system"
+    />
+
+</Widget>

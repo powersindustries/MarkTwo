@@ -16,7 +16,7 @@ double Utility::DistanceBetweenTwoPoints(const int rect1X, const int rect1Y, con
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-double Utility::DirectionalDistanceBetweenTwoRectangles(const MarkTwo::Direction direction, SDL_Rect& rect1, SDL_Rect& rect2)
+double Utility::DirectionalDistanceBetweenTwoRectangles(const MarkTwo::Direction& direction, const SDL_Rect& rect1, const SDL_Rect& rect2)
 {
     switch (direction)
     {
@@ -55,12 +55,12 @@ bool Utility::CollisionBetweenTwoRectangles(const SDL_Rect& rect1, const SDL_Rec
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-bool Utility::CollisionBetweenTwoRectanglesWithPadding(const SDL_Rect& rect1, const SDL_Rect& rect2, const int iPadding)
+bool Utility::CollisionBetweenTwoRectanglesWithPadding(const SDL_Rect& rect1, const SDL_Rect& rect2, const int padding)
 {
-    return (rect1.x - iPadding) < rect2.x + rect2.w &&
-        (rect1.x + rect1.w + iPadding) > rect2.x &&
-        (rect1.y - iPadding) < rect2.y + rect2.h &&
-        (rect1.h + rect1.y + iPadding) > rect2.y;
+    return (rect1.x - padding) < rect2.x + rect2.w &&
+           (rect1.x + rect1.w + padding) > rect2.x &&
+           (rect1.y - padding) < rect2.y + rect2.h &&
+           (rect1.h + rect1.y + padding) > rect2.y;
 }
 
 
@@ -77,25 +77,25 @@ bool Utility::CollisionBetweenPointAndRectangle(const SDL_Rect& rect, const Core
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-double Utility::ATan2InDegrees(const int iY, const int iX)
+double Utility::ATan2InDegrees(const int x, const int y)
 {
-    const double dRadians = atan2(iY, iX);
+    const double dRadians = atan2(y, x);
     return dRadians * (180.0 / MarkTwo::g_GameGlobals.PI);
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-double Utility::ATan2InRadians(const int iY, const int iX)
+double Utility::ATan2InRadians(const int x, const int y)
 {
-    return atan2(static_cast<double>(iY), static_cast<double>(iX));
+    return atan2(static_cast<double>(y), static_cast<double>(x));
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-bool Utility::StringToBool(const std::string Text)
+bool Utility::StringToBool(const std::string& text)
 {
-    return (Text == "True" || Text == "true" || Text == "T" || Text == "t") ? true : false;
+    return (text == "True" || text == "true" || text == "T" || text == "t") ? true : false;
 }
 }

@@ -17,21 +17,12 @@ SettingsManager g_SettingsManager;
 // -------------------------------------------------------
 // -------------------------------------------------------
 SettingsManager::SettingsManager()
-    : m_MainWindow(nullptr)
 {
-    m_sSettingsFilepath.append(__PROJECT_DIRECTORY__);
+    m_sSettingsFilepath = __PROJECT_DIRECTORY__;
     m_sSettingsFilepath.append("/src/Data/Settings.xml");
 
     m_SettingsData.m_iWidth = 0;
     m_SettingsData.m_iHeight = 0;
-
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-SettingsManager::~SettingsManager()
-{
 }
 
 
@@ -62,8 +53,7 @@ void SettingsManager::Initialize()
 // -------------------------------------------------------
 int SettingsManager::GetRelativeScreenX(int iX)
 {
-    const float fOutputX = (float)(iX * m_SettingsData.m_iWidth) / MarkTwo::g_GameGlobals.BASE_WINDOW_SCALE_WIDTH;
-    return static_cast<int>(fOutputX);
+    return static_cast<int>( (float)(iX * m_SettingsData.m_iWidth) / MarkTwo::g_GameGlobals.BASE_WINDOW_SCALE_WIDTH );
 }
 
 
@@ -71,8 +61,7 @@ int SettingsManager::GetRelativeScreenX(int iX)
 // -------------------------------------------------------
 int SettingsManager::GetRelativeScreenY(int iY)
 {
-    const float fOutputY = (float)(iY * m_SettingsData.m_iHeight) / MarkTwo::g_GameGlobals.BASE_WINDOW_SCALE_HEIGHT;
-    return static_cast<int>(fOutputY);
+    return static_cast<int>( (float)(iY * m_SettingsData.m_iHeight) / MarkTwo::g_GameGlobals.BASE_WINDOW_SCALE_HEIGHT );
 }
 
 }

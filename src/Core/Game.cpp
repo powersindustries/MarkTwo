@@ -2,12 +2,13 @@
 #include "GameGlobals.h"
 #include "Game/Player/Player.h"
 #include "Systems/Logging.h"
-#include "Game/Managers/UIManager.h"
+#include "Game/Managers/FrontendManager.h"
 #include "Game/Managers/EventManager.h"
 #include "Managers/SettingsManager.h"
 #include "Managers/AssetManager.h"
-#include "Managers/StyleManager.h"
+#include "Core/UI/Types/StyleTypes.h"
 #include "Game/Managers/MapManager.h"
+#include "Core/UI/UIManager.h"
 
 namespace MarkTwo
 {
@@ -84,15 +85,14 @@ void Game::InitializeSession()
     // Initialization.
     g_EventManager.Initialize();
     Core::g_AssetManager.Initialize(m_Renderer);
-    Core::g_StyleManager.Initialize();
+    UI::g_UIManager.Initialize();
 
     g_MapManager.Initialize();
     g_Player.Initialize();
-    g_UIManager.Initialize();
+    g_FrontendManager.Initialize();
 
     g_GameGlobals.m_bGameRunning = true;
 
-    return;
 }
 
 
@@ -136,13 +136,13 @@ void Game::Update()
     if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eESCMenu))
     {
         g_GameGlobals.m_bGamePaused = !g_GameGlobals.m_bGamePaused;
-        if (g_UIManager.GetActiveScreenID() == UI::UIScreenID::ePause)
+        if (g_FrontendManager.GetActiveScreenID() == g_FrontendManager.GetPauseMenuScreenID())
         {
-            g_UIManager.RemoveScreen(UI::UIScreenID::ePause);
+            g_FrontendManager.RemoveScreen(g_FrontendManager.GetPauseMenuScreenID());
         }
         else
         {
-            g_UIManager.ActivateScreen(UI::UIScreenID::ePause);
+            g_FrontendManager.ActivateScreen(g_FrontendManager.GetPauseMenuScreenID());
         }
     }
 
@@ -152,6 +152,12 @@ void Game::Update()
         g_GameGlobals.m_bGraphicsDebugMode = !g_GameGlobals.m_bGraphicsDebugMode;
     }
 
+    // Trigger UI hot reload F2 key.
+    if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eDebug2))
+    {
+        g_UIManager.DEBUG_HOTRELOAD();
+    }
+
 
     // Update Managers
     if (!g_GameGlobals.m_bGamePaused)
@@ -159,7 +165,7 @@ void Game::Update()
         g_Player.Update(deltaTime);
     }
 
-    g_UIManager.Update();
+    g_FrontendManager.Update();
 }
 
 
@@ -184,7 +190,7 @@ void Game::Draw()
         g_Player.Draw(m_Renderer);
     }
 
-    g_UIManager.Draw(m_Renderer);
+    g_FrontendManager.Draw(m_Renderer);
 
 
     SDL_RenderPresent(m_Renderer);

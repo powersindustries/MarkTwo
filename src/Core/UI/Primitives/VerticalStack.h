@@ -6,41 +6,28 @@
 #include <SDL_image.h> // SDL Image
 #include <vector>
 
-#include "../UICore.h"
 #include "Core/Math/VectorMethods.h"
+#include "Core/UI/Types/StackBase.h"
 
 namespace UI
 {
 
-class VerticalStack : public UIBase
+class VerticalStack : public StackBase
 {
 public:
-    VerticalStack();
-    ~VerticalStack();
 
     void Draw(SDL_Renderer* renderer) override;
-    void SetStyle(uint32_t uiStyleID) override;
-    void SetOffset(int xOffset, int yOffset) override;
-
     void RefreshUI() override;
 
-    void AddChild(UIBase* child);
-    void ClearChildren();
-
-    void SetVisibility(UIVisibility visibility);
-    void SetPadding(int padding);
+    void AddChild(UIBase* child) override;
+    void SetVisibility(const UIVisibility& visibility) override;
 
 
 private:
 
     void SetPositionNoRefresh(const int x, const int y) override;
 
-
-public:
-
-	std::vector<UIBase*> m_Children;
-
-	int m_iPadding;
+    friend class Box;
 
 };
 }

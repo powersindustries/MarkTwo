@@ -17,13 +17,6 @@ PlayerMovement::PlayerMovement()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-PlayerMovement::~PlayerMovement()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void PlayerMovement::Update(const float deltaTime)
 {
     m_bPlayerMoving = false;
@@ -77,13 +70,6 @@ void PlayerMovement::Update(const float deltaTime)
             break;
         }
     }
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void PlayerMovement::Draw(SDL_Renderer* renderer)
-{
 }
 
 }

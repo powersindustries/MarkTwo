@@ -21,23 +21,23 @@ public:
     Sprite(uint32_t assetIDHash, uint8_t animationSpeed);
 
     void Update(const float deltaTime);
-    void Update(const float deltaTime, SDL_Rect& inRectangle);
-    void Draw(SDL_Renderer* renderer, SDL_RendererFlip flip = SDL_FLIP_NONE);
+    void Update(const float deltaTime, SDL_Rect& rectangle);
+    void Draw(SDL_Renderer* renderer, const SDL_RendererFlip& flip = SDL_FLIP_NONE);
 
-    void SetTexture(uint32_t textureIDHash);
+    void SetTexture(const uint32_t textureIDHash);
 
-    void SetRotation(double degrees);
+    void SetRotation(const double degrees);
 
 
 private:
-    SDL_Texture* m_Texture;
+    SDL_Texture* m_Texture{};
 
-    SDL_Rect m_SourceRectangle;
-    SDL_Rect m_DestinationRectangle;
+    SDL_Rect m_SourceRectangle{};
+    SDL_Rect m_DestinationRectangle{};
 
     Transform m_Transform;
 
-    uint8_t m_uiFrameNumber;
+    uint8_t m_uiFrameNumber{};
     uint8_t m_uiAnimationSpeed;
 
     // In Degrees, Clockwise

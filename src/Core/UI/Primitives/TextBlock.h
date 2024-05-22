@@ -5,31 +5,31 @@
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
 #include <string>
+#include "Core/UI/Types/UIBase.h"
 
-#include "../UICore.h"
 
 namespace UI
 {
 class TextBlock : public UIBase
 {
 public:
+
     TextBlock();
-    ~TextBlock();
 
     void Draw(SDL_Renderer* renderer) override;
-    void SetStyle(uint32_t uiStyleID) override;
 
-    void SetFont(uint32_t fontIDHash);
-    void SetColor(SDL_Color color);
-    void SetText(std::string text);
-    void SetVisibility(UIVisibility visibility);
-    void SetSize(const int x, const int y);
-    void SetWordWrap(uint8_t uiWordWrap);
+    void SetStyle(const uint32_t styleId) override;
+    void SetFont(const uint32_t fontIdHash);
+    void SetColor(const SDL_Color& color) override;
+    void SetText(const std::string& text);
+    void SetWordWrap(const uint8_t uiWordWrap);
+    void SetVisibility(const UIVisibility& visibility) override;
+    void SetSize(const int x, const int y) override;
+
+    inline const std::string GetText() { return m_Text; };
 
 
 private:
-
-    void SetPositionNoRefresh(const int x, const int y) override;
 
     void CreateWordTexture();
 

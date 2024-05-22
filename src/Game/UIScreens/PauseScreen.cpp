@@ -1,8 +1,8 @@
 #include "PauseScreen.h"
 #include "GameGlobals.h"
-#include "Game/Managers/UIManager.h"
-#include "Core/Systems/Systems.h"
+#include "Game/Managers/FrontendManager.h"
 #include "Core/Managers/SettingsManager.h"
+#include "Core/UI/UIManager.h"
 
 namespace MarkTwo
 {
@@ -12,14 +12,7 @@ namespace MarkTwo
 // -------------------------------------------------------
 PauseScreen::PauseScreen()
 {
-    m_ScreenID = UI::UIScreenID::ePause;
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-PauseScreen::~PauseScreen()
-{
+    m_sScreenID = "pause_screen";
 }
 
 
@@ -27,44 +20,14 @@ PauseScreen::~PauseScreen()
 // -------------------------------------------------------
 void PauseScreen::Initialize()
 {
-	m_BackgroundBox.SetAnchor(Anchor::eCenter);
-	m_BackgroundBox.SetColor(g_GameGlobals.COLOR_SILVER);
-	m_BackgroundBox.SetSize(500, Core::g_SettingsManager.GetScreenHeight() - 50);
-	m_BackgroundBox.SetOffset(
-		(m_BackgroundBox.GetWidth() / 2) * -1,
-		(m_BackgroundBox.GetHeight() / 2) * -1
-	);
+    UIScreenBase::Initialize();
 
+    m_Widget = UI::g_UIManager.GetWidgetByID(m_sWidgetId);
 
-	m_Title.SetAnchor(Anchor::eTopCenter);
-	m_Title.SetText("Pause Menu");
-	m_Title.SetOffset(
-		((m_Title.GetWidth() / 2) * -1),
-		75
-	);
+    m_ReturnButton = dynamic_cast<Button*>(UI::g_UIManager.GetPrimitiveByID("return_button"));
+    m_QuitButton = dynamic_cast<Button*>(UI::g_UIManager.GetPrimitiveByID("quit_button"));
 
-	m_EngineText.SetAnchor(Anchor::eTopCenter);
-	m_EngineText.SetText("MarkTwo Engine v2.0");
-	m_EngineText.SetOffset(
-		((m_EngineText.GetWidth() / 2) * -1),
-		200
-	);
-
-	m_ReturnToGameButton.SetText("RETURN");
-	m_ReturnToGameButton.SetSize(300, 50);
-
-	m_QuitGameButton.SetText("QUIT");
-	m_QuitGameButton.SetSize(300, 50);
-
-	m_Stack.SetAnchor(Anchor::eCenter);
-	m_Stack.SetPadding(25);
-	m_Stack.AddChild(&m_ReturnToGameButton);
-	m_Stack.AddChild(&m_QuitGameButton);
-	m_Stack.SetOffset(
-		((m_Stack.GetWidth() / 2) * -1),
-		150
-	);
-
+    assert(m_ReturnButton && m_QuitButton);
 }
 
 
@@ -72,17 +35,16 @@ void PauseScreen::Initialize()
 // -------------------------------------------------------
 void PauseScreen::Update()
 {
-    m_ReturnToGameButton.Update();
-    m_QuitGameButton.Update();
+    m_Widget->Update();
 
     // Button Click Event Check
-    if (m_ReturnToGameButton.LeftClickPressed())
+    if (m_ReturnButton && m_ReturnButton->LeftClickPressed())
     {
         g_GameGlobals.m_bGamePaused = false;
         RemoveSelf();
     }
 
-    if (m_QuitGameButton.LeftClickPressed())
+    if (m_QuitButton && m_QuitButton->LeftClickPressed())
     {
         g_GameGlobals.m_bGameRunning = false;
     }
@@ -93,17 +55,7 @@ void PauseScreen::Update()
 // -------------------------------------------------------
 void PauseScreen::Draw(SDL_Renderer* renderer)
 {
-    m_BackgroundBox.Draw(renderer);
-    m_Title.Draw(renderer);
-    m_EngineText.Draw(renderer);
-    m_Stack.Draw(renderer);
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void PauseScreen::OnShow()
-{
+    m_Widget->Draw(renderer);
 }
 
 
@@ -111,7 +63,15 @@ void PauseScreen::OnShow()
 // -------------------------------------------------------
 void PauseScreen::RemoveSelf()
 {
-    g_UIManager.RemoveScreen(m_ScreenID);
+    g_FrontendManager.RemoveScreen(m_sScreenID);
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void PauseScreen::HotReloadUI()
+{
+    m_Widget = UI::g_UIManager.GetWidgetByID(m_sWidgetId);
 }
 
 }

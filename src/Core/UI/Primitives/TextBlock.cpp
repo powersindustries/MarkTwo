@@ -2,11 +2,10 @@
 #include "GameGlobals.h"
 #include "Core/Game.h"
 
-#include "Core/Systems/Systems.h"
-#include "Core/Managers/SettingsManager.h"
 #include "Core/Managers/AssetManager.h"
 #include "Core/Systems/Hash.h"
-#include "Core/Managers/StyleManager.h"
+#include "Core/UI/Types/StyleTypes.h"
+#include "Core/UI/UIManager.h"
 
 namespace UI
 {
@@ -15,7 +14,7 @@ namespace UI
 // -------------------------------------------------------
 // -------------------------------------------------------
 TextBlock::TextBlock()
-    : m_Font(nullptr), m_MessageTexture(nullptr)
+        : m_Font(nullptr), m_MessageTexture(nullptr)
 {
     m_Text = "";
 
@@ -23,13 +22,6 @@ TextBlock::TextBlock()
     m_vSize.m_Y = 0;
 
     m_uiWordWrap = 0;
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-TextBlock::~TextBlock()
-{
 }
 
 
@@ -48,11 +40,11 @@ void TextBlock::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetStyle(uint32_t uiStyleID)
+void TextBlock::SetStyle(const uint32_t styleId)
 {
-    const Core::TextBlockStyle& currStyleData = Core::g_StyleManager.GetTextBlockStyle(uiStyleID);
+    const UI::TextBlockStyle& currStyleData = g_UIManager.GetTextBlockStyle(styleId);
 
-    m_Font = Core::g_AssetManager.m_FontAssets[currStyleData.m_uiFont].m_Font;
+    m_Font = Core::g_AssetManager.m_FontAssetsMap[currStyleData.m_uiFont].m_Font;
     m_Color = currStyleData.m_Color;
 
     if (m_Text == "")
@@ -69,7 +61,7 @@ void TextBlock::SetStyle(uint32_t uiStyleID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetText(std::string text)
+void TextBlock::SetText(const std::string& text)
 {
     m_Text = text;
 
@@ -80,7 +72,7 @@ void TextBlock::SetText(std::string text)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetVisibility(UIVisibility visibility)
+void TextBlock::SetVisibility(const UIVisibility& visibility)
 {
     UIBase::SetVisibility(visibility);
 
@@ -102,7 +94,7 @@ void TextBlock::SetSize(const int x, const int y)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetWordWrap(uint8_t uiWordWrap)
+void TextBlock::SetWordWrap(const uint8_t uiWordWrap)
 {
     m_uiWordWrap = uiWordWrap;
 
@@ -113,10 +105,19 @@ void TextBlock::SetWordWrap(uint8_t uiWordWrap)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void TextBlock::SetPositionNoRefresh(const int x, const int y)
+void TextBlock::SetFont(const uint32_t fontIdHash)
 {
-    m_BaseRectangle.x = x;
-    m_BaseRectangle.y = y;
+    m_Font = Core::g_AssetManager.m_FontAssetsMap[fontIdHash].m_Font;
+}
+
+
+// -------------------------------------------------------
+// -------------------------------------------------------
+void TextBlock::SetColor(const SDL_Color& color)
+{
+    UIBase::SetColor(color);
+
+    CreateWordTexture();
 }
 
 
@@ -124,13 +125,14 @@ void TextBlock::SetPositionNoRefresh(const int x, const int y)
 // -------------------------------------------------------
 void TextBlock::CreateWordTexture()
 {
-    SDL_Color tempColor = 
-    { 
-    m_Color.r, 
-    m_Color.g, 
-    m_Color.b, 
-    m_Visibility == UIVisibility::eVisible ? static_cast<Uint8>(m_Color.a) : static_cast<Uint8>(m_Color.a / 2)
-    };
+    SDL_Color tempColor =
+            {
+                    m_Color.r,
+                    m_Color.g,
+                    m_Color.b,
+                    m_Visibility == UIVisibility::eVisible ? static_cast<Uint8>(m_Color.a) : static_cast<Uint8>(
+                            m_Color.a / 2)
+            };
 
     SDL_Surface* surface = nullptr;
     if (m_Font)
@@ -148,11 +150,12 @@ void TextBlock::CreateWordTexture()
     {
         if (m_uiWordWrap > 0)
         {
-            surface = TTF_RenderText_Blended_Wrapped(GetDefaultFont(), m_Text.c_str(), tempColor, m_uiWordWrap);
+            surface = TTF_RenderText_Blended_Wrapped(g_UIManager.GetDefaultFont(), m_Text.c_str(), tempColor,
+                                                     m_uiWordWrap);
         }
         else
         {
-            surface = TTF_RenderText_Solid(GetDefaultFont(), m_Text.c_str(), tempColor);
+            surface = TTF_RenderText_Solid(g_UIManager.GetDefaultFont(), m_Text.c_str(), tempColor);
         }
     }
 
@@ -175,24 +178,6 @@ void TextBlock::CreateWordTexture()
         m_BaseRectangle.w = textureSize.x;
         m_BaseRectangle.h = textureSize.y;
     }
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void TextBlock::SetFont(uint32_t fontIDHash)
-{
-    m_Font = Core::g_AssetManager.m_FontAssets[fontIDHash].m_Font;
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void TextBlock::SetColor(SDL_Color color)
-{
-    UIBase::SetColor(color);
-
-    CreateWordTexture();
 }
 
 }

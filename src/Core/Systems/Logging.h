@@ -19,7 +19,7 @@ enum class LoggingLevel
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-static void SYSTEMS_LOG(const LoggingLevel level, const std::string message)
+static void SYSTEMS_LOG(const LoggingLevel& level, const std::string& message)
 {
     std::string sOutputMessage;
     switch (level)

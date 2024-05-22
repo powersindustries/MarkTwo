@@ -33,13 +33,13 @@ struct MapData
 class MapManager
 {
 public:
+
     MapManager();
-    ~MapManager();
 
     void Initialize();
     void Draw(SDL_Renderer* renderer);
 
-    void LoadMapByID(uint32_t uiMapID);
+    void LoadMapByID(const uint32_t uiMapID);
 
 
 private:
@@ -47,8 +47,8 @@ private:
     void LoadTileMapData();
     void LoadMapData();
 
-    void LoadTileMapDataByPath(std::string mapPath);
-    void LoadMapDataByPath(std::string mapPath);
+    void LoadTileMapDataByPath(const std::string& mapPath);
+    void LoadMapDataByPath(const std::string& mapPath);
 
 
 private:

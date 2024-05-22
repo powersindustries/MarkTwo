@@ -30,13 +30,6 @@ Player::Player()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Player::~Player()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void Player::Initialize()
 {
     // Initialize Player Sprite
@@ -92,7 +85,7 @@ void Player::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Player::SetPlayerPosition(int x, int y)
+void Player::SetPlayerPosition(const int x, const int y)
 {
     m_PlayerRectangle.x = x;
     m_PlayerRectangle.y = y;
@@ -111,18 +104,18 @@ void Player::OnTestEvent()
 // -------------------------------------------------------
 void Player::SetMouseRotation()
 {
-    int iMouseX;
-    int iMouseY;
-    SDL_GetMouseState(&iMouseX, &iMouseY);
+    int mouseX;
+    int mouseY;
+    SDL_GetMouseState(&mouseX, &mouseY);
 
-    double dNumberator = m_PlayerRectangle.x - iMouseX;
-    double dDenominator = m_PlayerRectangle.y - iMouseY;
-    double dRotation = atan2(dNumberator, dDenominator) * 180 / g_GameGlobals.PI;
+    double numerator = m_PlayerRectangle.x - mouseX;
+    double denominator = m_PlayerRectangle.y - mouseY;
+    double rotation = atan2(numerator, denominator) * 180 / g_GameGlobals.PI;
 
     // Clockwise correction.
-    dRotation *= -1;
+    rotation *= -1;
 
-    m_PlayerSprite->SetRotation(dRotation);
+    m_PlayerSprite->SetRotation(rotation);
 }
 
 }

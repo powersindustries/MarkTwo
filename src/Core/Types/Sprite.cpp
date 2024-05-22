@@ -89,9 +89,9 @@ void Sprite::Update(const float deltaTime)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::Update(const float deltaTime, SDL_Rect& inRectangle)
+void Sprite::Update(const float deltaTime, SDL_Rect& rectangle)
 {
-    m_Transform.SetTransform(inRectangle);
+    m_Transform.SetTransform(rectangle);
 
     if (m_uiFrameNumber > 0)
     {
@@ -108,7 +108,7 @@ void Sprite::Update(const float deltaTime, SDL_Rect& inRectangle)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::Draw(SDL_Renderer* renderer, SDL_RendererFlip flip)
+void Sprite::Draw(SDL_Renderer* renderer, const SDL_RendererFlip& flip)
 {
 	SDL_RenderCopyEx(renderer, m_Texture, &m_SourceRectangle, &m_DestinationRectangle, m_dRotation, NULL, flip);
 }
@@ -116,9 +116,9 @@ void Sprite::Draw(SDL_Renderer* renderer, SDL_RendererFlip flip)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::SetTexture(uint32_t textureIDHash)
+void Sprite::SetTexture(const uint32_t textureIDHash)
 {
-    Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssets[textureIDHash];
+    Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssetsMap[textureIDHash];
     m_Texture = textureAssetData.m_Texture;
     m_uiFrameNumber = textureAssetData.m_uiFrames;
     
@@ -131,7 +131,7 @@ void Sprite::SetTexture(uint32_t textureIDHash)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::SetRotation(double degrees)
+void Sprite::SetRotation(const double degrees)
 {
     m_dRotation = degrees;
 }

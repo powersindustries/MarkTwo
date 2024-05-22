@@ -4,34 +4,33 @@
 #include <SDL.h> // SDL Main
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
+#include <string>
 
 namespace UI
 {
-
-enum class UIScreenID
-{
-    eDEFAULT,
-
-    eHud,
-    ePause
-};
 
 class UIScreenBase
 {
 public:
 
-    virtual void Initialize() = 0;
+    virtual void Initialize();
 
     virtual void Update() = 0;
     virtual void Draw(SDL_Renderer* renderer) = 0;
 
-    virtual void OnShow() = 0;
+    virtual void OnShow() {};
     virtual void RemoveSelf() = 0;
+
+    virtual void HotReloadUI() {};
+
+private:
+
+    void OnDebugUIHotReloadCalled();
 
 
 public:
 
-    UIScreenID m_ScreenID;
+    std::string m_sScreenID;
 
 };
 

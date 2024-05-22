@@ -1,8 +1,14 @@
 cmake_minimum_required(VERSION 3.7)
-project(MarkTwo VERSION 2.1)
+project(MarkTwo VERSION 2.2)
+
+# Set version of C++.
+set (CMAKE_CXX_STANDARD 11)
 
 # Set Source directory to be used in game.
 add_definitions(-DPROJECT_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
+
+# Set Source directory to be used in game.
+add_definitions(-DVERSION_NUMBER="${CMAKE_PROJECT_VERSION}")
 
 # Set build types.
 IF(CMAKE_BUILD_TYPE MATCHES Release)
@@ -52,9 +58,9 @@ if(WIN32)
 
     endif ()
 
-
 # Set Libraries for Linux.
 else()
+
 
     find_package(SDL2 REQUIRED)
     find_package(SDL2_image REQUIRED)
@@ -118,30 +124,36 @@ src/Core/Managers/SoundManager.h
 src/Core/Managers/SoundManager.cpp
 src/Core/Managers/AssetManager.h
 src/Core/Managers/AssetManager.cpp
-src/Core/Managers/StyleManager.h
-src/Core/Managers/StyleManager.cpp
+src/Core/UI/Types/StyleTypes.h
+src/Core/UI/Types/StyleTypes.cpp
 
 src/Core/Math/VectorMethods.h
 src/Core/Math/VectorMethods.cpp
 src/Core/Math/Utility.h
 src/Core/Math/Utility.cpp
 
-src/Core/UI/UICore.h
-src/Core/UI/UICore.cpp
-src/Core/UI/UIScreenBase.h
-src/Core/UI/UIScreenBase.cpp
-src/Core/UI/Types/Box.h
-src/Core/UI/Types/Box.cpp
-src/Core/UI/Types/Button.h
-src/Core/UI/Types/Button.cpp
-src/Core/UI/Types/VerticalStack.h
-src/Core/UI/Types/VerticalStack.cpp
-src/Core/UI/Types/HorizontalStack.h
-src/Core/UI/Types/HorizontalStack.cpp
-src/Core/UI/Types/TextBlock.h
-src/Core/UI/Types/TextBlock.cpp
-src/Core/UI/Types/Icon.h
-src/Core/UI/Types/Icon.cpp
+src/Core/UI/Types/Widget.h
+src/Core/UI/Types/Widget.cpp
+src/Core/UI/Types/UIBase.h
+src/Core/UI/Types/UIBase.cpp
+src/Core/UI/UIManager.h
+src/Core/UI/UIManager.cpp
+src/Core/UI/Types/UICoreTypes.h
+src/Core/UI/Types/UICoreTypes.cpp
+src/Core/UI/Types/UIScreenBase.h
+src/Core/UI/Types/UIScreenBase.cpp
+src/Core/UI/Primitives/Box.h
+src/Core/UI/Primitives/Box.cpp
+src/Core/UI/Primitives/Button.h
+src/Core/UI/Primitives/Button.cpp
+src/Core/UI/Primitives/VerticalStack.h
+src/Core/UI/Primitives/VerticalStack.cpp
+src/Core/UI/Primitives/HorizontalStack.h
+src/Core/UI/Primitives/HorizontalStack.cpp
+src/Core/UI/Primitives/TextBlock.h
+src/Core/UI/Primitives/TextBlock.cpp
+src/Core/UI/Primitives/Icon.h
+src/Core/UI/Primitives/Icon.cpp
 
 src/Game/Player/Player.h
 src/Game/Player/Player.cpp
@@ -153,14 +165,17 @@ src/Game/UIScreens/HUDScreen.cpp
 src/Game/UIScreens/PauseScreen.h
 src/Game/UIScreens/PauseScreen.cpp
 
-src/Game/Managers/UIManager.h
-src/Game/Managers/UIManager.cpp
+src/Game/Managers/FrontendManager.h
+src/Game/Managers/FrontendManager.cpp
 src/Game/Managers/EventManager.h
 src/Game/Managers/EventManager.cpp
 src/Game/Managers/MapManager.h
 src/Game/Managers/MapManager.cpp
 
 ${RESOURCE_FILES}
+        src/Core/UI/Types/StackBase.h
+        src/Core/UI/Types/StackBase.cpp
+
 
 )
 

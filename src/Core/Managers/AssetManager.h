@@ -15,12 +15,12 @@ namespace Core
 struct TextureAssetData
 {
     TextureAssetData() 
-        : m_Texture(nullptr), m_uiID(0), m_iHeight(0), m_iWidth(0), m_uiFrames(0)
+        : m_Texture(nullptr), m_uiId(0), m_iHeight(0), m_iWidth(0), m_uiFrames(0)
     {}
 
-    uint32_t m_uiID;
+    uint32_t m_uiId;
 
-    std::string m_File;
+    std::string m_sFile;
 
     SDL_Texture* m_Texture;
 
@@ -34,10 +34,10 @@ class TileMapAssetData
 {
 public:
     TileMapAssetData() 
-        : m_TextureAssetData(nullptr), m_uiID(0), m_uiLength(0)
+        : m_TextureAssetData(nullptr), m_uiId(0), m_uiLength(0)
     {}
 
-    uint32_t m_uiID;
+    uint32_t m_uiId;
 
     TextureAssetData* m_TextureAssetData;
 
@@ -50,11 +50,11 @@ public:
 struct FontAssetData
 {
     FontAssetData() 
-        : m_Font(nullptr), m_uiID(0)
+        : m_Font(nullptr), m_uiId(0)
     {}
 
-    uint32_t m_uiID;
-    std::string m_File;
+    uint32_t m_uiId;
+    std::string m_sFile;
 
     TTF_Font* m_Font;
 };
@@ -63,11 +63,11 @@ struct FontAssetData
 struct SoundAssetData
 {
     SoundAssetData() 
-        : m_SoundEffect(nullptr), m_uiID(0)
+        : m_SoundEffect(nullptr), m_uiId(0)
     {}
 
-    uint32_t m_uiID;
-    std::string m_File;
+    uint32_t m_uiId;
+    std::string m_sFile;
 
     Mix_Chunk* m_SoundEffect;
 };
@@ -76,11 +76,11 @@ struct SoundAssetData
 struct MusicAssetData
 {
     MusicAssetData() 
-        : m_Music(nullptr), m_uiID(0)
+        : m_Music(nullptr), m_uiId(0)
     {}
 
-    uint32_t m_uiID;
-    std::string m_File;
+    uint32_t m_uiId;
+    std::string m_sFile;
 
     Mix_Music* m_Music;
 };
@@ -90,17 +90,16 @@ class AssetManager
 {
 public:
     AssetManager();
-    ~AssetManager();
 
     void Initialize(SDL_Renderer* renderer);
 
-    SDL_Surface* GetAssetSurfaceByID(std::string AssetID);
+    SDL_Surface* GetAssetSurfaceById(const std::string& assetId);
 
-    std::map<uint32_t, TextureAssetData> m_TextureAssets; // ID as hash, Texture Data
-    std::map<uint32_t, TileMapAssetData> m_TileMapAssets; // ID as hash, TileMap Data
-    std::map<uint32_t, FontAssetData> m_FontAssets; // ID as hash, Font Data
-    std::map<uint32_t, SoundAssetData> m_SoundAssets; // ID as hash, Sound Data
-    std::map<uint32_t, MusicAssetData> m_MusicAssets; // ID as hash, Music Data
+    std::map<uint32_t, TextureAssetData> m_TextureAssetsMap; // ID as hash, Texture Data
+    std::map<uint32_t, TileMapAssetData> m_TileMapAssetsMap; // ID as hash, TileMap Data
+    std::map<uint32_t, FontAssetData> m_FontAssetsMap; // ID as hash, Font Data
+    std::map<uint32_t, SoundAssetData> m_SoundAssetsMap; // ID as hash, Sound Data
+    std::map<uint32_t, MusicAssetData> m_MusicAssetsMap; // ID as hash, Music Data
 
 
 private:
@@ -115,10 +114,10 @@ private:
 private:
 
     std::string m_sManifestFilepath;
-    std::string m_sTextureDirectorypath;
-    std::string m_sFontsDirectorypath;
-    std::string m_sSoundsDirectorypath;
-    std::string m_sSaveDirectorypath;
+    std::string m_sTextureDirectoryPath;
+    std::string m_sFontsDirectoryPath;
+    std::string m_sSoundsDirectoryPath;
+    std::string m_sSaveDirectoryPath;
 
 };
 

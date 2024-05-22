@@ -38,13 +38,6 @@ MapManager::MapManager()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-MapManager::~MapManager()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void MapManager::Initialize()
 {
     LoadTileMapData();
@@ -60,15 +53,14 @@ void MapManager::Initialize()
 // -------------------------------------------------------
 void MapManager::Draw(SDL_Renderer* renderer)
 {
-    const uint32_t uiTilemapIndex = m_ActiveMapData->m_uiTileMap;
-    const TileMapData& currTileMapData = m_TileMapData[uiTilemapIndex];
-    Core::TileMapAssetData tileMapAssetData = Core::g_AssetManager.m_TileMapAssets[currTileMapData.m_uiTileMapID];
+    const uint32_t tileMapIndex = m_ActiveMapData->m_uiTileMap;
+    const TileMapData& currTileMapData = m_TileMapData[tileMapIndex];
+    Core::TileMapAssetData tileMapAssetData = Core::g_AssetManager.m_TileMapAssetsMap[currTileMapData.m_uiTileMapID];
 
-    const uint8_t uiMapSize = static_cast<uint8_t>(currTileMapData.m_vMap.size());
-    for (uint8_t x = 0; x < uiMapSize; ++x)
+    const uint8_t mapSize = static_cast<uint8_t>(currTileMapData.m_vMap.size());
+    for (uint8_t x = 0; x < mapSize; ++x)
     {
         const uint8_t testInt = currTileMapData.m_vMap[x];
-        SDL_Rect& testRect = tileMapAssetData.m_SourceRectangles[testInt];
 
         SDL_RenderCopy(
             renderer,
@@ -82,7 +74,7 @@ void MapManager::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void MapManager::LoadMapByID(uint32_t uiMapID)
+void MapManager::LoadMapByID(const uint32_t uiMapID)
 {
     if (m_MapData.count(uiMapID))
     {
@@ -118,10 +110,10 @@ void MapManager::LoadTileMapData()
                 continue;
             }
 
-            std::string sTileMapPath = m_sTileMapDirectoryPath;
-            sTileMapPath.append(child->first_attribute("File")->value());
+            std::string tileMapPath = m_sTileMapDirectoryPath;
+            tileMapPath.append(child->first_attribute("File")->value());
 
-            LoadTileMapDataByPath(sTileMapPath);
+            LoadTileMapDataByPath(tileMapPath);
         }
     }
 }
@@ -146,10 +138,10 @@ void MapManager::LoadMapData()
                 continue;
             }
 
-            std::string sMapPath = m_sMapDirectoryPath;
-            sMapPath.append(child->first_attribute("File")->value());
+            std::string mapPath = m_sMapDirectoryPath;
+            mapPath.append(child->first_attribute("File")->value());
 
-            LoadMapDataByPath(sMapPath);
+            LoadMapDataByPath(mapPath);
         }
     }
 }
@@ -157,7 +149,7 @@ void MapManager::LoadMapData()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void MapManager::LoadTileMapDataByPath(std::string mapPath)
+void MapManager::LoadTileMapDataByPath(const std::string& mapPath)
 {
     rapidxml::file<> xmlFile(mapPath.c_str());
     rapidxml::xml_document<> doc;
@@ -170,34 +162,33 @@ void MapManager::LoadTileMapDataByPath(std::string mapPath)
         newTileMap.m_uiID = Core::StringToHash32(mapNode->first_attribute("ID")->value());
         newTileMap.m_uiTileMapID = Core::StringToHash32(mapNode->first_attribute("Texture")->value());
 
-        std::string sMapValues = mapNode->first_attribute("Values")->value();
+        std::string mapValues = mapNode->first_attribute("Values")->value();
 
         // Create vector of comma seperated values.
-        const uint8_t sMapValuesSize = static_cast<uint32_t>(sMapValues.size());
-        for (uint8_t x = 0; x < sMapValuesSize; ++x)
+        const uint8_t mapValuesSize = static_cast<uint32_t>(mapValues.size());
+        for (uint8_t x = 0; x < mapValuesSize; ++x)
         {
-            char cCurrChar = sMapValues[x];
-            if (std::isdigit(cCurrChar))
+            char currChar = mapValues[x];
+            if (std::isdigit(currChar))
             {
-                newTileMap.m_vMap.push_back(((uint8_t)(cCurrChar)) - 48);
+                newTileMap.m_vMap.push_back(((uint8_t)(currChar)) - 48);
             }
         }
 
-        uint8_t uiRow = 0;
-
-        const uint8_t uiMapSize = static_cast<uint8_t>(newTileMap.m_vMap.size());
-        const uint8_t uiLength = static_cast<uint8_t>(std::sqrt(uiMapSize));
-        for (uint8_t x = 0; x < uiMapSize; ++x)
+        uint8_t row = 0;
+        const uint8_t mapSize = static_cast<uint8_t>(newTileMap.m_vMap.size());
+        const uint8_t length = static_cast<uint8_t>(std::sqrt(mapSize));
+        for (uint8_t x = 0; x < mapSize; ++x)
         {
             // Calculate current row.
-            if (x != 0 && x % uiLength == 0)
+            if (x != 0 && x % length == 0)
             {
-                uiRow++;
+                row++;
             }
 
             SDL_Rect newRect;
-            newRect.x = (x - (uiRow * uiLength)) * g_GameGlobals.TILE_SIZE;
-            newRect.y = uiRow * g_GameGlobals.TILE_SIZE;
+            newRect.x = (x - (row * length)) * g_GameGlobals.TILE_SIZE;
+            newRect.y = row * g_GameGlobals.TILE_SIZE;
 
             newRect.w = g_GameGlobals.TILE_SIZE;
             newRect.h = g_GameGlobals.TILE_SIZE;
@@ -212,7 +203,7 @@ void MapManager::LoadTileMapDataByPath(std::string mapPath)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void MapManager::LoadMapDataByPath(std::string mapPath)
+void MapManager::LoadMapDataByPath(const std::string& mapPath)
 {
     rapidxml::file<> xmlFile(mapPath.c_str());
     rapidxml::xml_document<> doc;
@@ -226,30 +217,30 @@ void MapManager::LoadMapDataByPath(std::string mapPath)
         newMap.m_uiTileMap = Core::StringToHash32(std::string(mapNode->first_attribute("TileMap")->value()));
 
         // Populate background colors.
-        const std::string sBackground = mapNode->first_attribute("Background")->value();
-        const uint8_t sBackgroundSize = static_cast<uint8_t>(sBackground.size());
+        const std::string background = mapNode->first_attribute("Background")->value();
+        const uint8_t backgroundSize = static_cast<uint8_t>(background.size());
 
-        std::vector<int> vBackgroundVector;
-        std::string sTempString = "";
-        for (uint8_t x = 0; x < sBackgroundSize; ++x)
+        std::vector<int> backgroundVector;
+        std::string tempString = "";
+        for (uint8_t x = 0; x < backgroundSize; ++x)
         {
-            char cCurrChar = sBackground[x];
-            if (cCurrChar != ',' && cCurrChar != ' ')
+            char currChar = background[x];
+            if (currChar != ',' && currChar != ' ')
             {
-                sTempString += cCurrChar;
+                tempString += currChar;
             }
             else
             {
-                vBackgroundVector.push_back(std::stoi(sTempString));
-                sTempString = "";
+                backgroundVector.push_back(std::stoi(tempString));
+                tempString = "";
             }
         }
-        vBackgroundVector.push_back(std::stoi(sTempString));
+        backgroundVector.push_back(std::stoi(tempString));
 
-        newMap.m_BackgroundColor.r = vBackgroundVector[0];
-        newMap.m_BackgroundColor.g = vBackgroundVector[1];
-        newMap.m_BackgroundColor.b = vBackgroundVector[2];
-        newMap.m_BackgroundColor.a = vBackgroundVector[3];
+        newMap.m_BackgroundColor.r = backgroundVector[0];
+        newMap.m_BackgroundColor.g = backgroundVector[1];
+        newMap.m_BackgroundColor.b = backgroundVector[2];
+        newMap.m_BackgroundColor.a = backgroundVector[3];
 
         newMap.m_BackgroundRectangle.x = 0;
         newMap.m_BackgroundRectangle.y = 0;

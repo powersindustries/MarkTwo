@@ -1,0 +1,44 @@
+<Widget id="w_pause_screen">
+
+    <Box
+        Anchor="center"
+        Alignment="center"
+        Color="192 192 192 255"
+        Size="500 700"
+    />
+
+    <TextBlock
+        Text="Pause Menu"
+        Anchor="TopCenter"
+        Alignment="Center"
+        Offset="0 75"
+    />
+
+    <TextBlock
+        Text="MarkTwo Engine v2.0"
+        Anchor="TopCenter"
+        Alignment="Center"
+        Offset="0 200"
+    />
+
+    <VerticalStack
+        Anchor="center"
+        Alignment="topcenter"
+        Padding="25"
+    >
+
+        <Button
+            id="return_button"
+            Size="300 50"
+            Text="RETURN"
+        />
+
+        <Button
+            id="quit_button"
+            Size="300 50"
+            Text="QUIT"
+        />
+
+    </VerticalStack>
+
+</Widget>

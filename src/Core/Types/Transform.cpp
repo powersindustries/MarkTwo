@@ -19,14 +19,7 @@ Transform::Transform()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Transform::~Transform()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void Transform::SetTransform(SDL_Rect& rectangle, int s /*= 1*/)
+void Transform::SetTransform(const SDL_Rect& rectangle, int s /*= 1*/)
 {
     m_iPositionX = rectangle.x;
     m_iPositionY = rectangle.y;
@@ -38,7 +31,7 @@ void Transform::SetTransform(SDL_Rect& rectangle, int s /*= 1*/)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Transform::SetTransform(int x, int y, int w, int h, int s /*= 1*/)
+void Transform::SetTransform(const int x, const int y, const int w, const int h, int s /*= 1*/)
 {
     m_iPositionX = x;
     m_iPositionY = y;
@@ -50,7 +43,7 @@ void Transform::SetTransform(int x, int y, int w, int h, int s /*= 1*/)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Transform::SetPosition(int x, int y)
+void Transform::SetPosition(const int x, const int y)
 {
     m_iPositionX = x;
     m_iPositionY = y;
@@ -59,7 +52,7 @@ void Transform::SetPosition(int x, int y)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Transform::SetPosition(SDL_Rect& rectangle)
+void Transform::SetPosition(const SDL_Rect& rectangle)
 {
     m_iPositionX = rectangle.x;
     m_iPositionY = rectangle.y;

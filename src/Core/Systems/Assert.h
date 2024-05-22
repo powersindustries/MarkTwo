@@ -12,7 +12,7 @@ namespace Core
 // -------------------------------------------------------
 // Expression should be true. If not, assert will be hit.
 // -------------------------------------------------------
-static void SYSTEMS_ASSERT(bool expression)
+static void SYSTEMS_ASSERT(const bool expression)
 {
     if (!expression)
     {

@@ -23,27 +23,20 @@ AssetManager g_AssetManager;
 // -------------------------------------------------------
 AssetManager::AssetManager()
 {
-    m_sManifestFilepath.append(__PROJECT_DIRECTORY__);
+    m_sManifestFilepath = __PROJECT_DIRECTORY__;
     m_sManifestFilepath.append("/src/Data/AssetManifest.xml");
 
-    m_sTextureDirectorypath.append(__PROJECT_DIRECTORY__);
-    m_sTextureDirectorypath.append("/src/Assets/Textures/");
+    m_sTextureDirectoryPath = __PROJECT_DIRECTORY__;
+    m_sTextureDirectoryPath.append("/src/Assets/Textures/");
 
-    m_sFontsDirectorypath.append(__PROJECT_DIRECTORY__);
-    m_sFontsDirectorypath.append("/src/Assets/Fonts/");
+    m_sFontsDirectoryPath = __PROJECT_DIRECTORY__;
+    m_sFontsDirectoryPath.append("/src/Assets/Fonts/");
 
-    m_sSoundsDirectorypath.append(__PROJECT_DIRECTORY__);
-    m_sSoundsDirectorypath.append("/src/Assets/Sounds/");
+    m_sSoundsDirectoryPath = __PROJECT_DIRECTORY__;
+    m_sSoundsDirectoryPath.append("/src/Assets/Sounds/");
 
-    m_sSaveDirectorypath.append(__PROJECT_DIRECTORY__);
-    m_sSaveDirectorypath.append("/src/Data/Save.xml");
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-AssetManager::~AssetManager()
-{
+    m_sSaveDirectoryPath = __PROJECT_DIRECTORY__;
+    m_sSaveDirectoryPath.append("/src/Data/Save.xml");
 }
 
 
@@ -61,11 +54,12 @@ void AssetManager::Initialize(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-SDL_Surface* AssetManager::GetAssetSurfaceByID(std::string AssetID)
+SDL_Surface* AssetManager::GetAssetSurfaceById(const std::string& assetId)
 {
-    TextureAssetData& iconTextureData = m_TextureAssets[Core::StringToHash32(AssetID)];
-    std::string sAssetPath = m_sTextureDirectorypath + iconTextureData.m_File;
-    return IMG_Load(sAssetPath.c_str());
+    const TextureAssetData& iconTextureData = m_TextureAssetsMap[Core::StringToHash32(assetId)];
+    const std::string assetPath = m_sTextureDirectoryPath + iconTextureData.m_sFile;
+
+    return IMG_Load(assetPath.c_str());
 }
 
 
@@ -89,8 +83,8 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
             }
 
             TextureAssetData textureAssetData;
-            textureAssetData.m_uiID = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
-            textureAssetData.m_File = child->first_attribute("File")->value();
+            textureAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            textureAssetData.m_sFile = child->first_attribute("File")->value();
 
             rapidxml::xml_attribute<>* framesAttribute = child->first_attribute("Frames");
             if (framesAttribute)
@@ -102,16 +96,16 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
                 textureAssetData.m_uiFrames = 0;
             }
 
-            std::string sAssetPath = m_sTextureDirectorypath;
-            sAssetPath.append(textureAssetData.m_File);
+            std::string assetPath = m_sTextureDirectoryPath;
+            assetPath.append(textureAssetData.m_sFile);
 
-            SDL_Surface* surface = IMG_Load(sAssetPath.c_str());
+            SDL_Surface* surface = IMG_Load(assetPath.c_str());
             textureAssetData.m_Texture = SDL_CreateTextureFromSurface(renderer, surface);
             SDL_FreeSurface(surface);
 
             SDL_QueryTexture(textureAssetData.m_Texture, NULL, NULL, &textureAssetData.m_iWidth, &textureAssetData.m_iHeight);
 
-            m_TextureAssets[textureAssetData.m_uiID] = textureAssetData;
+            m_TextureAssetsMap[textureAssetData.m_uiId] = textureAssetData;
         }
     }
 
@@ -139,23 +133,23 @@ void AssetManager::LoadTileMapAssets()
             }
 
             TileMapAssetData newTileMap;
-            newTileMap.m_uiID = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
-            newTileMap.m_TextureAssetData = &m_TextureAssets[newTileMap.m_uiID];
+            newTileMap.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            newTileMap.m_TextureAssetData = &m_TextureAssetsMap[newTileMap.m_uiId];
             newTileMap.m_uiLength = newTileMap.m_TextureAssetData->m_iWidth / MarkTwo::g_GameGlobals.TILE_SIZE;
 
-            uint8_t uiRow = 0;
+            uint8_t row = 0;
             const uint8_t tilemapSize = newTileMap.m_uiLength * newTileMap.m_uiLength;
             for (uint8_t x = 0; x < tilemapSize; ++x)
             {
                 // Calculate current row.
                 if ((x != 0) && (x % newTileMap.m_uiLength == 0))
                 {
-                    uiRow++;
+                    row++;
                 }
 
                 SDL_Rect newRect;
-                newRect.x = (x - (uiRow * newTileMap.m_uiLength)) * MarkTwo::g_GameGlobals.TILE_SIZE;
-                newRect.y = uiRow * MarkTwo::g_GameGlobals.TILE_SIZE;
+                newRect.x = (x - (row * newTileMap.m_uiLength)) * MarkTwo::g_GameGlobals.TILE_SIZE;
+                newRect.y = row * MarkTwo::g_GameGlobals.TILE_SIZE;
 
                 newRect.w = MarkTwo::g_GameGlobals.TILE_SIZE;
                 newRect.h = MarkTwo::g_GameGlobals.TILE_SIZE;
@@ -163,7 +157,7 @@ void AssetManager::LoadTileMapAssets()
                 newTileMap.m_SourceRectangles.push_back(newRect);
             }
 
-            m_TileMapAssets.insert({ newTileMap.m_uiID, newTileMap });
+            m_TileMapAssetsMap.insert({newTileMap.m_uiId, newTileMap });
         }
     }
 
@@ -191,15 +185,15 @@ void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
             }
 
             FontAssetData fontAssetData;
-            fontAssetData.m_uiID = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
-            fontAssetData.m_File = child->first_attribute("File")->value();
+            fontAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            fontAssetData.m_sFile = child->first_attribute("File")->value();
 
-            std::string assetPath = m_sFontsDirectorypath;
-            assetPath.append(fontAssetData.m_File);
+            std::string assetPath = m_sFontsDirectoryPath;
+            assetPath.append(fontAssetData.m_sFile);
 
             fontAssetData.m_Font = TTF_OpenFont(assetPath.c_str(), DEFAULT_FONT_SIZE);
 
-            m_FontAssets[fontAssetData.m_uiID] = fontAssetData;
+            m_FontAssetsMap[fontAssetData.m_uiId] = fontAssetData;
         }
     }
 
@@ -227,17 +221,17 @@ void AssetManager::LoadSoundAssets()
             }
 
             SoundAssetData soundAssetData;
-            soundAssetData.m_uiID = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
-            soundAssetData.m_File = child->first_attribute("File")->value();
+            soundAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            soundAssetData.m_sFile = child->first_attribute("File")->value();
 
-            std::string assetPath = m_sSoundsDirectorypath;
-            assetPath.append(soundAssetData.m_File);
+            std::string assetPath = m_sSoundsDirectoryPath;
+            assetPath.append(soundAssetData.m_sFile);
 
             soundAssetData.m_SoundEffect = Mix_LoadWAV(assetPath.c_str());
 
             if (soundAssetData.m_SoundEffect)
             {
-                m_SoundAssets[soundAssetData.m_uiID] = soundAssetData;
+                m_SoundAssetsMap[soundAssetData.m_uiId] = soundAssetData;
             }
             else
             {
@@ -273,17 +267,17 @@ void AssetManager::LoadMusicAssets()
             }
 
             MusicAssetData musicAssetData;
-            musicAssetData.m_uiID = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
-            musicAssetData.m_File = child->first_attribute("File")->value();
+            musicAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            musicAssetData.m_sFile = child->first_attribute("File")->value();
 
-            std::string assetPath = m_sSoundsDirectorypath;
-            assetPath.append(musicAssetData.m_File);
+            std::string assetPath = m_sSoundsDirectoryPath;
+            assetPath.append(musicAssetData.m_sFile);
 
             musicAssetData.m_Music = Mix_LoadMUS(assetPath.c_str());
 
             if (musicAssetData.m_Music)
             {
-                m_MusicAssets[musicAssetData.m_uiID] = musicAssetData;
+                m_MusicAssetsMap[musicAssetData.m_uiId] = musicAssetData;
             }
             else
             {

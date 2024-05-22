@@ -14,25 +14,26 @@ namespace Core
 class Texture
 {
 public:
-	Texture();
+
+    Texture();
 	~Texture();
 
-	Texture(uint32_t uiAssetID);
+	Texture(uint32_t uiAssetId);
 	
 	void Draw(SDL_Renderer* renderer);
 
-	void SetTexture(const uint32_t uiTextureID);
+	void SetTexture(const uint32_t uiTextureId);
 
-	void SetSize(int w, int h);
-	void SetPosition(int x, int y);
+	void SetSize(const int w, const int h);
+	void SetPosition(const int x, const int y);
 
 
 private:
 
-	SDL_Texture* m_Texture;
+	SDL_Texture* m_Texture{};
 
-	SDL_Rect m_BaseRectangle;
-	SDL_Color m_Color;
+	SDL_Rect m_BaseRectangle{};
+	SDL_Color m_Color{};
 
 };
 

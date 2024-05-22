@@ -12,26 +12,12 @@ EventManager g_EventManager;
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-EventManager::EventManager()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-EventManager::~EventManager()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void EventManager::Initialize()
 {
-    const uint16_t uiEventsCount = static_cast<uint16_t>(Events::eCount);
-    m_EventsVector.reserve(uiEventsCount);
+    const uint16_t eventsCount = static_cast<uint16_t>(Events::eCount);
+    m_EventsVector.reserve(eventsCount);
 
-    for (uint16_t x = 0; x < uiEventsCount; ++x)
+    for (uint16_t x = 0; x < eventsCount; ++x)
     {
         std::vector<Core::Event> newEvent;
         m_EventsVector.push_back(newEvent);
@@ -43,33 +29,33 @@ void EventManager::Initialize()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void EventManager::Broadcast(Events eEvent)
+void EventManager::Broadcast(const Events& event)
 {
-    Core::SYSTEMS_ASSERT(m_EventsMap.find(eEvent) != m_EventsMap.end());
+    Core::SYSTEMS_ASSERT(m_EventsMap.find(event) != m_EventsMap.end());
 
-    const uint16_t uiEventIndex = m_EventsMap[eEvent];
-    std::vector<Core::Event> vEvents = m_EventsVector[uiEventIndex];
+    const uint16_t eventIndex = m_EventsMap[event];
+    std::vector<Core::Event> eventsVector = m_EventsVector[eventIndex];
 
-    const uint16_t uiEventsCount = static_cast<uint16_t>(vEvents.size());
-    for (uint16_t x = 0; x < uiEventsCount; ++x)
+    const uint16_t eventsCount = static_cast<uint16_t>(eventsVector.size());
+    for (uint16_t x = 0; x < eventsCount; ++x)
     {
-        vEvents[x].OnBroadCast();
+        eventsVector[x].OnBroadCast();
     }
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void EventManager::Subscribe(Events eEvent, std::function<void()> inDelegate)
+void EventManager::Subscribe(const Events& event, std::function<void()> inDelegate)
 {
-    Core::SYSTEMS_ASSERT(m_EventsMap.find(eEvent) != m_EventsMap.end());
+    Core::SYSTEMS_ASSERT(m_EventsMap.find(event) != m_EventsMap.end());
 
-    std::vector<Core::Event>& vEvents = m_EventsVector[m_EventsMap[eEvent]];
+    std::vector<Core::Event>& eventsVector = m_EventsVector[m_EventsMap[event]];
 
     Core::Event newSubscription;
     newSubscription.SetEvent(inDelegate);
 
-    vEvents.push_back(newSubscription);
+    eventsVector.push_back(newSubscription);
 }
 
 }

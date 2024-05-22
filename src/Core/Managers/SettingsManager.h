@@ -23,7 +23,6 @@ class SettingsManager
 {
 public:
     SettingsManager();
-    ~SettingsManager();
 
     void Initialize();
 
@@ -48,8 +47,6 @@ private:
     std::string m_sSettingsFilepath;
 
     SettingsData m_SettingsData;
-
-    SDL_Window* m_MainWindow;
 
 };
 

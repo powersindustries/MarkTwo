@@ -42,36 +42,36 @@ enum class InputMappings
 struct InputMappingsData
 {
     // Debug Keys.
-    bool m_F1 = false;
-    bool m_F2 = false;
-    bool m_F3 = false;
+    bool m_bF1 = false;
+    bool m_bF2 = false;
+    bool m_bF3 = false;
     bool m_F4 = false;
 
     // Mouse Actions.
-    bool m_LeftClicked = false;
-    bool m_RightClicked = false;
-    bool m_MiddleClicked = false;
-    bool m_MouseMotion = false;
+    bool m_bLeftClicked = false;
+    bool m_bRightClicked = false;
+    bool m_bMiddleClicked = false;
+    bool m_bMouseMotion = false;
 
     // System Keys.
-    bool m_Escape = false;
-    bool m_Tab = false;
+    bool m_bEscape = false;
+    bool m_bTab = false;
 
     // Player Keys.
-    bool m_UpArrow = false;
-    bool m_DownArrow = false;
-    bool m_LeftArrow = false;
-    bool m_RightArrow = false;
-    bool m_W = false;
-    bool m_A = false;
-    bool m_S = false;
-    bool m_D = false;
+    bool m_bUpArrow = false;
+    bool m_bDownArrow = false;
+    bool m_bLeftArrow = false;
+    bool m_bRightArrow = false;
+    bool m_bW = false;
+    bool m_bA = false;
+    bool m_bS = false;
+    bool m_bD = false;
 
-    bool m_Space = false;
+    bool m_bSpace = false;
 
     // Gameplay Keys.
-    bool m_E = false;
-    bool m_J = false;
+    bool m_bE = false;
+    bool m_bJ = false;
 };
 
 struct HeldInputMappingsData
@@ -124,14 +124,14 @@ public:
 
     void ProcessInputs();
 
-    bool GetActionPressed(const InputMappings Mapping);
-    bool GetActionHeld(const InputMappings Mapping);
-    int64_t GetActionHeldTimestamp(const InputMappings Mapping);
+    bool GetActionPressed(const InputMappings& mapping);
+    bool GetActionHeld(const InputMappings& mapping);
+    int64_t GetActionHeldTimestamp(const InputMappings& mapping);
 
     const MouseMotionData& GetMouseMotionData() const { return m_MouseMotionData; }
 
     bool GetMouseClickAbsorbedByUI() { return m_bMouseClickAbsorbedByUI; };
-    void SetMouseClickAbsorbedByUI(bool bAbsorbed) { m_bMouseClickAbsorbedByUI = bAbsorbed; };
+    void SetMouseClickAbsorbedByUI(const bool absorbed) { m_bMouseClickAbsorbedByUI = absorbed; };
 
 
 private:
@@ -149,10 +149,10 @@ private:
 
     InputMappingsData m_InputMappingPressedData;
     HeldInputMappingsData m_InputMappingHeldData;
-
     MouseMotionData m_MouseMotionData;
 
     bool m_bMouseClickAbsorbedByUI;
+
 };
 
 extern InputManager g_InputManager;

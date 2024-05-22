@@ -16,8 +16,8 @@ namespace MarkTwo
 class Player
 {
 public:
+
     Player();
-    ~Player();
 
     void Initialize();
 
@@ -25,13 +25,14 @@ public:
     void Draw(SDL_Renderer* renderer);
 
     SDL_Rect GetPlayerRectangle() const { return m_PlayerRectangle; }
-    void SetPlayerRectangle(SDL_Rect rectangle) { m_PlayerRectangle = rectangle; }
+    void SetPlayerRectangle(const SDL_Rect& rectangle) { m_PlayerRectangle = rectangle; }
 
-    void SetPlayerPosition(int x, int y);
-    void SetPlayerPositionX(int x) { m_PlayerRectangle.x = x; };
-    void SetPlayerPositionY(int y) { m_PlayerRectangle.y = y; };
+    void SetPlayerPosition(const int x, const int y);
+    void SetPlayerPositionX(const int x) { m_PlayerRectangle.x = x; };
+    void SetPlayerPositionY(const int y) { m_PlayerRectangle.y = y; };
 
     void OnTestEvent();
+
 
 private:
 
@@ -40,10 +41,8 @@ private:
 
 private:
 
-    SDL_Rect m_PlayerRectangle;
-
+    SDL_Rect m_PlayerRectangle{};
     Sprite* m_PlayerSprite;
-
     PlayerMovement m_PlayerMovement;
 
 };

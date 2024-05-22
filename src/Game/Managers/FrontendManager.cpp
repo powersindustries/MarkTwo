@@ -1,4 +1,4 @@
-#include "UIManager.h"
+#include "FrontendManager.h"
 
 #include "Core/Systems/Systems.h"
 
@@ -8,93 +8,70 @@ namespace MarkTwo
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-UIManager g_UIManager;
+FrontendManager g_FrontendManager;
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-UIManager::UIManager()
+FrontendManager::FrontendManager()
 {
     // Default add HUD UI Screen to stack.
-    m_ScreenStack.push(UI::UIScreenID::eHud);
+    m_ScreenStack.push(m_HUDScreen.m_sScreenID);
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-UIManager::~UIManager()
-{
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
-void UIManager::Initialize()
+void FrontendManager::Initialize()
 {
     m_HUDScreen.Initialize();
     m_PauseScreen.Initialize();
+
+    m_ScreenLookupMap.insert({m_HUDScreen.m_sScreenID, &m_HUDScreen});
+    m_ScreenLookupMap.insert({m_PauseScreen.m_sScreenID, &m_PauseScreen});
+
+    m_sPauseMenuScreenID = m_PauseScreen.m_sScreenID;
+    m_sHUDScreenID = m_HUDScreen.m_sScreenID;
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIManager::Update()
+void FrontendManager::Update()
 {
-    switch (GetActiveScreenID())
+    const std::string activeScreenId = GetActiveScreenID();
+    if (m_ScreenLookupMap.find(activeScreenId) != m_ScreenLookupMap.end())
     {
-    case UIScreenID::eHud : 
+        m_ScreenLookupMap[activeScreenId]->Update();
+    }
+    else
     {
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "FrontendManager m_ScreenStack is empty. Defaulting to HUD.");
         m_HUDScreen.Update();
-        break;
-    }
-    case UIScreenID::ePause :
-    {
-        m_PauseScreen.Update();
-        break;
-    }
-    case UIScreenID::eDEFAULT :
-    default :
-    {
-        m_HUDScreen.Update();
-
-        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "UIManager m_ScreenStack is empty. Defaulting to HUD.");
-        break;
-    }
     }
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIManager::Draw(SDL_Renderer* renderer)
+void FrontendManager::Draw(SDL_Renderer *renderer)
 {
-    switch (GetActiveScreenID())
+    const std::string activeScreenId = GetActiveScreenID();
+    if (m_ScreenLookupMap.find(activeScreenId) != m_ScreenLookupMap.end())
     {
-    case UIScreenID::eHud :
+        m_ScreenLookupMap[activeScreenId]->Draw(renderer);
+    }
+    else
     {
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "FrontendManager m_ScreenStack is empty. Defaulting to HUD.");
         m_HUDScreen.Draw(renderer);
-        break;
-    }
-    case UIScreenID::ePause :
-    {
-        m_PauseScreen.Draw(renderer);
-        break;
-    }
-    case UIScreenID::eDEFAULT :
-    default :
-    {
-        m_HUDScreen.Draw(renderer);
-
-        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "UI Draw corrupted.");
-        break;
-    }
     }
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIManager::ActivateScreen(UIScreenID screenID)
+void FrontendManager::ActivateScreen(const std::string& screenID)
 {
     if (GetActiveScreenID() != screenID)
     {
@@ -104,7 +81,7 @@ void UIManager::ActivateScreen(UIScreenID screenID)
     else
     {
         std::string errorMessage = "Youre attempting to activate a screen that is already active. Current active ScreenID: ";
-        errorMessage.append(std::to_string(static_cast<int>(GetActiveScreenID())));
+        errorMessage.append(screenID);
 
         Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage);
     }
@@ -113,7 +90,7 @@ void UIManager::ActivateScreen(UIScreenID screenID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIManager::RemoveScreen(UIScreenID screenID)
+void FrontendManager::RemoveScreen(const std::string& screenID)
 {
     if (GetActiveScreenID() == screenID)
     {
@@ -122,9 +99,9 @@ void UIManager::RemoveScreen(UIScreenID screenID)
     else
     {
         std::string errorMessage = "Screen youre removing is not current active screen. Current active ScreenID: ";
-        errorMessage.append(std::to_string(static_cast<int>(GetActiveScreenID())));
+        errorMessage.append(GetActiveScreenID());
         errorMessage.append(", input screenID: ");
-        errorMessage.append(std::to_string(static_cast<int>(screenID)));
+        errorMessage.append(screenID);
 
         Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage);
     }
@@ -133,35 +110,24 @@ void UIManager::RemoveScreen(UIScreenID screenID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void UIManager::CallOnShow()
+void FrontendManager::CallOnShow()
 {
-	switch (GetActiveScreenID())
-	{
-	case UIScreenID::eHud:
-	{
-		m_HUDScreen.OnShow();
-		break;
-	}
-	case UIScreenID::ePause:
-	{
-		m_PauseScreen.OnShow();
-		break;
-	}
-	case UIScreenID::eDEFAULT:
-	default:
-	{
-		m_HUDScreen.OnShow();
-
-		Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "UIManager m_ScreenStack is empty. Defaulting to HUD.");
-		break;
-	}
-	}
+    const std::string& activeScreenId = GetActiveScreenID();
+    if (m_ScreenLookupMap.find(activeScreenId) != m_ScreenLookupMap.end())
+    {
+        m_ScreenLookupMap[activeScreenId]->OnShow();
+    }
+    else
+    {
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "FrontendManager m_ScreenStack is empty. Defaulting to HUD.");
+        m_HUDScreen.OnShow();
+    }
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-const UI::UIScreenID UIManager::GetActiveScreenID()
+const std::string &FrontendManager::GetActiveScreenID()
 {
     return m_ScreenStack.top();
 }

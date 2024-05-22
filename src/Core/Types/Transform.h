@@ -11,17 +11,18 @@ namespace Core
 class Transform
 {
 public:
+
     Transform();
-    ~Transform();
 
-    void SetTransform(SDL_Rect& rectangle, int s = 1);
-    void SetTransform(int x, int y, int w, int h, int s = 1);
+    void SetTransform(const SDL_Rect& rectangle, int s = 1);
+    void SetTransform(const int x, const int y, const int w, const int h, int s = 1);
 
-    void SetPosition(int x, int y);
-    void SetPosition(SDL_Rect& rectangle);
+    void SetPosition(const int x, const int y);
+    void SetPosition(const SDL_Rect& rectangle);
 
 
 public:
+
     int m_iPositionX;
     int m_iPositionY;
 

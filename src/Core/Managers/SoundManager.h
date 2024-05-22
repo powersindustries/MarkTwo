@@ -9,19 +9,13 @@ namespace Core
 class SoundManager
 {
 public:
-    SoundManager();
-    ~SoundManager();
 
     void ResetSoundManager();
-    void PlaySoundByID(std::string sSoundID);
-    void PlayMusicByID(std::string sMusicID);
+    void PlaySoundByID(const std::string& sSoundID);
+    void PlayMusicByID(const std::string& sMusicID);
     void ResumeMusic();
     void PauseMusic();
     void StopAllMusic();
-
-private:
-
-    
 
 
 };
