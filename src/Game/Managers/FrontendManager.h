@@ -25,14 +25,14 @@ public:
     void Update();
     void Draw(SDL_Renderer* renderer);
 
-    const std::string& GetActiveScreenID();
-    void ActivateScreen(const std::string& screenID);
+    const std::string& GetActiveScreenId();
+    void ActivateScreen(const std::string& screenId);
 
-    void RemoveScreen(const std::string& screenID);
+    void RemoveScreen(const std::string& screenId);
 
     // Getters for popular screens referenced throughout the games.
-    inline const std::string& GetHUDScreenID() { return m_sHUDScreenID; }
-    inline const std::string& GetPauseMenuScreenID() { return m_sPauseMenuScreenID; }
+    inline const std::string& GetHUDScreenId() { return m_sHUDScreenId; }
+    inline const std::string& GetPauseMenuScreenId() { return m_sPauseMenuScreenId; }
 
 
 private:
@@ -46,8 +46,8 @@ private:
 
     std::stack<std::string> m_ScreenStack;
 
-    std::string m_sHUDScreenID;
-    std::string m_sPauseMenuScreenID;
+    std::string m_sHUDScreenId;
+    std::string m_sPauseMenuScreenId;
 
     HUDScreen m_HUDScreen;
     PauseScreen m_PauseScreen;

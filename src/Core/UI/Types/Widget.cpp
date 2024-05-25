@@ -51,7 +51,7 @@ void Widget::AddPrimitive(UIBase* primitive)
     assert(primitive);
 
     m_vDrawPrimitives.push_back(primitive);
-    m_PrimitiveSearchMap.insert( {primitive->m_sID, primitive } );
+    m_PrimitiveSearchMap.insert( {primitive->m_sId, primitive } );
 }
 
 

@@ -83,7 +83,6 @@ void Game::InitializeSession()
     }
 
     // Initialization.
-    g_EventManager.Initialize();
     Core::g_AssetManager.Initialize(m_Renderer);
     UI::g_UIManager.Initialize();
 
@@ -136,13 +135,13 @@ void Game::Update()
     if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eESCMenu))
     {
         g_GameGlobals.m_bGamePaused = !g_GameGlobals.m_bGamePaused;
-        if (g_FrontendManager.GetActiveScreenID() == g_FrontendManager.GetPauseMenuScreenID())
+        if (g_FrontendManager.GetActiveScreenId() == g_FrontendManager.GetPauseMenuScreenId())
         {
-            g_FrontendManager.RemoveScreen(g_FrontendManager.GetPauseMenuScreenID());
+            g_FrontendManager.RemoveScreen(g_FrontendManager.GetPauseMenuScreenId());
         }
         else
         {
-            g_FrontendManager.ActivateScreen(g_FrontendManager.GetPauseMenuScreenID());
+            g_FrontendManager.ActivateScreen(g_FrontendManager.GetPauseMenuScreenId());
         }
     }
 

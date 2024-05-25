@@ -33,10 +33,10 @@ Player::Player()
 void Player::Initialize()
 {
     // Initialize Player Sprite
-    m_PlayerSprite = new Sprite(Core::StringToHash32(std::string("txt_Chopper")), 90);
+    m_PlayerSprite = new Sprite(Core::StringToHash(std::string("txt_Chopper")), 90);
 
     // Subscribe to TestEvent
-    g_EventManager.Subscribe(Events::eTestEvent, [this](){ Player::OnTestEvent(); });
+    g_EventManager.Subscribe("e_test_event", [this](){ Player::OnTestEvent(); });
 
 }
 
@@ -57,13 +57,13 @@ void Player::Update(const float deltaTime)
     // Play test Sound FX if F3 is Pressed
     if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eDebug3))
     {
-        Core::g_SoundManager.PlaySoundByID("snd_TestFX");
+        Core::g_SoundManager.PlaySoundById("snd_TestFX");
     }
 
     // Trigger Test Event if F4 is Pressed
     if (Core::g_InputManager.GetActionPressed(Core::InputMappings::eDebug4))
     {
-        g_EventManager.Broadcast(Events::eTestEvent);
+        g_EventManager.Broadcast("e_test_event");
     }
 }
 

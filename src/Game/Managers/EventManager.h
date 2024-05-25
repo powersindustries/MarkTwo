@@ -4,35 +4,45 @@
 #include <vector>
 #include <functional>
 #include <unordered_map>
-#include <stdint.h>
-
-#include "Core/Systems/Event.h"
 
 
 namespace MarkTwo
 {
 
-enum class Events
+class Event
 {
-    eDebugUIHotReload,
-    eTestEvent,
-    eCount
+public:
+
+    void SetEvent(std::function<void()>& delegate)
+    {
+        m_Delegate = delegate;
+    }
+
+    void OnBroadCast()
+    {
+        m_Delegate();
+    }
+
+
+private:
+
+    std::function<void()> m_Delegate;
+
 };
+
 
 class EventManager
 {
 public:
 
-    void Initialize();
-
-    void Broadcast(const Events& event);
-    void Subscribe(const Events& event, std::function<void()> inDelegate);
+    void Broadcast(const std::string& eventId);
+    void Subscribe(const std::string& eventId, std::function<void()> delegate);
 
 
 private:
 
-    std::vector<std::vector<Core::Event>> m_EventsVector;
-    std::unordered_map<Events, uint16_t> m_EventsMap; // Key: Events enum, Value: index in m_EventsVector
+   // Key: Event Id Hash, Value: vector of Event objects
+   std::unordered_map<uint8_t, std::vector<Event>> m_EventsMap;
 
 };
 

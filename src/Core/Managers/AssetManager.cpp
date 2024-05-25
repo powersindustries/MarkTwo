@@ -56,7 +56,7 @@ void AssetManager::Initialize(SDL_Renderer* renderer)
 // -------------------------------------------------------
 SDL_Surface* AssetManager::GetAssetSurfaceById(const std::string& assetId)
 {
-    const TextureAssetData& iconTextureData = m_TextureAssetsMap[Core::StringToHash32(assetId)];
+    const TextureAssetData& iconTextureData = m_TextureAssetsMap[Core::StringToHash(assetId)];
     const std::string assetPath = m_sTextureDirectoryPath + iconTextureData.m_sFile;
 
     return IMG_Load(assetPath.c_str());
@@ -83,7 +83,7 @@ void AssetManager::LoadTextureAssets(SDL_Renderer* renderer)
             }
 
             TextureAssetData textureAssetData;
-            textureAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            textureAssetData.m_uiId = Core::StringToHash(std::string(child->first_attribute("ID")->value()));
             textureAssetData.m_sFile = child->first_attribute("File")->value();
 
             rapidxml::xml_attribute<>* framesAttribute = child->first_attribute("Frames");
@@ -133,7 +133,7 @@ void AssetManager::LoadTileMapAssets()
             }
 
             TileMapAssetData newTileMap;
-            newTileMap.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            newTileMap.m_uiId = Core::StringToHash(std::string(child->first_attribute("ID")->value()));
             newTileMap.m_TextureAssetData = &m_TextureAssetsMap[newTileMap.m_uiId];
             newTileMap.m_uiLength = newTileMap.m_TextureAssetData->m_iWidth / MarkTwo::g_GameGlobals.TILE_SIZE;
 
@@ -185,7 +185,7 @@ void AssetManager::LoadFontAssets(SDL_Renderer* renderer)
             }
 
             FontAssetData fontAssetData;
-            fontAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            fontAssetData.m_uiId = Core::StringToHash(std::string(child->first_attribute("ID")->value()));
             fontAssetData.m_sFile = child->first_attribute("File")->value();
 
             std::string assetPath = m_sFontsDirectoryPath;
@@ -221,7 +221,7 @@ void AssetManager::LoadSoundAssets()
             }
 
             SoundAssetData soundAssetData;
-            soundAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            soundAssetData.m_uiId = Core::StringToHash(std::string(child->first_attribute("ID")->value()));
             soundAssetData.m_sFile = child->first_attribute("File")->value();
 
             std::string assetPath = m_sSoundsDirectoryPath;
@@ -267,7 +267,7 @@ void AssetManager::LoadMusicAssets()
             }
 
             MusicAssetData musicAssetData;
-            musicAssetData.m_uiId = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
+            musicAssetData.m_uiId = Core::StringToHash(std::string(child->first_attribute("ID")->value()));
             musicAssetData.m_sFile = child->first_attribute("File")->value();
 
             std::string assetPath = m_sSoundsDirectoryPath;

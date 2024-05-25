@@ -11,8 +11,8 @@ class SoundManager
 public:
 
     void ResetSoundManager();
-    void PlaySoundByID(const std::string& sSoundID);
-    void PlayMusicByID(const std::string& sMusicID);
+    void PlaySoundById(const std::string& soundId);
+    void PlayMusicById(const std::string& musicId);
     void ResumeMusic();
     void PauseMusic();
     void StopAllMusic();

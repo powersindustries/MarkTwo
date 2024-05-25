@@ -11,7 +11,7 @@ namespace UI
 
 struct TextBlockStyle
 {
-    uint32_t m_uiID;
+    uint32_t m_uiId;
     uint32_t m_uiFont;
     
     SDL_Color m_Color;
@@ -20,7 +20,7 @@ struct TextBlockStyle
 
 struct ButtonStyle
 {
-    uint32_t m_uiID;
+    uint32_t m_uiId;
     uint32_t m_uiFont;
 
     SDL_Color m_HoverColor;

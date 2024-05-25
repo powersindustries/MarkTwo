@@ -12,7 +12,7 @@ namespace MarkTwo
 // -------------------------------------------------------
 PauseScreen::PauseScreen()
 {
-    m_sScreenID = "pause_screen";
+    m_sScreenId = "pause_screen";
 }
 
 
@@ -22,10 +22,10 @@ void PauseScreen::Initialize()
 {
     UIScreenBase::Initialize();
 
-    m_Widget = UI::g_UIManager.GetWidgetByID(m_sWidgetId);
+    m_Widget = UI::g_UIManager.GetWidgetById(m_sWidgetId);
 
-    m_ReturnButton = dynamic_cast<Button*>(UI::g_UIManager.GetPrimitiveByID("return_button"));
-    m_QuitButton = dynamic_cast<Button*>(UI::g_UIManager.GetPrimitiveByID("quit_button"));
+    m_ReturnButton = dynamic_cast<Button*>(UI::g_UIManager.GetPrimitiveById("return_button"));
+    m_QuitButton = dynamic_cast<Button*>(UI::g_UIManager.GetPrimitiveById("quit_button"));
 
     assert(m_ReturnButton && m_QuitButton);
 }
@@ -63,7 +63,7 @@ void PauseScreen::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void PauseScreen::RemoveSelf()
 {
-    g_FrontendManager.RemoveScreen(m_sScreenID);
+    g_FrontendManager.RemoveScreen(m_sScreenId);
 }
 
 
@@ -71,7 +71,7 @@ void PauseScreen::RemoveSelf()
 // -------------------------------------------------------
 void PauseScreen::HotReloadUI()
 {
-    m_Widget = UI::g_UIManager.GetWidgetByID(m_sWidgetId);
+    m_Widget = UI::g_UIManager.GetWidgetById(m_sWidgetId);
 }
 
 }

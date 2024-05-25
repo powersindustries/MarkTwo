@@ -43,7 +43,7 @@ void MapManager::Initialize()
     LoadTileMapData();
     LoadMapData();
 
-    LoadMapByID(Core::StringToHash32(std::string("mp_1")));
+    LoadMapById(Core::StringToHash(std::string("mp_1")));
 
     Core::SYSTEMS_LOG(Core::LoggingLevel::eInfo, "Map data Load Complete!");
 }
@@ -55,7 +55,7 @@ void MapManager::Draw(SDL_Renderer* renderer)
 {
     const uint32_t tileMapIndex = m_ActiveMapData->m_uiTileMap;
     const TileMapData& currTileMapData = m_TileMapData[tileMapIndex];
-    Core::TileMapAssetData tileMapAssetData = Core::g_AssetManager.m_TileMapAssetsMap[currTileMapData.m_uiTileMapID];
+    Core::TileMapAssetData tileMapAssetData = Core::g_AssetManager.m_TileMapAssetsMap[currTileMapData.m_uiTileMapId];
 
     const uint8_t mapSize = static_cast<uint8_t>(currTileMapData.m_vMap.size());
     for (uint8_t x = 0; x < mapSize; ++x)
@@ -74,16 +74,16 @@ void MapManager::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void MapManager::LoadMapByID(const uint32_t uiMapID)
+void MapManager::LoadMapById(const uint8_t uiMapId)
 {
-    if (m_MapData.count(uiMapID))
+    if (m_MapData.count(uiMapId))
     {
-        m_ActiveMapData = &m_MapData[uiMapID];
+        m_ActiveMapData = &m_MapData[uiMapId];
     }
     else
     {
         std::string errorMessage = "The key: ";
-        errorMessage.append(std::to_string(uiMapID));
+        errorMessage.append(std::to_string(uiMapId));
         errorMessage.append(", does not exist in the m_MapData.");
 
         Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage);
@@ -159,8 +159,8 @@ void MapManager::LoadTileMapDataByPath(const std::string& mapPath)
     if (mapNode)
     {
         TileMapData newTileMap;
-        newTileMap.m_uiID = Core::StringToHash32(mapNode->first_attribute("ID")->value());
-        newTileMap.m_uiTileMapID = Core::StringToHash32(mapNode->first_attribute("Texture")->value());
+        newTileMap.m_uiId = Core::StringToHash(mapNode->first_attribute("ID")->value());
+        newTileMap.m_uiTileMapId = Core::StringToHash(mapNode->first_attribute("Texture")->value());
 
         std::string mapValues = mapNode->first_attribute("Values")->value();
 
@@ -196,7 +196,7 @@ void MapManager::LoadTileMapDataByPath(const std::string& mapPath)
             newTileMap.m_vScreenTiles.push_back(newRect);
         }
 
-        m_TileMapData.insert({ newTileMap.m_uiID, newTileMap });
+        m_TileMapData.insert({newTileMap.m_uiId, newTileMap });
     }
 }
 
@@ -213,8 +213,8 @@ void MapManager::LoadMapDataByPath(const std::string& mapPath)
     if (mapNode)
     {
         MapData newMap;
-        newMap.m_uiID = Core::StringToHash32(std::string(mapNode->first_attribute("ID")->value()));
-        newMap.m_uiTileMap = Core::StringToHash32(std::string(mapNode->first_attribute("TileMap")->value()));
+        newMap.m_uiId = Core::StringToHash(std::string(mapNode->first_attribute("ID")->value()));
+        newMap.m_uiTileMap = Core::StringToHash(std::string(mapNode->first_attribute("TileMap")->value()));
 
         // Populate background colors.
         const std::string background = mapNode->first_attribute("Background")->value();
@@ -247,7 +247,7 @@ void MapManager::LoadMapDataByPath(const std::string& mapPath)
         newMap.m_BackgroundRectangle.w = Core::g_SettingsManager.GetScreenWidth();
         newMap.m_BackgroundRectangle.h = Core::g_SettingsManager.GetScreenHeight();
 
-        m_MapData.insert({ newMap.m_uiID, newMap });
+        m_MapData.insert({newMap.m_uiId, newMap });
     }
 
 }

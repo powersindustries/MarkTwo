@@ -30,7 +30,7 @@ public:
     virtual void SetVisibility(const UIVisibility& displayType) { m_Visibility = displayType; }
     virtual void SetSize(const int w, const int h);
     virtual void SetColor(const SDL_Color& color) { m_Color = color; }
-    virtual void SetStyle(const uint32_t styleID) {};
+    virtual void SetStyle(const uint32_t styleId) {};
 
     inline UIVisibility GetVisibility() const { return m_Visibility; }
     inline bool IsVisible() const { return m_Visibility != UIVisibility::eHidden; }
@@ -51,7 +51,7 @@ protected:
 public:
 
     // ID used to reference the primitive.
-    std::string m_sID;
+    std::string m_sId;
 
     // Dictates which part of the screen the UI is attached to.
     // Defaults value: X=0, Y=0, W=100, H=100

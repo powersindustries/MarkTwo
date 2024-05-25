@@ -46,7 +46,7 @@ void UIManager::Initialize()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Widget* UIManager::GetWidgetByID(const std::string& id)
+Widget* UIManager::GetWidgetById(const std::string& id)
 {
     return m_WidgetMap[id];
 }
@@ -74,12 +74,12 @@ void UIManager::InitializeStyleData()
             }
 
             TextBlockStyle textBlockStyle;
-            textBlockStyle.m_uiID = Core::StringToHash32(std::string(child->first_attribute("ID")->value()));
-            textBlockStyle.m_uiFont = Core::StringToHash32(std::string(child->first_attribute("Font")->value()));
+            textBlockStyle.m_uiId = Core::StringToHash(std::string(child->first_attribute("ID")->value()));
+            textBlockStyle.m_uiFont = Core::StringToHash(std::string(child->first_attribute("Font")->value()));
             textBlockStyle.m_Color = StringToSDLColor(std::string(child->first_attribute("Color")->value()));
             textBlockStyle.m_sDefaultText = std::string(child->first_attribute("DefaultText")->value());
 
-            m_TextBlockStyles.insert({textBlockStyle.m_uiID, textBlockStyle});
+            m_TextBlockStyles.insert({textBlockStyle.m_uiId, textBlockStyle});
         }
     }
 
@@ -90,8 +90,8 @@ void UIManager::InitializeStyleData()
         for (rapidxml::xml_node<>* child = buttonNode->first_node(); child; child = child->next_sibling())
         {
             ButtonStyle buttonStyle;
-            buttonStyle.m_uiID = Core::StringToHash32(child->first_attribute("ID")->value());
-            buttonStyle.m_uiFont = Core::StringToHash32(child->first_attribute("Font")->value());
+            buttonStyle.m_uiId = Core::StringToHash(child->first_attribute("ID")->value());
+            buttonStyle.m_uiFont = Core::StringToHash(child->first_attribute("Font")->value());
 
             buttonStyle.m_HoverColor = StringToSDLColor(child->first_attribute("HoverColor")->value());
             buttonStyle.m_PressedColor = StringToSDLColor(child->first_attribute("PressedColor")->value());
@@ -100,7 +100,7 @@ void UIManager::InitializeStyleData()
 
             buttonStyle.m_sDefaultText = std::string(child->first_attribute("DefaultText")->value());
 
-            m_ButtonStyles.insert({buttonStyle.m_uiID, buttonStyle});
+            m_ButtonStyles.insert({buttonStyle.m_uiId, buttonStyle});
         }
     }
 
@@ -198,7 +198,7 @@ UIBase* UIManager::SerializeXmlToUiPrimitive(const rapidxml::xml_node<>* node)
     rapidxml::xml_attribute<>* idAttribute = node->first_attribute("id");
     if (idAttribute)
     {
-        newPrimitive->m_sID = idAttribute->value();
+        newPrimitive->m_sId = idAttribute->value();
     }
 
     // Serialize XML attributes and set properties in each primitive.
@@ -323,7 +323,7 @@ UIBase* UIManager::SerializeXmlToUiPrimitive(const rapidxml::xml_node<>* node)
         }
     }
 
-    m_UIBaseMap.insert({newPrimitive->m_sID, newPrimitive});
+    m_UIBaseMap.insert({newPrimitive->m_sId, newPrimitive});
 
     return newPrimitive;
 }
@@ -534,7 +534,7 @@ Core::Vec2i UIManager::StringToSizeVector(const std::string& string)
 // -------------------------------------------------------
 TTF_Font* UIManager::GetDefaultFont()
 {
-    return Core::g_AssetManager.m_FontAssetsMap[Core::StringToHash32(std::string("fnt_Orbitron"))].m_Font;
+    return Core::g_AssetManager.m_FontAssetsMap[Core::StringToHash(std::string("fnt_Orbitron"))].m_Font;
 }
 
 
@@ -549,13 +549,13 @@ void UIManager::DEBUG_HOTRELOAD()
 
     Initialize();
 
-    MarkTwo::g_EventManager.Broadcast(MarkTwo::Events::eDebugUIHotReload);
+    MarkTwo::g_EventManager.Broadcast(UI_DEBUG_EVENT_ID);
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-UIBase* UIManager::GetPrimitiveByID(const std::string& id)
+UIBase* UIManager::GetPrimitiveById(const std::string& id)
 {
     return m_UIBaseMap[id];
 }

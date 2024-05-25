@@ -18,11 +18,11 @@ public:
     Texture();
 	~Texture();
 
-	Texture(uint32_t uiAssetId);
+	Texture(uint32_t assetId);
 	
 	void Draw(SDL_Renderer* renderer);
 
-	void SetTexture(const uint32_t uiTextureId);
+	void SetTexture(const uint32_t textureId);
 
 	void SetSize(const int w, const int h);
 	void SetPosition(const int x, const int y);

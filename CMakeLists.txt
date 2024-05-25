@@ -114,9 +114,8 @@ src/Core/Systems/Systems.h
 src/Core/Systems/Assert.h
 src/Core/Systems/Logging.h
 src/Core/Systems/Hash.h
-src/Core/Systems/Event.h
 
-src/Core/Managers/InputManager.h
+        src/Core/Managers/InputManager.h
 src/Core/Managers/InputManager.cpp
 src/Core/Managers/SettingsManager.h
 src/Core/Managers/SettingsManager.cpp

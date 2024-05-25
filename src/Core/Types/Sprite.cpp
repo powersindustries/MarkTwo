@@ -37,7 +37,7 @@ Sprite::~Sprite()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Sprite::Sprite(uint32_t assetIDHash)
+Sprite::Sprite(const uint8_t assetIdHash)
     : m_Texture(nullptr)
 {
     m_uiFrameNumber    = 0;
@@ -45,7 +45,7 @@ Sprite::Sprite(uint32_t assetIDHash)
 
     m_dRotation = 0.0;
 
-    SetTexture(assetIDHash);
+    SetTexture(assetIdHash);
 
     m_SourceRectangle.x = 0;
     m_SourceRectangle.y = 0;
@@ -61,9 +61,9 @@ Sprite::Sprite(uint32_t assetIDHash)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Sprite::Sprite(uint32_t assetIDHash, uint8_t animationSpeed)
+Sprite::Sprite(const uint8_t assetIdHash, const uint8_t animationSpeed)
 {
-    SetTexture(assetIDHash);
+    SetTexture(assetIdHash);
 
     m_uiAnimationSpeed = animationSpeed;
 
@@ -116,9 +116,9 @@ void Sprite::Draw(SDL_Renderer* renderer, const SDL_RendererFlip& flip)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Sprite::SetTexture(const uint32_t textureIDHash)
+void Sprite::SetTexture(const uint32_t textureIdHash)
 {
-    Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssetsMap[textureIDHash];
+    Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssetsMap[textureIdHash];
     m_Texture = textureAssetData.m_Texture;
     m_uiFrameNumber = textureAssetData.m_uiFrames;
     

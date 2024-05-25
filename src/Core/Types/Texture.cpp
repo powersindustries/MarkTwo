@@ -23,9 +23,9 @@ Texture::Texture()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-Texture::Texture(uint32_t uiAssetId)
+Texture::Texture(uint32_t assetId)
 {
-	SetTexture(uiAssetId);
+	SetTexture(assetId);
 
 	m_Color = MarkTwo::g_GameGlobals.COLOR_RED;
 }
@@ -58,9 +58,9 @@ void Texture::Draw(SDL_Renderer* renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void Texture::SetTexture(const uint32_t uiTextureID)
+void Texture::SetTexture(const uint32_t textureId)
 {
-	Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssetsMap[uiTextureID];
+	Core::TextureAssetData& textureAssetData = Core::g_AssetManager.m_TextureAssetsMap[textureId];
 	if (textureAssetData.m_Texture)
 	{
 		m_Texture = textureAssetData.m_Texture;
@@ -69,7 +69,6 @@ void Texture::SetTexture(const uint32_t uiTextureID)
 		m_BaseRectangle.y = 0;
 		m_BaseRectangle.w = textureAssetData.m_iWidth;
 		m_BaseRectangle.h = textureAssetData.m_iHeight;
-
 	}
 	else
 	{

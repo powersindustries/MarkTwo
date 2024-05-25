@@ -16,7 +16,7 @@ FrontendManager g_FrontendManager;
 FrontendManager::FrontendManager()
 {
     // Default add HUD UI Screen to stack.
-    m_ScreenStack.push(m_HUDScreen.m_sScreenID);
+    m_ScreenStack.push(m_HUDScreen.m_sScreenId);
 }
 
 
@@ -27,11 +27,11 @@ void FrontendManager::Initialize()
     m_HUDScreen.Initialize();
     m_PauseScreen.Initialize();
 
-    m_ScreenLookupMap.insert({m_HUDScreen.m_sScreenID, &m_HUDScreen});
-    m_ScreenLookupMap.insert({m_PauseScreen.m_sScreenID, &m_PauseScreen});
+    m_ScreenLookupMap.insert({m_HUDScreen.m_sScreenId, &m_HUDScreen});
+    m_ScreenLookupMap.insert({m_PauseScreen.m_sScreenId, &m_PauseScreen});
 
-    m_sPauseMenuScreenID = m_PauseScreen.m_sScreenID;
-    m_sHUDScreenID = m_HUDScreen.m_sScreenID;
+    m_sPauseMenuScreenId = m_PauseScreen.m_sScreenId;
+    m_sHUDScreenId = m_HUDScreen.m_sScreenId;
 }
 
 
@@ -39,7 +39,7 @@ void FrontendManager::Initialize()
 // -------------------------------------------------------
 void FrontendManager::Update()
 {
-    const std::string activeScreenId = GetActiveScreenID();
+    const std::string activeScreenId = GetActiveScreenId();
     if (m_ScreenLookupMap.find(activeScreenId) != m_ScreenLookupMap.end())
     {
         m_ScreenLookupMap[activeScreenId]->Update();
@@ -56,7 +56,7 @@ void FrontendManager::Update()
 // -------------------------------------------------------
 void FrontendManager::Draw(SDL_Renderer *renderer)
 {
-    const std::string activeScreenId = GetActiveScreenID();
+    const std::string activeScreenId = GetActiveScreenId();
     if (m_ScreenLookupMap.find(activeScreenId) != m_ScreenLookupMap.end())
     {
         m_ScreenLookupMap[activeScreenId]->Draw(renderer);
@@ -71,17 +71,17 @@ void FrontendManager::Draw(SDL_Renderer *renderer)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void FrontendManager::ActivateScreen(const std::string& screenID)
+void FrontendManager::ActivateScreen(const std::string& screenId)
 {
-    if (GetActiveScreenID() != screenID)
+    if (GetActiveScreenId() != screenId)
     {
-        m_ScreenStack.push(screenID);
+        m_ScreenStack.push(screenId);
         CallOnShow();
     }
     else
     {
         std::string errorMessage = "Youre attempting to activate a screen that is already active. Current active ScreenID: ";
-        errorMessage.append(screenID);
+        errorMessage.append(screenId);
 
         Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage);
     }
@@ -90,18 +90,18 @@ void FrontendManager::ActivateScreen(const std::string& screenID)
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void FrontendManager::RemoveScreen(const std::string& screenID)
+void FrontendManager::RemoveScreen(const std::string& screenId)
 {
-    if (GetActiveScreenID() == screenID)
+    if (GetActiveScreenId() == screenId)
     {
         m_ScreenStack.pop();
     }
     else
     {
         std::string errorMessage = "Screen youre removing is not current active screen. Current active ScreenID: ";
-        errorMessage.append(GetActiveScreenID());
-        errorMessage.append(", input screenID: ");
-        errorMessage.append(screenID);
+        errorMessage.append(GetActiveScreenId());
+        errorMessage.append(", input screenId: ");
+        errorMessage.append(screenId);
 
         Core::SYSTEMS_LOG(Core::LoggingLevel::eError, errorMessage);
     }
@@ -112,7 +112,7 @@ void FrontendManager::RemoveScreen(const std::string& screenID)
 // -------------------------------------------------------
 void FrontendManager::CallOnShow()
 {
-    const std::string& activeScreenId = GetActiveScreenID();
+    const std::string& activeScreenId = GetActiveScreenId();
     if (m_ScreenLookupMap.find(activeScreenId) != m_ScreenLookupMap.end())
     {
         m_ScreenLookupMap[activeScreenId]->OnShow();
@@ -127,7 +127,7 @@ void FrontendManager::CallOnShow()
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-const std::string &FrontendManager::GetActiveScreenID()
+const std::string &FrontendManager::GetActiveScreenId()
 {
     return m_ScreenStack.top();
 }

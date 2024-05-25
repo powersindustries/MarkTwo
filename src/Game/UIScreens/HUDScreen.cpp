@@ -10,7 +10,7 @@ namespace MarkTwo
 // -------------------------------------------------------
 HUDScreen::HUDScreen()
 {
-    m_sScreenID = "hud";
+    m_sScreenId = "hud";
 }
 
 
@@ -18,15 +18,15 @@ HUDScreen::HUDScreen()
 // -------------------------------------------------------
 void HUDScreen::Initialize()
 {
-    m_Widget = UI::g_UIManager.GetWidgetByID("w_hud_screen");
+    m_Widget = UI::g_UIManager.GetWidgetById("w_hud_screen");
 
-    TextBlock* versionTextblock = dynamic_cast<TextBlock*>(UI::g_UIManager.GetPrimitiveByID("version_textblock"));
+    TextBlock* versionTextblock = dynamic_cast<TextBlock*>(UI::g_UIManager.GetPrimitiveById("version_textblock"));
     assert(versionTextblock);
 
     const std::string versionText = versionTextblock->GetText() + VERSION_NUMBER;
     versionTextblock->SetText(versionText);
 
-    Box* versionBox = dynamic_cast<Box*>(UI::g_UIManager.GetPrimitiveByID("version_box"));
+    Box* versionBox = dynamic_cast<Box*>(UI::g_UIManager.GetPrimitiveById("version_box"));
     assert(versionBox);
 
     versionBox->SetSize(versionTextblock->GetWidth() + 25, versionTextblock->GetHeight() + 50);
@@ -53,7 +53,7 @@ void HUDScreen::Draw(SDL_Renderer* renderer)
 // -------------------------------------------------------
 void HUDScreen::RemoveSelf()
 {
-    g_FrontendManager.RemoveScreen(m_sScreenID);
+    g_FrontendManager.RemoveScreen(m_sScreenId);
 }
 
 }

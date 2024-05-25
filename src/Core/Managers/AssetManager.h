@@ -95,11 +95,11 @@ public:
 
     SDL_Surface* GetAssetSurfaceById(const std::string& assetId);
 
-    std::map<uint32_t, TextureAssetData> m_TextureAssetsMap; // ID as hash, Texture Data
-    std::map<uint32_t, TileMapAssetData> m_TileMapAssetsMap; // ID as hash, TileMap Data
-    std::map<uint32_t, FontAssetData> m_FontAssetsMap; // ID as hash, Font Data
-    std::map<uint32_t, SoundAssetData> m_SoundAssetsMap; // ID as hash, Sound Data
-    std::map<uint32_t, MusicAssetData> m_MusicAssetsMap; // ID as hash, Music Data
+    std::map<uint8_t, TextureAssetData> m_TextureAssetsMap; // ID as hash, Texture Data
+    std::map<uint8_t, TileMapAssetData> m_TileMapAssetsMap; // ID as hash, TileMap Data
+    std::map<uint8_t, FontAssetData> m_FontAssetsMap; // ID as hash, Font Data
+    std::map<uint8_t, SoundAssetData> m_SoundAssetsMap; // ID as hash, Sound Data
+    std::map<uint8_t, MusicAssetData> m_MusicAssetsMap; // ID as hash, Music Data
 
 
 private:

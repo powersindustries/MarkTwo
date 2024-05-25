@@ -30,7 +30,7 @@ private:
 
 public:
 
-    std::string m_sScreenID;
+    std::string m_sScreenId;
 
 };
 

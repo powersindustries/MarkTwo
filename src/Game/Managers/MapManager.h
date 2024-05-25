@@ -13,8 +13,8 @@ namespace MarkTwo
 
 struct TileMapData
 {
-    uint32_t m_uiID;
-    uint32_t m_uiTileMapID;
+    uint8_t m_uiId;
+    uint8_t m_uiTileMapId;
 
     std::vector<SDL_Rect> m_vScreenTiles;
     std::vector<uint8_t> m_vMap;
@@ -22,9 +22,9 @@ struct TileMapData
 
 struct MapData
 {
-    uint32_t m_uiID;
+    uint8_t m_uiId;
 
-    uint32_t m_uiTileMap;
+    uint8_t m_uiTileMap;
 
     SDL_Color m_BackgroundColor;
     SDL_Rect m_BackgroundRectangle;
@@ -39,7 +39,7 @@ public:
     void Initialize();
     void Draw(SDL_Renderer* renderer);
 
-    void LoadMapByID(const uint32_t uiMapID);
+    void LoadMapById(const uint8_t uiMapId);
 
 
 private:

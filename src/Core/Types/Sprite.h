@@ -14,22 +14,24 @@ namespace Core
 class Sprite
 {
 public:
+
     Sprite();
     ~Sprite();
 
-    Sprite(uint32_t assetIDHash);
-    Sprite(uint32_t assetIDHash, uint8_t animationSpeed);
+    Sprite(const uint8_t assetIdHash);
+    Sprite(const uint8_t assetIdHash, const uint8_t animationSpeed);
 
     void Update(const float deltaTime);
     void Update(const float deltaTime, SDL_Rect& rectangle);
     void Draw(SDL_Renderer* renderer, const SDL_RendererFlip& flip = SDL_FLIP_NONE);
 
-    void SetTexture(const uint32_t textureIDHash);
+    void SetTexture(const uint32_t textureIdHash);
 
     void SetRotation(const double degrees);
 
 
 private:
+
     SDL_Texture* m_Texture{};
 
     SDL_Rect m_SourceRectangle{};

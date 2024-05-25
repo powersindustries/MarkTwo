@@ -1,5 +1,6 @@
 #include "EventManager.h"
 #include "Core/Systems/Assert.h"
+#include "Core/Systems/Hash.h"
 
 namespace MarkTwo
 {
@@ -12,48 +13,47 @@ EventManager g_EventManager;
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void EventManager::Initialize()
+void EventManager::Broadcast(const std::string& eventId)
 {
-    const uint16_t eventsCount = static_cast<uint16_t>(Events::eCount);
-    m_EventsVector.reserve(eventsCount);
-
-    for (uint16_t x = 0; x < eventsCount; ++x)
+    const uint8_t hashedId = Core::StringToHash(eventId);
+    if (m_EventsMap.find(hashedId) != m_EventsMap.end())
     {
-        std::vector<Core::Event> newEvent;
-        m_EventsVector.push_back(newEvent);
+        std::vector<Event>& eventsVector = m_EventsMap[hashedId];
 
-        m_EventsMap.insert({ static_cast<Events>(x), x });
+        const uint32_t eventsCount = static_cast<uint32_t>(eventsVector.size());
+        for (uint32_t x = 0; x < eventsCount; ++x)
+        {
+            eventsVector[x].OnBroadCast();
+        }
+    }
+    else
+    {
+        Core::SYSTEMS_LOG(Core::LoggingLevel::eError, "EventId: " + eventId + " does not exist in events map.");
     }
 }
 
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void EventManager::Broadcast(const Events& event)
+void EventManager::Subscribe(const std::string& eventId, std::function<void()> delegate)
 {
-    Core::SYSTEMS_ASSERT(m_EventsMap.find(event) != m_EventsMap.end());
+    const uint8_t hashedId = Core::StringToHash(eventId);
 
-    const uint16_t eventIndex = m_EventsMap[event];
-    std::vector<Core::Event> eventsVector = m_EventsVector[eventIndex];
-
-    const uint16_t eventsCount = static_cast<uint16_t>(eventsVector.size());
-    for (uint16_t x = 0; x < eventsCount; ++x)
+    // Add new Event.
+    if (m_EventsMap.find(hashedId) == m_EventsMap.end())
     {
-        eventsVector[x].OnBroadCast();
+        // Create new event.
+        std::vector<Event> newEventVector;
+        newEventVector.reserve(INT16_MAX);
+
+        m_EventsMap.insert({hashedId, newEventVector});
     }
-}
 
+    // Add new subscription.
+    std::vector<Event>& eventsVector = m_EventsMap[hashedId];
 
-// -------------------------------------------------------
-// -------------------------------------------------------
-void EventManager::Subscribe(const Events& event, std::function<void()> inDelegate)
-{
-    Core::SYSTEMS_ASSERT(m_EventsMap.find(event) != m_EventsMap.end());
-
-    std::vector<Core::Event>& eventsVector = m_EventsVector[m_EventsMap[event]];
-
-    Core::Event newSubscription;
-    newSubscription.SetEvent(inDelegate);
+    Event newSubscription;
+    newSubscription.SetEvent(delegate);
 
     eventsVector.push_back(newSubscription);
 }
