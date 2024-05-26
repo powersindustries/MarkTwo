@@ -25,11 +25,6 @@ void HUDScreen::Initialize()
 
     const std::string versionText = versionTextblock->GetText() + VERSION_NUMBER;
     versionTextblock->SetText(versionText);
-
-    Box* versionBox = dynamic_cast<Box*>(UI::g_UIManager.GetPrimitiveById("version_box"));
-    assert(versionBox);
-
-    versionBox->SetSize(versionTextblock->GetWidth() + 25, versionTextblock->GetHeight() + 50);
 }
 
 

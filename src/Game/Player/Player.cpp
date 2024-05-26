@@ -3,7 +3,7 @@
 
 #include "GameGlobals.h"
 #include "Core/Systems/Systems.h"
-#include "../Managers/EventManager.h"
+#include "Core/Managers/EventManager.h"
 #include "Core/Managers/InputManager.h"
 #include "Core/Managers/SoundManager.h"
 

@@ -7,23 +7,6 @@ namespace UI
 
 // -------------------------------------------------------
 // -------------------------------------------------------
-void HorizontalStack::Draw(SDL_Renderer* renderer)
-{
-    if (m_Visibility == UIVisibility::eHidden)
-    {
-        return;
-    }
-
-    const uint8_t uiChildCount = static_cast<uint8_t>(m_Children.size());
-    for (uint8_t x = 0; x < uiChildCount; ++x)
-    {
-        m_Children[x]->Draw(renderer);
-    }
-}
-
-
-// -------------------------------------------------------
-// -------------------------------------------------------
 void HorizontalStack::RefreshUI()
 {
     // Get the width and height of the children.

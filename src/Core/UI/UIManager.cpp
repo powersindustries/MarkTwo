@@ -12,7 +12,7 @@
 #include "Core/UI/Primitives/VerticalStack.h"
 #include "Core/UI/Primitives/HorizontalStack.h"
 #include "Core/Managers/AssetManager.h"
-#include "Game/Managers/EventManager.h"
+#include "Core/Managers/EventManager.h"
 
 namespace UI
 {
@@ -549,7 +549,7 @@ void UIManager::DEBUG_HOTRELOAD()
 
     Initialize();
 
-    MarkTwo::g_EventManager.Broadcast(UI_DEBUG_EVENT_ID);
+    Core::g_EventManager.Broadcast(UI_DEBUG_EVENT_ID);
 }
 
 

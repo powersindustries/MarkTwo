@@ -4,6 +4,7 @@
 #include "Core/Managers/SettingsManager.h"
 #include "Core/Managers/AssetManager.h"
 #include "Core/Systems/Hash.h"
+#include "Core/Managers/EventManager.h"
 
 #define DEFAULT_TEXTBLOCK_ID "DEFAULT"
 
@@ -85,6 +86,11 @@ void UIBase::Update()
 // -------------------------------------------------------
 void UIBase::RefreshUI()
 {
+    if (!m_sParentId.empty()) {
+        Core::g_EventManager.Broadcast(m_sParentId);
+        return;
+    }
+
     const int iScreenWidth = Core::g_SettingsManager.GetScreenWidth();
     const int iScreenHeight = Core::g_SettingsManager.GetScreenHeight();
 

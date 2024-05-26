@@ -16,7 +16,6 @@ class VerticalStack : public StackBase
 {
 public:
 
-    void Draw(SDL_Renderer* renderer) override;
     void RefreshUI() override;
 
     void AddChild(UIBase* child) override;
@@ -26,8 +25,6 @@ public:
 private:
 
     void SetPositionNoRefresh(const int x, const int y) override;
-
-    friend class Box;
 
 };
 }

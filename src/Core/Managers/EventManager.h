@@ -6,7 +6,7 @@
 #include <unordered_map>
 
 
-namespace MarkTwo
+namespace Core
 {
 
 class Event

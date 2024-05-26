@@ -16,7 +16,6 @@ class HorizontalStack : public StackBase
 {
 public:
 
-    void Draw(SDL_Renderer* renderer) override;
     void RefreshUI() override;
 
     void AddChild(UIBase* child) override;

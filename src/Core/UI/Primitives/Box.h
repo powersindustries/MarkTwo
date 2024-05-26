@@ -5,30 +5,34 @@
 #include <SDL_ttf.h> // SDL Fonts or Text
 #include <SDL_image.h> // SDL Image
 #include "Core/UI/Types/UIBase.h"
-#include "VerticalStack.h"
+#include "Core/UI/Types/StackBase.h"
 
 namespace UI
 {
-class Box : public UIBase
+
+// Note: Box type is very similar to the VerticalBox type with a few differences.
+class Box : public StackBase
 {
 public:
-
-    Box();
 
     void Draw(SDL_Renderer* renderer) override;
     void RefreshUI() override;
 
-    void AddChild(UIBase* child);
-    void SetVisibility(const UIVisibility& visibility) override;
-
+    void AddChild(UIBase* child) override;
     void SetMargin(const Margin& margin);
+
+
+private:
+
+    void SetPositionNoRefresh(const int x, const int y) override;
+
 
 protected:
 
     // Spacing around the content and the box edges.
     Margin m_Margin;
 
-    VerticalStack* m_Stack;
+    static int m_iUniqueId;
 
 };
 }

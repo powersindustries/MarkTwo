@@ -14,6 +14,7 @@ public:
     StackBase();
 
     void Update() override;
+    void Draw(SDL_Renderer* renderer) override;
 
     virtual void AddChild(UIBase* child) = 0;
     void ClearChildren();

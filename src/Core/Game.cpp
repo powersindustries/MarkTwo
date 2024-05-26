@@ -3,7 +3,7 @@
 #include "Game/Player/Player.h"
 #include "Systems/Logging.h"
 #include "Game/Managers/FrontendManager.h"
-#include "Game/Managers/EventManager.h"
+#include "Core/Managers/EventManager.h"
 #include "Managers/SettingsManager.h"
 #include "Managers/AssetManager.h"
 #include "Core/UI/Types/StyleTypes.h"

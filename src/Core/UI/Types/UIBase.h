@@ -88,12 +88,18 @@ public:
     SDL_Color m_Color {};
 
 
+    // ID used in events to signal to parent class child has been updated.
+    // Currently used in StackBase types.
+    std::string m_sParentId;
+
+
 protected:
 
     bool m_bStyleSet;
 
     friend class VerticalStack;
     friend class HorizontalStack;
+    friend class Box;
 
 };
 

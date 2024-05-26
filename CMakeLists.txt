@@ -166,8 +166,8 @@ src/Game/UIScreens/PauseScreen.cpp
 
 src/Game/Managers/FrontendManager.h
 src/Game/Managers/FrontendManager.cpp
-src/Game/Managers/EventManager.h
-src/Game/Managers/EventManager.cpp
+        src/Core/Managers/EventManager.h
+        src/Core/Managers/EventManager.cpp
 src/Game/Managers/MapManager.h
 src/Game/Managers/MapManager.cpp
 

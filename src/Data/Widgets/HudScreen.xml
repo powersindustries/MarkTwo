@@ -8,15 +8,16 @@
         Alignment="TopCenter"
         Color="192 192 192 255"
         Offset="0 25"
-    />
+        Margin="25 25 25 25"
+    >
 
-    <TextBlock
-        id="version_textblock"
-        Anchor="TopCenter"
-        Alignment="TopCenter"
-        Offset="0 50"
-        Text="MarkTwo Engine v"
-    />
+        <TextBlock
+            id="version_textblock"
+            Text="MarkTwo Engine v"
+        />
+
+    </Box>
+
 
 
     <!--    Player Text-->

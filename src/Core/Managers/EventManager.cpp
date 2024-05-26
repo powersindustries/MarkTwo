@@ -2,7 +2,7 @@
 #include "Core/Systems/Assert.h"
 #include "Core/Systems/Hash.h"
 
-namespace MarkTwo
+namespace Core
 {
 
 
