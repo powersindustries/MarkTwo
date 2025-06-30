@@ -1,4 +1,5 @@
 #include "UIManager.h"
+#include <filesystem>
 #include "GameGlobals.h"
 #include "rapidxml_utils.hpp"
 #include "Core/Systems/Logging.h"
@@ -112,9 +113,9 @@ void UIManager::InitializeStyleData()
 // -------------------------------------------------------
 void UIManager::InitializeWidgetData()
 {
-    assert(std::__fs::filesystem::is_directory(m_sWidgetFilepath));
+    assert(std::filesystem::is_directory(m_sWidgetFilepath));
 
-    for (const auto& entry: std::__fs::filesystem::directory_iterator(m_sWidgetFilepath))
+    for (const auto& entry: std::filesystem::directory_iterator(m_sWidgetFilepath))
     {
         const auto& widgetPath = entry.path();
         LoadWidgetFile(widgetPath);

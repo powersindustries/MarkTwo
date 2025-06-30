@@ -2,8 +2,10 @@
 #define EventManager_h
 
 #include <vector>
+#include <string>
 #include <functional>
 #include <unordered_map>
+#include <cstdint>
 
 
 namespace Core

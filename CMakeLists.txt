@@ -2,7 +2,8 @@ cmake_minimum_required(VERSION 3.7)
 project(MarkTwo VERSION 2.2)
 
 # Set version of C++.
-set (CMAKE_CXX_STANDARD 11)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 # Set Source directory to be used in game.
 add_definitions(-DPROJECT_PATH="${CMAKE_CURRENT_SOURCE_DIR}")
